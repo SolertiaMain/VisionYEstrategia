@@ -1,0 +1,40 @@
+/* ============================================================
+   VISIÓN Y ESTRATEGIA — animations.css
+   ============================================================ */
+
+/* === SCROLL REVEAL === */
+.reveal        { opacity: 0; transform: translateY(36px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.reveal-left   { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-right  { opacity: 0; transform: translateX(40px);  transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-scale  { opacity: 0; transform: scale(0.93);       transition: opacity 0.6s ease, transform 0.6s ease; }
+
+.reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+  opacity: 1; transform: none;
+}
+
+.delay-100 { transition-delay: 0.10s; }
+.delay-200 { transition-delay: 0.20s; }
+.delay-300 { transition-delay: 0.30s; }
+.delay-400 { transition-delay: 0.40s; }
+.delay-500 { transition-delay: 0.50s; }
+
+/* === HERO ENTRANCE === */
+@keyframes hero-up { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+.hero-tag     { animation: hero-up 0.6s ease both; animation-delay: 0.10s; }
+.hero h1      { animation: hero-up 0.7s ease both; animation-delay: 0.24s; }
+.hero-desc    { animation: hero-up 0.7s ease both; animation-delay: 0.38s; }
+.hero-actions { animation: hero-up 0.7s ease both; animation-delay: 0.52s; }
+.hero-stats   { animation: hero-up 0.7s ease both; animation-delay: 0.66s; }
+
+/* === FLOAT (about card) === */
+@keyframes float-gentle { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.float-element { animation: float-gentle 5s ease-in-out infinite; }
+
+/* === PAGE LOADER === */
+.page-loader { position:fixed; inset:0; background:var(--navy); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:20px; transition:opacity 0.5s ease, visibility 0.5s ease; }
+.page-loader.hidden { opacity:0; visibility:hidden; }
+.loader-logo { font-family:var(--font-serif); font-size:1.4rem; color:var(--white); font-weight:700; }
+.loader-bar  { width:180px; height:2px; background:rgba(255,255,255,0.12); border-radius:2px; overflow:hidden; }
+.loader-fill { height:100%; background:var(--cyan); border-radius:2px; animation:loader-progress 1.2s cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes loader-progress { from{width:0%} to{width:100%} }
