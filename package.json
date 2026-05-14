@@ -2,10 +2,11 @@
   "name": "vision-estrategia-website",
   "version": "1.0.0",
   "description": "Sitio web de Visión y Estrategia Consultoría",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host 0.0.0.0 --port 3000"
   },
   "devDependencies": {
     "vite": "^5.0.0"
