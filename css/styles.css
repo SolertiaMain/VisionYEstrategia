@@ -23,7 +23,7 @@
   --purple-light: #9887B0;
 
   --cloud:        #F0EDE8;   /* Cloud Dancer   — Calidez Humana          */
-  --canvas:       #D4E3EA;   /* PANTONE 7541 C — El Lienzo (fondo web)   */
+  --canvas:       #D9E1E2;   /* PANTONE 7541 C — El Lienzo (fondo web)   */
   --canvas-light: #E2EEF3;
 
   /* Texto */
@@ -504,7 +504,7 @@ p {
 /* ============================================================
    NOSOTROS PREVIEW
    ============================================================ */
-.about-section { background: var(--white); }
+.about-section { background: var(--canvas); }
 .about-text h2 { margin-bottom: 18px; }
 .about-text p  { margin-bottom: 14px; font-size: 0.94rem; }
 
@@ -671,3 +671,86 @@ p {
 .stagger-children > *:nth-child(3) { transition-delay:.19s; } .stagger-children > *:nth-child(4) { transition-delay:.26s; }
 .stagger-children > *:nth-child(5) { transition-delay:.33s; } .stagger-children > *:nth-child(6) { transition-delay:.40s; }
 *:focus-visible { outline:3px solid var(--cyan); outline-offset:3px; }
+
+/* ============================================================
+   PERSONALIZACIONES (15-MAY-2026)
+   Ajustes basados en las anotaciones del PDF
+   ============================================================ */
+
+/* La barra de navegación deja de ser transparente y usa el color institucional */
+.navbar,
+.navbar.transparent {
+  background: var(--navy);
+}
+
+/* Líneas verticales de los pilares (en la sección “¿Por qué elegirnos?”) con violeta */
+.pillar-line {
+  background: var(--purple);
+}
+
+/* Botón “Agendar consulta” (versión de escritorio y móvil):
+   usa el violeta como fondo, mayor relleno, borde suavizado y sombra */
+.nav-cta.btn-primary,
+.mobile-cta.btn-primary {
+  background: var(--purple);
+  color: var(--white);
+  padding: 16px 36px;
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(123, 104, 150, 0.28);
+}
+
+.nav-cta.btn-primary:hover,
+.mobile-cta.btn-primary:hover {
+  background: var(--purple-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(123, 104, 150, 0.40);
+}
+
+/* 15-MAY-2026: personalización de tarjetas de servicios */
+.service-card {
+  /* degradado ligero basado en el color de la tarjeta */
+  background: linear-gradient(180deg,
+                rgba(var(--card-rgb, 0,169,206), 0.05) 0%,
+                var(--white) 60%);
+  border: none;
+}
+
+/* Variables RGB de cada tarjeta para permitir el degradado */
+.service-card.igualdad { --card-color: var(--purple); --card-rgb: 123,104,150; }
+.service-card.gestion  { --card-color: var(--cyan);   --card-rgb: 0,169,206;   }
+.service-card.evalua   { --card-color: var(--navy);   --card-rgb: 27,45,110;    }
+
+/* Añade un borde izquierdo con el color institucional de la tarjeta */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 4px;
+  background: var(--card-color);
+}
+
+/* Cambia la sombra y eleva la tarjeta al pasar el cursor */
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(var(--card-rgb, 0,169,206), 0.25);
+}
+
+/* 15-MAY-2026: personalización de testimonios */
+.testimonial-card {
+  background: var(--canvas-light);
+  border-left: 6px solid var(--cyan);
+  box-shadow: var(--shadow-md);
+}
+
+.testimonial-card:nth-child(2) {
+  border-left-color: var(--purple);
+}
+
+.testimonial-card:nth-child(3) {
+  border-left-color: var(--navy);
+}
+
+.testimonial-card::before {
+  color: var(--card-color, var(--cyan));
+  opacity: 0.18;
+}
