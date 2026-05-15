@@ -11,27 +11,42 @@
   <link rel="stylesheet" href="css/responsive.css" />
   <style>
     /* === TABS DE SERVICIOS === */
-    .tabs-nav { display:flex; gap:4px; background:var(--white); border-radius:12px; padding:6px; box-shadow:var(--shadow-sm); width:fit-content; margin:0 auto 64px; flex-wrap:wrap; justify-content:center; }
+    .tabs-nav { display:flex; gap:4px; background:rgba(226,238,243,0.82); border:1px solid rgba(19,36,82,0.10); border-radius:12px; padding:6px; box-shadow:var(--shadow-sm); width:fit-content; margin:0 auto 64px; flex-wrap:wrap; justify-content:center; }
     .tab-btn { font-family:var(--font-sans); font-size:0.76rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; padding:12px 26px; border-radius:8px; color:var(--text-mid); cursor:pointer; transition:var(--transition); border:none; background:none; display:flex; align-items:center; gap:10px; }
     .tab-btn svg { width:16px; height:16px; }
-    .tab-btn:hover { color:var(--navy); background:var(--canvas); }
+    .tab-btn:hover { color:var(--navy); background:rgba(123,104,150,0.10); }
     .tab-btn.active { background:var(--navy); color:var(--white); }
     .tab-panel { display:none; } .tab-panel.active { display:block; }
+    .tab-panel { --service-accent:var(--cyan); }
+    .tab-panel#igualdad { --service-accent:var(--purple); }
+    .tab-panel#gestion { --service-accent:var(--cyan); }
+    .tab-panel#evaluacion { --service-accent:var(--navy); }
 
     /* === DETALLE DE SERVICIO === */
     .service-detail { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-    .service-detail-content h2 { margin-bottom:18px; }
-    .service-detail-content > p { font-size:1.01rem; line-height:1.80; margin-bottom:32px; }
+    .service-detail-content h2 { font-family:var(--font-sans); font-size:clamp(1.45rem,2.6vw,2.1rem); font-weight:800; letter-spacing:0; margin-bottom:18px; }
+    .service-detail-content > p { font-family:var(--font-sans); font-size:1.01rem; line-height:1.80; margin-bottom:32px; font-weight:500; color:var(--text-mid); }
 
-    .entregables-label { font-family:var(--font-sans); font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--cyan); margin-bottom:18px; }
+    .entregables-label { font-family:var(--font-sans); font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--service-accent); margin-bottom:18px; }
 
     .entregable-item { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid rgba(27,45,110,0.07); }
     .entregable-check { width:22px; height:22px; border-radius:50%; background:rgba(0,169,206,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
-    .entregable-check svg { width:12px; height:12px; stroke:var(--cyan); stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .entregable-item p { font-size:0.87rem; margin:0; }
+    #igualdad .entregable-check { background:rgba(123,104,150,0.14); }
+    #gestion .entregable-check { background:rgba(0,169,206,0.12); }
+    #evaluacion .entregable-check { background:rgba(27,45,110,0.10); }
+    .entregable-item:nth-of-type(odd) { --service-accent:var(--cyan); }
+    .entregable-item:nth-of-type(even) { --service-accent:var(--purple); }
+    #evaluacion .entregable-item:nth-of-type(odd) { --service-accent:var(--navy); }
+    .entregable-item:nth-of-type(odd) .entregable-check { background:rgba(0,169,206,0.12); }
+    .entregable-item:nth-of-type(even) .entregable-check { background:rgba(123,104,150,0.14); }
+    #evaluacion .entregable-item:nth-of-type(odd) .entregable-check { background:rgba(19,36,82,0.10); }
+    .entregable-check svg { width:12px; height:12px; stroke:var(--service-accent); stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+    .entregable-item p { font-family:var(--font-sans); font-size:0.87rem; font-weight:500; margin:0; }
 
     .normas-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-    .norma-tag { background:rgba(27,45,110,0.07); color:var(--navy); font-family:var(--font-sans); font-size:0.74rem; font-weight:600; padding:6px 14px; border-radius:4px; }
+    .norma-tag { background:rgba(123,104,150,0.12); color:var(--purple); font-family:var(--font-sans); font-size:0.74rem; font-weight:700; padding:6px 14px; border-radius:4px; }
+    .service-cta { margin-top:36px; background:linear-gradient(135deg,var(--purple),var(--cyan)); box-shadow:0 12px 32px rgba(123,104,150,0.34); }
+    .service-cta:hover { background:linear-gradient(135deg,var(--purple-dark),var(--cyan-dark)); box-shadow:0 14px 36px rgba(123,104,150,0.44); }
 
     /* === CARD VISUAL DEL SERVICIO === */
     .service-detail-visual { position:sticky; top:100px; }
@@ -39,8 +54,8 @@
     .service-big-card::before { content:''; position:absolute; bottom:-50px; right:-50px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.05); }
     .service-big-card .card-icon-wrap { width:64px; height:64px; border-radius:14px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
     .service-big-card .card-icon-wrap svg { width:28px; height:28px; stroke:white; stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .service-big-card h3 { font-family:var(--font-serif); color:var(--white); font-size:1.45rem; margin-bottom:14px; }
-    .service-big-card p  { color:rgba(255,255,255,0.78); margin-bottom:32px; font-size:0.93rem; }
+    .service-big-card h3 { font-family:var(--font-sans); color:var(--white); font-size:1.18rem; font-weight:800; margin-bottom:14px; }
+    .service-big-card p  { font-family:var(--font-sans); color:rgba(255,255,255,0.78); margin-bottom:32px; font-size:0.93rem; font-weight:500; }
 
     .mini-stats { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
     .mini-stat { background:rgba(255,255,255,0.10); border-radius:10px; padding:16px; text-align:center; }
@@ -49,18 +64,20 @@
 
     /* === MODALIDADES === */
     .modalidades-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-    .modalidad-card { background:var(--white); border-radius:var(--radius-lg); padding:40px 32px; text-align:center; border:2px solid transparent; transition:var(--transition); position:relative; }
+    .modalidad-card { background:rgba(240,237,232,0.72); border-radius:var(--radius-lg); padding:40px 32px; text-align:center; border:2px solid transparent; transition:var(--transition); position:relative; }
     .modalidad-card:hover { border-color:var(--cyan); transform:translateY(-6px); box-shadow:var(--shadow-md); }
     .modalidad-card.featured { background:var(--navy); }
     .modalidad-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--cyan); color:var(--white); font-family:var(--font-sans); font-size:0.68rem; font-weight:700; padding:4px 16px; border-radius:40px; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
     .modalidad-label { font-family:var(--font-sans); font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.10em; color:var(--cyan); margin-bottom:12px; }
-    .modalidad-card h3 { font-family:var(--font-serif); font-size:1.25rem; margin-bottom:12px; }
+    .modalidad-card h3 { font-family:var(--font-sans); font-size:1.08rem; font-weight:800; margin-bottom:12px; }
     .modalidad-card.featured h3 { color:var(--white); }
     .modalidad-card > p { font-size:0.87rem; margin-bottom:28px; }
     .modalidad-card.featured > p { color:rgba(255,255,255,0.68); }
     .modalidad-features { text-align:left; margin-bottom:32px; }
-    .modalidad-feature { display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-family:var(--font-sans); font-size:0.84rem; color:var(--text-mid); border-bottom:1px solid rgba(27,45,110,0.06); }
+    .modalidad-feature { display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-family:var(--font-sans); font-size:0.84rem; font-weight:500; color:var(--text-mid); border-bottom:1px solid rgba(27,45,110,0.06); }
     .modalidad-card.featured .modalidad-feature { color:rgba(255,255,255,0.65); border-color:rgba(255,255,255,0.09); }
+    .modalidad-feature:nth-child(odd) .check-icon { stroke:var(--cyan); }
+    .modalidad-feature:nth-child(even) .check-icon { stroke:var(--purple); }
     .check-icon { width:16px; height:16px; flex-shrink:0; margin-top:2px; stroke:var(--cyan); stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 
     @media(max-width:768px){
@@ -150,7 +167,7 @@
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Talleres de sensibilización</strong> — Formación del personal en perspectiva de género, masculinidades y prevención de violencia.</p></div>
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Presupuesto con perspectiva de género</strong> — Análisis y reestructuración del gasto institucional con enfoque de género.</p></div>
             <div class="normas-list"><span class="norma-tag">LGIMH</span><span class="norma-tag">NOM-035-STPS</span><span class="norma-tag">NMX-R-025</span><span class="norma-tag">PROIGUALDAD</span><span class="norma-tag">ODS 5 y 10</span></div>
-            <a href="contacto.html" class="btn btn-primary mt-32">Solicitar este servicio</a>
+            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
           </div>
           <div class="service-detail-visual reveal-right">
             <div class="service-big-card" style="background:linear-gradient(140deg,var(--purple-dark, #5E4F72),var(--navy))">
@@ -182,7 +199,7 @@
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Presupuesto basado en resultados</strong> — Vinculación del presupuesto a objetivos e indicadores de desempeño.</p></div>
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Matrices de Indicadores (MIR)</strong> — Construcción y validación de la Matriz de Indicadores para Resultados.</p></div>
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Capacitación al personal</strong> — Talleres prácticos para el fortalecimiento de capacidades del equipo.</p></div>
-            <a href="contacto.html" class="btn btn-primary mt-32">Solicitar este servicio</a>
+            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
           </div>
           <div class="service-detail-visual reveal-right">
             <div class="service-big-card" style="background:linear-gradient(140deg,var(--cyan-dark),var(--cyan))">
@@ -214,7 +231,7 @@
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Fichas de monitoreo</strong> — Diseño de sistemas de seguimiento con indicadores clave de desempeño.</p></div>
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Informe ejecutivo</strong> — Documentos claros y listos para presentar ante autoridades o financiadoras.</p></div>
             <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Recomendaciones estratégicas</strong> — Plan de mejora con acciones concretas, responsables y plazos.</p></div>
-            <a href="contacto.html" class="btn btn-primary mt-32">Solicitar este servicio</a>
+            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
           </div>
           <div class="service-detail-visual reveal-right">
             <div class="service-big-card" style="background:linear-gradient(140deg,var(--navy-dark),var(--navy-light))">
@@ -237,7 +254,7 @@
 </section>
 
 <!-- MODALIDADES -->
-<section class="section" style="background:var(--white)">
+<section class="section" style="background:var(--canvas-light)">
   <div class="container">
     <div class="section-header">
       <span class="label-tag">Cómo trabajamos contigo</span>
