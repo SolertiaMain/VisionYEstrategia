@@ -11,12 +11,16 @@
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 </head>
+
 <body>
 <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
 <!-- PAGE LOADER -->
 <div class="page-loader" aria-hidden="true">
   <div class="loader-logo">Visión y Estrategia</div>
-  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-bar">
+    <div class="loader-fill"></div>
+  </div>
 </div>
 
 <!-- NAVBAR -->
@@ -30,65 +34,115 @@
     </a>
 
     <ul class="nav-links" role="list">
-      <li><a href="index.html"    class="nav-link active">Inicio</a></li>
-      <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
-      <li class="nav-item">
-        <a href="servicios.html" class="nav-link">Servicios ▾</a>
-        <div class="dropdown" role="menu">
-          <a href="servicios.html#igualdad" class="dropdown-link" role="menuitem">
-            <span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg>
+      <li>
+        <a href="index.html" class="nav-link active" aria-current="page">Inicio</a>
+      </li>
+
+      <li>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+      </li>
+
+      <li class="nav-item has-dropdown">
+        <a
+          href="servicios.html"
+          class="nav-link nav-services-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicios-submenu"
+        >
+          Servicios <span aria-hidden="true">▾</span>
+        </a>
+
+        <div class="dropdown" id="servicios-submenu" aria-label="Submenú de servicios">
+          <a href="servicios.html#igualdad" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+              </svg>
             </span>
             <span>
-              <strong style="display:block;font-family:var(--font-sans);font-size:0.80rem;color:var(--navy)">Igualdad</strong>
-              <small style="font-family:var(--font-sans);color:var(--text-light);font-size:0.74rem">Perspectiva de género</small>
+              <strong>Igualdad</strong>
+              <small>Perspectiva de género</small>
             </span>
           </a>
-          <a href="servicios.html#gestion" class="dropdown-link" role="menuitem">
-            <span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+
+          <a href="servicios.html#gestion" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
             </span>
             <span>
-              <strong style="display:block;font-family:var(--font-sans);font-size:0.80rem;color:var(--navy)">Gestión</strong>
-              <small style="font-family:var(--font-sans);color:var(--text-light);font-size:0.74rem">Administración pública</small>
+              <strong>Gestión</strong>
+              <small>Administración pública</small>
             </span>
           </a>
-          <a href="servicios.html#evaluacion" class="dropdown-link" role="menuitem">
-            <span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+
+          <a href="servicios.html#evaluacion" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
             </span>
             <span>
-              <strong style="display:block;font-family:var(--font-sans);font-size:0.80rem;color:var(--navy)">Evaluación</strong>
-              <small style="font-family:var(--font-sans);color:var(--text-light);font-size:0.74rem">Impacto y resultados</small>
+              <strong>Evaluación</strong>
+              <small>Impacto y resultados</small>
             </span>
           </a>
         </div>
       </li>
-      <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+
+      <li>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </li>
     </ul>
 
     <a href="contacto.html" class="btn btn-primary nav-cta">Agendar consulta</a>
 
-    <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <button
+      type="button"
+      class="hamburger"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" role="dialog" aria-label="Menú móvil">
-  <a href="index.html"     class="mobile-link">Inicio</a>
-  <a href="nosotros.html"  class="mobile-link">Nosotros</a>
+<div
+  class="mobile-menu"
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú móvil"
+  aria-hidden="true"
+  hidden
+>
+  <a href="index.html" class="mobile-link active" aria-current="page">Inicio</a>
+  <a href="nosotros.html" class="mobile-link">Nosotros</a>
   <a href="servicios.html" class="mobile-link">Servicios</a>
-  <div class="mobile-sub-links">
-    <a href="servicios.html#igualdad"   class="mobile-sub-link">Igualdad de Género</a>
-    <a href="servicios.html#gestion"    class="mobile-sub-link">Gestión Pública</a>
+
+  <div class="mobile-sub-links" aria-label="Servicios">
+    <a href="servicios.html#igualdad" class="mobile-sub-link">Igualdad de Género</a>
+    <a href="servicios.html#gestion" class="mobile-sub-link">Gestión Pública</a>
     <a href="servicios.html#evaluacion" class="mobile-sub-link">Evaluación de Programas</a>
   </div>
+
   <a href="contacto.html" class="mobile-link">Contacto</a>
-  <a href="contacto.html" class="btn btn-primary mobile-cta" style="text-align:center;width:100%;justify-content:center">Agendar consulta</a>
+  <a href="contacto.html" class="btn btn-primary mobile-cta">Agendar consulta</a>
 </div>
+
 <main id="contenido-principal" tabindex="-1">
+
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-stripe" aria-hidden="true"></div>
@@ -119,24 +173,35 @@
         <div class="hero-actions">
           <a href="servicios.html" class="btn btn-primary">
             Conocer nuestros servicios
-            <svg style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
+
           <a href="contacto.html" class="btn btn-outline-white">
             Agendar consulta gratuita
           </a>
         </div>
 
-        <div class="hero-stats">
+        <div class="hero-stats" aria-label="Indicadores de experiencia">
           <div class="stat-item">
-            <div class="stat-num"><span data-count="15" data-suffix="+">15+</span></div>
+            <div class="stat-num">
+              <span data-count="15" data-suffix="+">15+</span>
+            </div>
             <div class="stat-label">Años de experiencia</div>
           </div>
+
           <div class="stat-item">
-            <div class="stat-num"><span data-count="200" data-suffix="+">200+</span></div>
+            <div class="stat-num">
+              <span data-count="200" data-suffix="+">200+</span>
+            </div>
             <div class="stat-label">Proyectos completados</div>
           </div>
+
           <div class="stat-item">
-            <div class="stat-num"><span data-count="98" data-suffix="%">98%</span></div>
+            <div class="stat-num">
+              <span data-count="98" data-suffix="%">98%</span>
+            </div>
             <div class="stat-label">Clientes satisfechos</div>
           </div>
         </div>
@@ -161,45 +226,59 @@
       <div class="grid-3 stagger-children">
 
         <article class="service-card igualdad reveal">
-          <div class="service-icon-box purple">
+          <div class="service-icon-box purple" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
             </svg>
           </div>
+
           <h3>Igualdad de Género</h3>
           <p>Implementamos la perspectiva de género en políticas institucionales. Cumplimiento de la NOM-035, protocolos de igualdad y diagnósticos organizacionales con enfoque de derechos humanos.</p>
-          <a href="servicios.html#igualdad" class="service-link">
+
+          <a href="servicios.html#igualdad" class="service-link" aria-label="Ver servicio de Igualdad de Género">
             Ver servicio
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </article>
 
         <article class="service-card gestion reveal delay-200">
-          <div class="service-icon-box cyan">
+          <div class="service-icon-box cyan" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
             </svg>
           </div>
+
           <h3>Gestión Pública</h3>
           <p>Fortalecemos capacidades institucionales con diagnósticos organizacionales, rediseño de procesos, presupuestación con perspectiva de género y planeación estratégica orientada a resultados.</p>
-          <a href="servicios.html#gestion" class="service-link">
+
+          <a href="servicios.html#gestion" class="service-link" aria-label="Ver servicio de Gestión Pública">
             Ver servicio
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </article>
 
         <article class="service-card evalua reveal delay-400">
-          <div class="service-icon-box navy">
+          <div class="service-icon-box navy" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
             </svg>
           </div>
+
           <h3>Evaluación de Programas</h3>
           <p>Diseñamos y ejecutamos evaluaciones de diseño, proceso e impacto para medir resultados reales. Metodologías sólidas que mejoran la toma de decisiones y la rendición de cuentas.</p>
-          <a href="servicios.html#evaluacion" class="service-link">
+
+          <a href="servicios.html#evaluacion" class="service-link" aria-label="Ver servicio de Evaluación de Programas">
             Ver servicio
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </a>
         </article>
 
@@ -208,33 +287,36 @@
   </section>
 
   <!-- PROPUESTA DE VALOR -->
-  <section class="section valor-section">
+  <section class="section valor-section" aria-labelledby="valor-heading">
     <div class="container">
       <div class="valor-content">
 
         <div class="valor-left reveal-left">
           <span class="label-tag" style="background:rgba(0,169,206,0.18);color:var(--cyan)">¿Por qué elegirnos?</span>
-          <h2>Experiencia que se traduce en resultados</h2>
+          <h2 id="valor-heading">Experiencia que se traduce en resultados</h2>
           <p>Somos un equipo multidisciplinario con profundo conocimiento del marco legal mexicano y más de 15 años construyendo organizaciones más justas, eficientes y transparentes.</p>
+
           <div class="valor-pillars">
             <div class="pillar">
-              <div class="pillar-line"></div>
+              <div class="pillar-line" aria-hidden="true"></div>
               <div class="pillar-text">
-                <h4>Enfoque legal robusto</h4>
+                <h3>Enfoque legal robusto</h3>
                 <p>Cumplimiento normativo garantizado: LGIMH, NOM-035, LGDS y marcos internacionales.</p>
               </div>
             </div>
+
             <div class="pillar">
-              <div class="pillar-line"></div>
+              <div class="pillar-line" aria-hidden="true"></div>
               <div class="pillar-text">
-                <h4>Metodología probada</h4>
+                <h3>Metodología probada</h3>
                 <p>Procesos estructurados con evidencia, adaptados a la realidad de cada cliente.</p>
               </div>
             </div>
+
             <div class="pillar">
-              <div class="pillar-line"></div>
+              <div class="pillar-line" aria-hidden="true"></div>
               <div class="pillar-text">
-                <h4>Acompañamiento continuo</h4>
+                <h3>Acompañamiento continuo</h3>
                 <p>No entregamos solo un informe — acompañamos la implementación hasta ver resultados.</p>
               </div>
             </div>
@@ -243,30 +325,33 @@
 
         <div class="reveal-right">
           <div class="feature-item">
-            <div class="feature-num">01</div>
+            <div class="feature-num" aria-hidden="true">01</div>
             <div>
-              <h4>Diagnóstico profundo</h4>
+              <h3>Diagnóstico profundo</h3>
               <p>Analizamos tu organización desde adentro para identificar brechas reales y oportunidades de mejora.</p>
             </div>
           </div>
+
           <div class="feature-item">
-            <div class="feature-num">02</div>
+            <div class="feature-num" aria-hidden="true">02</div>
             <div>
-              <h4>Soluciones a medida</h4>
+              <h3>Soluciones a medida</h3>
               <p>Cada propuesta es diseñada específicamente para tu contexto, recursos y objetivos institucionales.</p>
             </div>
           </div>
+
           <div class="feature-item">
-            <div class="feature-num">03</div>
+            <div class="feature-num" aria-hidden="true">03</div>
             <div>
-              <h4>Equipo certificado</h4>
+              <h3>Equipo certificado</h3>
               <p>Especialistas en género, derecho, evaluación de políticas públicas y administración pública.</p>
             </div>
           </div>
+
           <div class="feature-item">
-            <div class="feature-num">04</div>
+            <div class="feature-num" aria-hidden="true">04</div>
             <div>
-              <h4>Impacto medible</h4>
+              <h3>Impacto medible</h3>
               <p>Establecemos indicadores desde el inicio para demostrar el avance a todas las partes interesadas.</p>
             </div>
           </div>
@@ -277,37 +362,42 @@
   </section>
 
   <!-- PROCESO -->
-  <section class="section proceso-section" id="proceso">
+  <section class="section proceso-section" id="proceso" aria-labelledby="proceso-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Cómo trabajamos</span>
-        <h2>Nuestro proceso de consultoría</h2>
+        <h2 id="proceso-heading">Nuestro proceso de consultoría</h2>
         <p>Un método claro y estructurado que garantiza resultados desde el primer día.</p>
       </div>
+
       <div class="proceso-steps stagger-children">
         <div class="step reveal">
-          <div class="step-circle">01</div>
-          <h4>Diagnóstico inicial</h4>
+          <div class="step-circle" aria-hidden="true">01</div>
+          <h3>Diagnóstico inicial</h3>
           <p>Revisamos tu situación actual, normatividad y necesidades específicas.</p>
         </div>
+
         <div class="step reveal delay-100">
-          <div class="step-circle">02</div>
-          <h4>Propuesta estratégica</h4>
+          <div class="step-circle" aria-hidden="true">02</div>
+          <h3>Propuesta estratégica</h3>
           <p>Diseñamos un plan de trabajo personalizado con metas y plazos claros.</p>
         </div>
+
         <div class="step reveal delay-200">
-          <div class="step-circle">03</div>
-          <h4>Implementación</h4>
+          <div class="step-circle" aria-hidden="true">03</div>
+          <h3>Implementación</h3>
           <p>Ejecutamos el proyecto con metodologías probadas y seguimiento constante.</p>
         </div>
+
         <div class="step reveal delay-300">
-          <div class="step-circle">04</div>
-          <h4>Seguimiento</h4>
+          <div class="step-circle" aria-hidden="true">04</div>
+          <h3>Seguimiento</h3>
           <p>Monitoreamos avances y ajustamos el rumbo cuando es necesario.</p>
         </div>
+
         <div class="step reveal delay-400">
-          <div class="step-circle">05</div>
-          <h4>Entregables</h4>
+          <div class="step-circle" aria-hidden="true">05</div>
+          <h3>Entregables</h3>
           <p>Documentos ejecutivos, reportes y capacitaciones para asegurar la continuidad.</p>
         </div>
       </div>
@@ -315,36 +405,40 @@
   </section>
 
   <!-- NOSOTROS PREVIEW -->
-  <section class="section about-section">
+  <section class="section about-section" aria-labelledby="about-preview-heading">
     <div class="container">
       <div class="grid-2">
 
         <div class="about-text reveal-left">
           <span class="label-tag">Quiénes somos</span>
-          <h2>Un equipo comprometido con la transformación</h2>
+          <h2 id="about-preview-heading">Un equipo comprometido con la transformación</h2>
           <p>Visión y Estrategia nació de la convicción de que las organizaciones pueden ser más justas, eficientes y transparentes. Con más de 15 años de trayectoria, hemos acompañado a gobiernos municipales, estatales y empresas privadas en todo el Estado de México y el país.</p>
           <p>Nuestro equipo combina formación académica de alto nivel con experiencia práctica en el sector público, garantizando soluciones que funcionan en la realidad institucional mexicana.</p>
-          <div class="about-tags">
+
+          <div class="about-tags" aria-label="Áreas de especialidad">
             <span class="about-tag">Perspectiva de género</span>
             <span class="about-tag">Políticas públicas</span>
             <span class="about-tag">NOM-035</span>
             <span class="about-tag">LGIMH</span>
             <span class="about-tag">Evaluación de impacto</span>
           </div>
+
           <a href="nosotros.html" class="btn btn-secondary mt-32">Conocer al equipo</a>
         </div>
 
         <div class="about-visual reveal-right">
           <div class="about-card-main">
-            <!-- Reemplazar con imagen real del equipo -->
             <div style="text-align:center;color:rgba(255,255,255,0.25);padding:40px;">
-              <svg style="width:80px;height:80px;margin:0 auto 16px;opacity:0.4" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              <svg aria-hidden="true" style="width:80px;height:80px;margin:0 auto 16px;opacity:0.4" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
               <p style="font-family:var(--font-sans);font-size:0.80rem;color:rgba(255,255,255,0.28)">Fotografía del equipo</p>
             </div>
           </div>
+
           <div class="about-card-accent float-element">
             <div class="big-num">+15</div>
             <div class="big-label">Años transformando organizaciones</div>
@@ -356,37 +450,40 @@
   </section>
 
   <!-- TESTIMONIOS -->
-  <section class="section testimonials-section">
+  <section class="section testimonials-section" aria-labelledby="testimonios-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Lo que dicen nuestros clientes</span>
-        <h2>Resultados que hablan por sí solos</h2>
+        <h2 id="testimonios-heading">Resultados que hablan por sí solos</h2>
       </div>
+
       <div class="testimonial-grid stagger-children">
         <div class="testimonial-card reveal">
           <p class="testimonial-text">El equipo de Visión y Estrategia nos acompañó en todo el proceso de certificación de igualdad laboral. Su conocimiento del marco legal y su calidez humana marcaron la diferencia. Cumplimos en tiempo y con resultados sólidos.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">MC</div>
+            <div class="author-avatar" aria-hidden="true">MC</div>
             <div>
               <div class="author-name">M. Cruz</div>
               <div class="author-role">Directora de RRHH, Organismo municipal</div>
             </div>
           </div>
         </div>
+
         <div class="testimonial-card reveal delay-200">
           <p class="testimonial-text">La evaluación de diseño que realizaron para nuestro programa social fue impecable. Nos dieron claridad sobre lo que estaba funcionando y lo que debíamos mejorar. Hoy somos un programa más efectivo.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">JR</div>
+            <div class="author-avatar" aria-hidden="true">JR</div>
             <div>
               <div class="author-name">J. Ramírez</div>
               <div class="author-role">Coordinador de Programas, Gobierno estatal</div>
             </div>
           </div>
         </div>
+
         <div class="testimonial-card reveal delay-400">
           <p class="testimonial-text">Implementar la perspectiva de género en nuestra empresa parecía complejo, pero Visión y Estrategia lo hizo sencillo, práctico y con un enfoque 100% aplicable. Los talleres fueron excelentes.</p>
           <div class="testimonial-author">
-            <div class="author-avatar">AL</div>
+            <div class="author-avatar" aria-hidden="true">AL</div>
             <div>
               <div class="author-name">A. López</div>
               <div class="author-role">Gerente General, Empresa privada</div>
@@ -398,30 +495,177 @@
   </section>
 
   <!-- FAQ -->
-  <section class="section faq-section">
+  <section class="section faq-section" aria-labelledby="faq-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Preguntas frecuentes</span>
-        <h2>Resolvemos tus dudas</h2>
+        <h2 id="faq-heading">Resolvemos tus dudas</h2>
       </div>
+
       <div class="faq-grid">
-        <div class="faq-item reveal"><div class="faq-question">¿A qué tipo de organizaciones asesoran?<span class="faq-toggle">+</span></div><div class="faq-answer">Trabajamos con organismos públicos municipales y estatales, secretarías de gobierno, empresas privadas de todos los tamaños y organizaciones de la sociedad civil.</div></div>
-        <div class="faq-item reveal delay-100"><div class="faq-question">¿Cuánto tiempo toma un proyecto?<span class="faq-toggle">+</span></div><div class="faq-answer">Depende del alcance. Un diagnóstico básico puede tomar 4–6 semanas; un proceso de certificación de igualdad laboral puede durar 3–6 meses. Siempre definimos tiempos claros desde la propuesta inicial.</div></div>
-        <div class="faq-item reveal delay-200"><div class="faq-question">¿Trabajan fuera del Estado de México?<span class="faq-toggle">+</span></div><div class="faq-answer">Sí. Aunque estamos basados en Zinacantepec, hemos colaborado con instituciones en varios estados de la república. También ofrecemos modalidades en línea para todo el territorio nacional.</div></div>
-        <div class="faq-item reveal delay-300"><div class="faq-question">¿Cómo sé si necesito una consulta de igualdad de género?<span class="faq-toggle">+</span></div><div class="faq-answer">Si tu organización tiene más de 50 personas, ya tienes obligaciones legales bajo la NOM-035. Te ayudamos a diagnosticar tu situación en una primera reunión sin costo.</div></div>
-        <div class="faq-item reveal delay-100"><div class="faq-question">¿Qué diferencia a Visión y Estrategia?<span class="faq-toggle">+</span></div><div class="faq-answer">Combinamos tres especialidades únicas: género, gestión pública y evaluación. No subcontratamos: trabajas directamente con los especialistas y acompañamos la implementación, no solo la entrega del informe.</div></div>
-        <div class="faq-item reveal delay-200"><div class="faq-question">¿Cómo puedo solicitar una cotización?<span class="faq-toggle">+</span></div><div class="faq-answer">Puedes escribirnos por WhatsApp, llamarnos directamente o llenar el formulario de contacto. Respondemos en menos de 24 horas hábiles con una propuesta preliminar sin compromiso.</div></div>
+
+        <div class="faq-item reveal">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-1"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-1"
+            >
+              <span>¿A qué tipo de organizaciones asesoran?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-1"
+            role="region"
+            aria-labelledby="faq-pregunta-1"
+            hidden
+          >
+            <p>Trabajamos con organismos públicos municipales y estatales, secretarías de gobierno, empresas privadas de todos los tamaños y organizaciones de la sociedad civil.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-100">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-2"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-2"
+            >
+              <span>¿Cuánto tiempo toma un proyecto?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-2"
+            role="region"
+            aria-labelledby="faq-pregunta-2"
+            hidden
+          >
+            <p>Depende del alcance. Un diagnóstico básico puede tomar 4–6 semanas; un proceso de certificación de igualdad laboral puede durar 3–6 meses. Siempre definimos tiempos claros desde la propuesta inicial.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-200">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-3"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-3"
+            >
+              <span>¿Trabajan fuera del Estado de México?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-3"
+            role="region"
+            aria-labelledby="faq-pregunta-3"
+            hidden
+          >
+            <p>Sí. Aunque estamos basados en Zinacantepec, hemos colaborado con instituciones en varios estados de la república. También ofrecemos modalidades en línea para todo el territorio nacional.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-300">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-4"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-4"
+            >
+              <span>¿Cómo sé si necesito una consulta de igualdad de género?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-4"
+            role="region"
+            aria-labelledby="faq-pregunta-4"
+            hidden
+          >
+            <p>Si tu organización tiene más de 50 personas, ya tienes obligaciones legales bajo la NOM-035. Te ayudamos a diagnosticar tu situación en una primera reunión sin costo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-100">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-5"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-5"
+            >
+              <span>¿Qué diferencia a Visión y Estrategia?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-5"
+            role="region"
+            aria-labelledby="faq-pregunta-5"
+            hidden
+          >
+            <p>Combinamos tres especialidades únicas: género, gestión pública y evaluación. No subcontratamos: trabajas directamente con los especialistas y acompañamos la implementación, no solo la entrega del informe.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-200">
+          <h3>
+            <button
+              type="button"
+              class="faq-question"
+              id="faq-pregunta-6"
+              aria-expanded="false"
+              aria-controls="faq-respuesta-6"
+            >
+              <span>¿Cómo puedo solicitar una cotización?</span>
+              <span class="faq-toggle" aria-hidden="true">+</span>
+            </button>
+          </h3>
+
+          <div
+            class="faq-answer"
+            id="faq-respuesta-6"
+            role="region"
+            aria-labelledby="faq-pregunta-6"
+            hidden
+          >
+            <p>Puedes escribirnos por WhatsApp, llamarnos directamente o llenar el formulario de contacto. Respondemos en menos de 24 horas hábiles con una propuesta preliminar sin compromiso.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- CTA BANNER -->
-  <section class="cta-banner">
+  <section class="cta-banner" aria-labelledby="cta-home-heading">
     <div class="container">
       <div class="cta-banner-content">
         <span class="label-tag" style="background:rgba(0,169,206,0.18);color:var(--cyan)">¿Listo para comenzar?</span>
-        <h2>Tu organización merece<br>una consultoría de alto nivel</h2>
+        <h2 id="cta-home-heading">Tu organización merece<br>una consultoría de alto nivel</h2>
         <p>Primera sesión de diagnóstico sin costo. Cuéntanos tu reto y en 24 horas te presentamos cómo podemos ayudarte.</p>
+
         <div class="cta-actions">
           <a href="contacto.html" class="btn btn-primary">Agendar consulta gratuita</a>
           <a href="https://wa.me/+5217222676413" class="btn btn-outline-white" target="_blank" rel="noopener">Contactar por WhatsApp</a>
@@ -429,7 +673,9 @@
       </div>
     </div>
   </section>
+
 </main>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
@@ -438,43 +684,62 @@
         <div class="footer-logo">Visión y Estrategia</div>
         <div class="footer-tagline">Ideas Ágiles · Consultoría</div>
         <p>Especialistas en Igualdad de Género, Gestión Pública y Evaluación de Programas para organizaciones que quieren hacer mejor las cosas.</p>
+
         <div class="footer-social">
           <a href="#" class="social-btn" aria-label="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
           </a>
+
           <a href="#" class="social-btn" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
           </a>
+
           <a href="#" class="social-btn" aria-label="Twitter/X">
-            <svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+            </svg>
           </a>
+
           <a href="https://wa.me/+5217222676413" class="social-btn" aria-label="WhatsApp" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
           </a>
         </div>
       </div>
+
       <div class="footer-col">
         <h4>Servicios</h4>
-        <a href="servicios.html#igualdad"   class="footer-link">Igualdad de Género</a>
-        <a href="servicios.html#gestion"    class="footer-link">Gestión Pública</a>
+        <a href="servicios.html#igualdad" class="footer-link">Igualdad de Género</a>
+        <a href="servicios.html#gestion" class="footer-link">Gestión Pública</a>
         <a href="servicios.html#evaluacion" class="footer-link">Evaluación de Programas</a>
       </div>
+
       <div class="footer-col">
         <h4>Empresa</h4>
-        <a href="nosotros.html"  class="footer-link">Nosotros</a>
+        <a href="nosotros.html" class="footer-link">Nosotros</a>
         <a href="servicios.html" class="footer-link">Servicios</a>
-        <a href="contacto.html"  class="footer-link">Contacto</a>
+        <a href="contacto.html" class="footer-link">Contacto</a>
       </div>
+
       <div class="footer-col">
         <h4>Contacto</h4>
-        <a href="tel:7225447945"  class="footer-link">722-544-7945 Ext. 104</a>
-        <a href="tel:7222676413"  class="footer-link">722-267-6413</a>
+        <a href="tel:7225447945" class="footer-link">722-544-7945 Ext. 104</a>
+        <a href="tel:7222676413" class="footer-link">722-267-6413</a>
         <a href="mailto:informes@visionyestrategia.com.mx" class="footer-link">informes@visionyestrategia.com.mx</a>
         <span class="footer-link" style="cursor:default">Zinacantepec, Estado de México</span>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 Visión y Estrategia Consultoría. Todos los derechos reservados.</p>
+
       <div class="footer-bottom-links">
         <a href="#" class="footer-bottom-link">Aviso de privacidad</a>
         <a href="#" class="footer-bottom-link">Términos de uso</a>
@@ -485,16 +750,19 @@
 
 <!-- WhatsApp float -->
 <a href="https://wa.me/+5217222676413" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
 </a>
 
 <!-- Back to top -->
 <button id="back-to-top" aria-label="Volver arriba">
-  <svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg>
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
 </button>
 
 <script type="module" src="/js/main.js"></script>
-
 
 </body>
 </html>

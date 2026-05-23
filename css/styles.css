@@ -15,12 +15,11 @@
   --cyan-light:   #33BFDB;
   --cyan-dark:    #0087A8;
 
-  --navy:         #132452;   /* PANTONE 534 C  — El Ancla Institucional  */
-  --navy-dark:    #081333;
-  --navy-light:   #1B2D6E;
+  --navy:         #1B2D6E;   /* PANTONE 534 C  — El Ancla Institucional  */
+  --navy-dark:    #111E50;
+  --navy-light:   #243A88;
 
   --purple:       #7B6896;   /* PANTONE 667 C  — Toque de Igualdad       */
-  --purple-dark:  #5E4F72;
   --purple-light: #9887B0;
 
   --cloud:        #F0EDE8;   /* Cloud Dancer   — Calidez Humana          */
@@ -135,14 +134,14 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg,var(--purple),var(--cyan));
+  background: var(--cyan);
   color: var(--white);
-  box-shadow: 0 10px 28px rgba(123,104,150,0.32);
+  box-shadow: 0 4px 18px rgba(0,169,206,0.28);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg,var(--purple-dark),var(--cyan-dark));
+  background: var(--cyan-dark);
   transform: translateY(-2px);
-  box-shadow: 0 12px 34px rgba(123,104,150,0.42);
+  box-shadow: 0 8px 28px rgba(0,169,206,0.40);
 }
 
 .btn-secondary {
@@ -180,9 +179,9 @@ p {
 }
 .navbar.transparent { background: transparent; }
 .navbar.scrolled {
-  background: rgba(8,19,51,0.98);
+  background: rgba(17,30,80,0.97);
   backdrop-filter: blur(14px);
-  box-shadow: 0 6px 32px rgba(8,19,51,0.42);
+  box-shadow: 0 4px 28px rgba(17,30,80,0.30);
 }
 
 .nav-container {
@@ -266,12 +265,7 @@ p {
 }
 .dropdown-icon-box svg { width: 15px; height: 15px; }
 
-.nav-cta {
-  margin-left: 22px;
-  padding-inline: 24px;
-  background: linear-gradient(135deg,var(--purple),var(--cyan));
-  box-shadow: 0 10px 28px rgba(123,104,150,0.38);
-}
+.nav-cta { margin-left: 16px; }
 
 .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
@@ -456,9 +450,6 @@ p {
   text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--cyan); transition: var(--transition);
 }
-.service-card.igualdad .service-link { color: var(--purple); }
-.service-card.gestion .service-link  { color: var(--cyan); }
-.service-card.evalua .service-link   { color: var(--purple); }
 .service-link svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
 .service-card:hover .service-link svg { transform: translateX(6px); }
 
@@ -563,85 +554,17 @@ p {
 /* ============================================================
    FAQ
    ============================================================ */
-.faq-section {
-  background: var(--white);
-}
+.faq-section { background: var(--white); }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:960px; margin:0 auto; }
 
-.faq-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  max-width: 960px;
-  margin: 0 auto;
-  align-items: start;
-}
-
-.faq-item {
-  background: var(--canvas);
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid rgba(27, 45, 110, 0.06);
-  transition: background 0.3s ease;
-}
-
-.faq-question {
-  padding: 22px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: var(--navy);
-  transition: var(--transition);
-  gap: 12px;
-}
-
-.faq-question:hover {
-  color: var(--cyan);
-}
-
-.faq-toggle {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--navy);
-  transition: var(--transition);
-}
-
-.faq-item.open .faq-toggle {
-  background: var(--cyan);
-  color: var(--white);
-  transform: rotate(45deg);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 24px;
-  font-family: var(--font-sans);
-  font-size: 0.86rem;
-  line-height: 1.75;
-  color: var(--text-mid);
-  transition: max-height 0.45s ease, padding 0.45s ease;
-}
-
-.faq-item.open {
-  background: var(--white);
-}
-
-.faq-item.open .faq-answer {
-  max-height: 220px;
-  padding: 0 24px 22px;
-}
+.faq-item { background:var(--canvas); border-radius:var(--radius); overflow:hidden; border:1px solid rgba(27,45,110,0.06); }
+.faq-question { padding:22px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-family:var(--font-sans); font-weight:600; font-size:0.88rem; color:var(--navy); transition:var(--transition); gap:12px; }
+.faq-question:hover { color:var(--cyan); }
+.faq-toggle { width:26px; height:26px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem; font-weight:300; color:var(--navy); transition:var(--transition); }
+.faq-item.open .faq-toggle { background:var(--cyan); color:var(--white); transform:rotate(45deg); }
+.faq-answer { display:none; padding:0 24px 22px; font-family:var(--font-sans); font-size:0.86rem; line-height:1.75; color:var(--text-mid); }
+.faq-item.open { background:var(--white); }
+.faq-item.open .faq-answer { display:block; }
 
 /* ============================================================
    CTA BANNER
@@ -695,7 +618,7 @@ p {
 /* ============================================================
    FOOTER — PANTONE 534 C (navy oscuro) + Montserrat
    ============================================================ */
-.footer { background:linear-gradient(180deg,#0d1b43 0%,var(--navy-dark) 100%); color:var(--white); padding:80px 0 32px; }
+.footer { background:var(--navy-dark); color:var(--white); padding:80px 0 32px; }
 .footer-grid { display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr; gap:48px; margin-bottom:64px; }
 .footer-logo { font-family:var(--font-serif); font-size:1.22rem; font-weight:700; color:var(--white); margin-bottom:4px; }
 .footer-tagline { font-family:var(--font-sans); font-size:0.64rem; color:var(--cyan); text-transform:uppercase; letter-spacing:0.18em; margin-bottom:18px; }
@@ -737,9 +660,7 @@ p {
 .breadcrumb a { color:var(--cyan); transition:var(--transition); }
 .breadcrumb a:hover { color:var(--white); }
 
-/* ============================================================
-   UTILIDADES
-   ============================================================ */
+
 .mt-8  { margin-top:8px; }  .mt-16 { margin-top:16px; } .mt-24 { margin-top:24px; } .mt-32 { margin-top:32px; }
 .text-center { text-align:center; } .text-cyan { color:var(--cyan); } .text-white { color:var(--white)!important; }
 .bg-white { background:var(--white); } .bg-canvas { background:var(--canvas); } .bg-cloud { background:var(--cloud); }
@@ -749,24 +670,15 @@ p {
 .stagger-children > *:nth-child(5) { transition-delay:.33s; } .stagger-children > *:nth-child(6) { transition-delay:.40s; }
 *:focus-visible { outline:3px solid var(--cyan); outline-offset:3px; }
 
-/* ============================================================
-   PERSONALIZACIONES (15-MAY-2026)
-   Ajustes basados en las anotaciones del PDF
-   ============================================================ */
-
-/* La barra de navegación deja de ser transparente y usa el color institucional */
 .navbar,
 .navbar.transparent {
   background: var(--navy);
 }
 
-/* Líneas verticales de los pilares (en la sección “¿Por qué elegirnos?”) con violeta */
 .pillar-line {
   background: var(--purple);
 }
 
-/* Botón “Agendar consulta” (versión de escritorio y móvil):
-   usa el violeta como fondo, mayor relleno, borde suavizado y sombra */
 .nav-cta.btn-primary,
 .mobile-cta.btn-primary {
   background: var(--purple);
@@ -783,21 +695,17 @@ p {
   box-shadow: 0 8px 28px rgba(123, 104, 150, 0.40);
 }
 
-/* 15-MAY-2026: personalización de tarjetas de servicios */
 .service-card {
-  /* degradado ligero basado en el color de la tarjeta */
   background: linear-gradient(180deg,
                 rgba(var(--card-rgb, 0,169,206), 0.05) 0%,
                 var(--white) 60%);
   border: none;
 }
 
-/* Variables RGB de cada tarjeta para permitir el degradado */
 .service-card.igualdad { --card-color: var(--purple); --card-rgb: 123,104,150; }
 .service-card.gestion  { --card-color: var(--cyan);   --card-rgb: 0,169,206;   }
 .service-card.evalua   { --card-color: var(--navy);   --card-rgb: 27,45,110;    }
 
-/* Añade un borde izquierdo con el color institucional de la tarjeta */
 .service-card::before {
   content: '';
   position: absolute;
@@ -806,13 +714,11 @@ p {
   background: var(--card-color);
 }
 
-/* Cambia la sombra y eleva la tarjeta al pasar el cursor */
 .service-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 12px 40px rgba(var(--card-rgb, 0,169,206), 0.25);
 }
 
-/* 15-MAY-2026: personalización de testimonios */
 .testimonial-card {
   background: var(--canvas-light);
   border-left: 6px solid var(--cyan);
@@ -830,4 +736,326 @@ p {
 .testimonial-card::before {
   color: var(--card-color, var(--cyan));
   opacity: 0.18;
+}
+
+/* ============================================================
+   WCAG 2.2 AA — Accesibilidad teclado, foco, formularios y reflow
+   ============================================================ */
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  transform: translateY(-140%);
+  background: var(--white);
+  color: var(--navy);
+  border: 3px solid var(--cyan);
+  border-radius: 6px;
+  padding: 12px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-lg);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 4px solid var(--purple);
+  outline-offset: 3px;
+}
+
+/* Utilidad para texto solo visible a lectores de pantalla */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Foco visible robusto */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 4px solid var(--cyan);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px rgba(0, 169, 206, 0.22);
+}
+
+.navbar {
+  z-index: 1300;
+}
+
+.hamburger {
+  position: relative;
+  z-index: 1301;
+}
+
+/* Evita que el header fijo tape el destino al navegar por anclas */
+main,
+section[id],
+.tab-panel,
+#contenido-principal {
+  scroll-margin-top: 96px;
+}
+
+/* Dropdown accesible por teclado */
+.nav-item:focus-within .dropdown,
+.nav-item.open .dropdown,
+.nav-item:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-link strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.80rem;
+  color: var(--navy);
+}
+
+.dropdown-link small {
+  display: block;
+  font-family: var(--font-sans);
+  color: var(--text-light);
+  font-size: 0.74rem;
+}
+
+/* Estados hidden correctos */
+.mobile-menu[hidden],
+.tab-panel[hidden],
+.faq-answer[hidden],
+.form-success[hidden] {
+  display: none !important;
+}
+
+.mobile-menu {
+  z-index: 1200;
+}
+
+/* FAQ como botón real */
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  color: var(--navy);
+  font-family: var(--font-sans);
+}
+
+.faq-toggle {
+  flex-shrink: 0;
+}
+
+/* Tabs accesibles */
+.tab-btn[aria-selected="true"] {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.tab-panel:focus-visible {
+  outline: 4px solid var(--cyan);
+  outline-offset: 6px;
+}
+
+/* Formularios accesibles */
+.form-help {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.form-error[hidden] {
+  display: none !important;
+}
+
+.form-error {
+  margin-top: 7px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #b00020;
+}
+
+.form-field.error input,
+.form-field.error textarea,
+.form-field.error select,
+[aria-invalid="true"] {
+  border-color: #b00020 !important;
+  background: #fffafa;
+}
+
+.form-field.error input:focus,
+.form-field.error textarea:focus,
+.form-field.error select:focus,
+[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 4px rgba(176, 0, 32, 0.16);
+}
+
+.form-success.visible {
+  display: block;
+}
+
+/* Reflow 320px / 400% zoom */
+html,
+body {
+  max-width: 100%;
+}
+
+body {
+  overflow-x: visible;
+}
+
+.container,
+.nav-container,
+.contact-grid,
+.form-grid,
+.grid-2,
+.grid-3,
+.footer-grid {
+  min-width: 0;
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+span,
+strong,
+small,
+label,
+button {
+  overflow-wrap: anywhere;
+}
+
+img,
+svg,
+iframe {
+  max-width: 100%;
+}
+
+.btn,
+.nav-link,
+.dropdown-link,
+.mobile-link,
+.mobile-sub-link,
+.footer-link,
+.social-bar-link {
+  max-width: 100%;
+}
+
+.tabs-nav {
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tab-btn {
+  white-space: normal;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .navbar {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .mobile-menu {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero-actions,
+  .social-bar,
+  .footer-bottom,
+  .footer-bottom-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn,
+  .social-bar-link,
+  .nav-cta,
+  .mobile-cta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .quick-card,
+  .contact-form-card,
+  .service-card {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .whatsapp-float {
+    right: 18px;
+    bottom: 24px;
+  }
+
+  #back-to-top {
+    right: 18px;
+    bottom: 88px;
+  }
+}
+
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.85rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+  }
+
+  .logo-main {
+    font-size: 0.95rem;
+  }
+
+  .logo-tag,
+  .logo-sub {
+    font-size: 0.5rem;
+  }
+
+  .btn {
+    padding-left: 18px;
+    padding-right: 18px;
+    letter-spacing: 0.06em;
+  }
+
+  .tabs-nav {
+    justify-content: flex-start;
+  }
 }

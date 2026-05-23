@@ -9,76 +9,349 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+
   <style>
     /* === TABS DE SERVICIOS === */
-    .tabs-nav { display:flex; gap:4px; background:rgba(226,238,243,0.82); border:1px solid rgba(19,36,82,0.10); border-radius:12px; padding:6px; box-shadow:var(--shadow-sm); width:fit-content; margin:0 auto 64px; flex-wrap:wrap; justify-content:center; }
-    .tab-btn { font-family:var(--font-sans); font-size:0.76rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; padding:12px 26px; border-radius:8px; color:var(--text-mid); cursor:pointer; transition:var(--transition); border:none; background:none; display:flex; align-items:center; gap:10px; }
+    .tabs-nav {
+      display:flex;
+      gap:4px;
+      background:rgba(226,238,243,0.82);
+      border:1px solid rgba(19,36,82,0.10);
+      border-radius:12px;
+      padding:6px;
+      box-shadow:var(--shadow-sm);
+      width:fit-content;
+      max-width:100%;
+      margin:0 auto 64px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .tab-btn {
+      font-family:var(--font-sans);
+      font-size:0.76rem;
+      font-weight:700;
+      letter-spacing:0.07em;
+      text-transform:uppercase;
+      padding:12px 26px;
+      border-radius:8px;
+      color:var(--text-mid);
+      cursor:pointer;
+      transition:var(--transition);
+      border:none;
+      background:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:normal;
+    }
+
     .tab-btn svg { width:16px; height:16px; }
     .tab-btn:hover { color:var(--navy); background:rgba(123,104,150,0.10); }
-    .tab-btn.active { background:var(--navy); color:var(--white); }
-    .tab-panel { display:none; } .tab-panel.active { display:block; }
-    .tab-panel { --service-accent:var(--cyan); }
+    .tab-btn.active,
+    .tab-btn[aria-selected="true"] { background:var(--navy); color:var(--white); }
+
+    .tab-panel { display:none; --service-accent:var(--cyan); }
+    .tab-panel.active { display:block; }
     .tab-panel#igualdad { --service-accent:var(--purple); }
     .tab-panel#gestion { --service-accent:var(--cyan); }
     .tab-panel#evaluacion { --service-accent:var(--navy); }
+
+    .tab-panel[hidden] {
+      display:none !important;
+    }
 
     /* === DETALLE DE SERVICIO === */
     .service-detail { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
     .service-detail-content h2 { font-family:var(--font-sans); font-size:clamp(1.45rem,2.6vw,2.1rem); font-weight:800; letter-spacing:0; margin-bottom:18px; }
     .service-detail-content > p { font-family:var(--font-sans); font-size:1.01rem; line-height:1.80; margin-bottom:32px; font-weight:500; color:var(--text-mid); }
 
-    .entregables-label { font-family:var(--font-sans); font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em; color:var(--service-accent); margin-bottom:18px; }
+    .entregables-label {
+      font-family:var(--font-sans);
+      font-size:0.68rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:var(--service-accent);
+      margin-bottom:18px;
+    }
 
-    .entregable-item { display:flex; align-items:flex-start; gap:14px; padding:14px 0; border-bottom:1px solid rgba(27,45,110,0.07); }
-    .entregable-check { width:22px; height:22px; border-radius:50%; background:rgba(0,169,206,0.12); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; }
+    .entregable-item {
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      padding:14px 0;
+      border-bottom:1px solid rgba(27,45,110,0.07);
+    }
+
+    .entregable-check {
+      width:22px;
+      height:22px;
+      border-radius:50%;
+      background:rgba(0,169,206,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      margin-top:1px;
+    }
+
     #igualdad .entregable-check { background:rgba(123,104,150,0.14); }
     #gestion .entregable-check { background:rgba(0,169,206,0.12); }
     #evaluacion .entregable-check { background:rgba(27,45,110,0.10); }
+
     .entregable-item:nth-of-type(odd) { --service-accent:var(--cyan); }
     .entregable-item:nth-of-type(even) { --service-accent:var(--purple); }
     #evaluacion .entregable-item:nth-of-type(odd) { --service-accent:var(--navy); }
+
     .entregable-item:nth-of-type(odd) .entregable-check { background:rgba(0,169,206,0.12); }
     .entregable-item:nth-of-type(even) .entregable-check { background:rgba(123,104,150,0.14); }
     #evaluacion .entregable-item:nth-of-type(odd) .entregable-check { background:rgba(19,36,82,0.10); }
-    .entregable-check svg { width:12px; height:12px; stroke:var(--service-accent); stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .entregable-item p { font-family:var(--font-sans); font-size:0.87rem; font-weight:500; margin:0; }
 
-    .normas-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
-    .norma-tag { background:rgba(123,104,150,0.12); color:var(--purple); font-family:var(--font-sans); font-size:0.74rem; font-weight:700; padding:6px 14px; border-radius:4px; }
-    .service-cta { margin-top:36px; background:linear-gradient(135deg,var(--purple),var(--cyan)); box-shadow:0 12px 32px rgba(123,104,150,0.34); }
-    .service-cta:hover { background:linear-gradient(135deg,var(--purple-dark),var(--cyan-dark)); box-shadow:0 14px 36px rgba(123,104,150,0.44); }
+    .entregable-check svg {
+      width:12px;
+      height:12px;
+      stroke:var(--service-accent);
+      stroke-width:2.5;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .entregable-item p {
+      font-family:var(--font-sans);
+      font-size:0.87rem;
+      font-weight:500;
+      margin:0;
+    }
+
+    .normas-list {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:22px;
+    }
+
+    .norma-tag {
+      background:rgba(123,104,150,0.12);
+      color:var(--purple);
+      font-family:var(--font-sans);
+      font-size:0.74rem;
+      font-weight:700;
+      padding:6px 14px;
+      border-radius:4px;
+    }
+
+    .service-cta {
+      margin-top:36px;
+      background:linear-gradient(135deg,var(--purple),var(--cyan));
+      box-shadow:0 12px 32px rgba(123,104,150,0.34);
+    }
+
+    .service-cta:hover {
+      background:linear-gradient(135deg,var(--purple-dark),var(--cyan-dark));
+      box-shadow:0 14px 36px rgba(123,104,150,0.44);
+    }
 
     /* === CARD VISUAL DEL SERVICIO === */
-    .service-detail-visual { position:sticky; top:100px; }
-    .service-big-card { border-radius:var(--radius-lg); padding:52px 44px; color:var(--white); position:relative; overflow:hidden; }
-    .service-big-card::before { content:''; position:absolute; bottom:-50px; right:-50px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.05); }
-    .service-big-card .card-icon-wrap { width:64px; height:64px; border-radius:14px; background:rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; margin-bottom:24px; }
-    .service-big-card .card-icon-wrap svg { width:28px; height:28px; stroke:white; stroke-width:1.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-    .service-big-card h3 { font-family:var(--font-sans); color:var(--white); font-size:1.18rem; font-weight:800; margin-bottom:14px; }
-    .service-big-card p  { font-family:var(--font-sans); color:rgba(255,255,255,0.78); margin-bottom:32px; font-size:0.93rem; font-weight:500; }
+    .service-detail-visual {
+      position:sticky;
+      top:100px;
+    }
 
-    .mini-stats { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .mini-stat { background:rgba(255,255,255,0.10); border-radius:10px; padding:16px; text-align:center; }
-    .mini-stat .num   { font-family:var(--font-serif); font-size:1.5rem; font-weight:700; color:var(--white); }
-    .mini-stat .label { font-family:var(--font-sans); font-size:0.70rem; color:rgba(255,255,255,0.62); margin-top:3px; }
+    .service-big-card {
+      border-radius:var(--radius-lg);
+      padding:52px 44px;
+      color:var(--white);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .service-big-card::before {
+      content:'';
+      position:absolute;
+      bottom:-50px;
+      right:-50px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.05);
+    }
+
+    .service-big-card .card-icon-wrap {
+      width:64px;
+      height:64px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:24px;
+    }
+
+    .service-big-card .card-icon-wrap svg {
+      width:28px;
+      height:28px;
+      stroke:white;
+      stroke-width:1.6;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .service-big-card h3 {
+      font-family:var(--font-sans);
+      color:var(--white);
+      font-size:1.18rem;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .service-big-card p {
+      font-family:var(--font-sans);
+      color:rgba(255,255,255,0.78);
+      margin-bottom:32px;
+      font-size:0.93rem;
+      font-weight:500;
+    }
+
+    .mini-stats {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .mini-stat {
+      background:rgba(255,255,255,0.10);
+      border-radius:10px;
+      padding:16px;
+      text-align:center;
+    }
+
+    .mini-stat .num {
+      font-family:var(--font-serif);
+      font-size:1.5rem;
+      font-weight:700;
+      color:var(--white);
+    }
+
+    .mini-stat .label {
+      font-family:var(--font-sans);
+      font-size:0.70rem;
+      color:rgba(255,255,255,0.62);
+      margin-top:3px;
+    }
 
     /* === MODALIDADES === */
-    .modalidades-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-    .modalidad-card { background:rgba(240,237,232,0.72); border-radius:var(--radius-lg); padding:40px 32px; text-align:center; border:2px solid transparent; transition:var(--transition); position:relative; }
-    .modalidad-card:hover { border-color:var(--cyan); transform:translateY(-6px); box-shadow:var(--shadow-md); }
-    .modalidad-card.featured { background:var(--navy); }
-    .modalidad-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--cyan); color:var(--white); font-family:var(--font-sans); font-size:0.68rem; font-weight:700; padding:4px 16px; border-radius:40px; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
-    .modalidad-label { font-family:var(--font-sans); font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.10em; color:var(--cyan); margin-bottom:12px; }
-    .modalidad-card h3 { font-family:var(--font-sans); font-size:1.08rem; font-weight:800; margin-bottom:12px; }
-    .modalidad-card.featured h3 { color:var(--white); }
-    .modalidad-card > p { font-size:0.87rem; margin-bottom:28px; }
-    .modalidad-card.featured > p { color:rgba(255,255,255,0.68); }
-    .modalidad-features { text-align:left; margin-bottom:32px; }
-    .modalidad-feature { display:flex; align-items:flex-start; gap:10px; padding:8px 0; font-family:var(--font-sans); font-size:0.84rem; font-weight:500; color:var(--text-mid); border-bottom:1px solid rgba(27,45,110,0.06); }
-    .modalidad-card.featured .modalidad-feature { color:rgba(255,255,255,0.65); border-color:rgba(255,255,255,0.09); }
+    .modalidades-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
+    }
+
+    .modalidad-card {
+      background:rgba(240,237,232,0.72);
+      border-radius:var(--radius-lg);
+      padding:40px 32px;
+      text-align:center;
+      border:2px solid transparent;
+      transition:var(--transition);
+      position:relative;
+    }
+
+    .modalidad-card:hover {
+      border-color:var(--cyan);
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-md);
+    }
+
+    .modalidad-card.featured {
+      background:var(--navy);
+    }
+
+    .modalidad-badge {
+      position:absolute;
+      top:-12px;
+      left:50%;
+      transform:translateX(-50%);
+      background:var(--cyan);
+      color:var(--white);
+      font-family:var(--font-sans);
+      font-size:0.68rem;
+      font-weight:700;
+      padding:4px 16px;
+      border-radius:40px;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .modalidad-label {
+      font-family:var(--font-sans);
+      font-size:0.68rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.10em;
+      color:var(--cyan);
+      margin-bottom:12px;
+    }
+
+    .modalidad-card h3 {
+      font-family:var(--font-sans);
+      font-size:1.08rem;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .modalidad-card.featured h3 {
+      color:var(--white);
+    }
+
+    .modalidad-card > p {
+      font-size:0.87rem;
+      margin-bottom:28px;
+    }
+
+    .modalidad-card.featured > p {
+      color:rgba(255,255,255,0.68);
+    }
+
+    .modalidad-features {
+      text-align:left;
+      margin-bottom:32px;
+    }
+
+    .modalidad-feature {
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:8px 0;
+      font-family:var(--font-sans);
+      font-size:0.84rem;
+      font-weight:500;
+      color:var(--text-mid);
+      border-bottom:1px solid rgba(27,45,110,0.06);
+    }
+
+    .modalidad-card.featured .modalidad-feature {
+      color:rgba(255,255,255,0.65);
+      border-color:rgba(255,255,255,0.09);
+    }
+
     .modalidad-feature:nth-child(odd) .check-icon { stroke:var(--cyan); }
     .modalidad-feature:nth-child(even) .check-icon { stroke:var(--purple); }
-    .check-icon { width:16px; height:16px; flex-shrink:0; margin-top:2px; stroke:var(--cyan); stroke-width:2.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+
+    .check-icon {
+      width:16px;
+      height:16px;
+      flex-shrink:0;
+      margin-top:2px;
+      stroke:var(--cyan);
+      stroke-width:2.5;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
 
     @media(max-width:768px){
       .service-detail{grid-template-columns:1fr;gap:48px}
@@ -88,237 +361,562 @@
     }
   </style>
 </head>
-<body>
 
-<nav class="navbar scrolled">
+<body>
+<a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+<nav class="navbar scrolled" aria-label="Navegación principal">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><span class="logo-tag">Ideas Ágiles</span><span class="logo-main">Visión y Estrategia</span><span class="logo-sub">Consultoría</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html"    class="nav-link">Inicio</a></li>
-      <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
-      <li class="nav-item">
-        <a href="servicios.html" class="nav-link active">Servicios ▾</a>
-        <div class="dropdown">
-          <a href="#igualdad"   class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg></span>Igualdad</a>
-          <a href="#gestion"    class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Gestión</a>
-          <a href="#evaluacion" class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Evaluación</a>
+
+    <a href="index.html" class="nav-logo" aria-label="Visión y Estrategia — Inicio">
+      <span class="logo-tag">Ideas Ágiles</span>
+      <span class="logo-main">Visión y Estrategia</span>
+      <span class="logo-sub">Consultoría</span>
+    </a>
+
+    <ul class="nav-links" role="list">
+      <li>
+        <a href="index.html" class="nav-link">Inicio</a>
+      </li>
+
+      <li>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+      </li>
+
+      <li class="nav-item has-dropdown">
+        <a
+          href="servicios.html"
+          class="nav-link nav-services-trigger active"
+          aria-current="page"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicios-submenu"
+        >
+          Servicios <span aria-hidden="true">▾</span>
+        </a>
+
+        <div class="dropdown" id="servicios-submenu" aria-label="Submenú de servicios">
+          <a href="#igualdad" class="dropdown-link" data-service-target="igualdad">
+            <span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Igualdad</strong>
+              <small>Perspectiva de género</small>
+            </span>
+          </a>
+
+          <a href="#gestion" class="dropdown-link" data-service-target="gestion">
+            <span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Gestión</strong>
+              <small>Administración pública</small>
+            </span>
+          </a>
+
+          <a href="#evaluacion" class="dropdown-link" data-service-target="evaluacion">
+            <span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Evaluación</strong>
+              <small>Impacto y resultados</small>
+            </span>
+          </a>
         </div>
       </li>
-      <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+
+      <li>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </li>
     </ul>
+
     <a href="contacto.html" class="btn btn-primary nav-cta">Agendar consulta</a>
-    <button class="hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+
+    <button
+      type="button"
+      class="hamburger"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
   </div>
 </nav>
 
-<div class="mobile-menu">
-  <a href="index.html"    class="mobile-link">Inicio</a>
+<div
+  class="mobile-menu"
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú móvil"
+  aria-hidden="true"
+  hidden
+>
+  <a href="index.html" class="mobile-link">Inicio</a>
   <a href="nosotros.html" class="mobile-link">Nosotros</a>
-  <a href="servicios.html" class="mobile-link">Servicios</a>
-  <div class="mobile-sub-links">
-    <a href="#igualdad"   class="mobile-sub-link">Igualdad de Género</a>
-    <a href="#gestion"    class="mobile-sub-link">Gestión Pública</a>
-    <a href="#evaluacion" class="mobile-sub-link">Evaluación de Programas</a>
+  <a href="servicios.html" class="mobile-link active" aria-current="page">Servicios</a>
+
+  <div class="mobile-sub-links" aria-label="Servicios">
+    <a href="#igualdad" class="mobile-sub-link" data-service-target="igualdad">Igualdad de Género</a>
+    <a href="#gestion" class="mobile-sub-link" data-service-target="gestion">Gestión Pública</a>
+    <a href="#evaluacion" class="mobile-sub-link" data-service-target="evaluacion">Evaluación de Programas</a>
   </div>
+
   <a href="contacto.html" class="mobile-link">Contacto</a>
-  <a href="contacto.html" class="btn btn-primary mobile-cta" style="text-align:center;width:100%;justify-content:center">Agendar consulta</a>
+  <a href="contacto.html" class="btn btn-primary mobile-cta">Agendar consulta</a>
 </div>
 
-<section class="page-hero">
-  <div class="container">
-    <nav class="breadcrumb"><a href="index.html">Inicio</a> <span>›</span> <span>Servicios</span></nav>
-    <span class="label-tag">Lo que hacemos</span>
-    <h1>Nuestros servicios de consultoría</h1>
-    <p>Tres líneas estratégicas, un solo propósito: transformar tu organización.</p>
-  </div>
-</section>
+<main id="contenido-principal" tabindex="-1">
 
-<!-- TABS -->
-<section class="section" style="background:var(--canvas)">
-  <div class="container">
-    <div class="tab-group">
-      <div class="tabs-nav">
-        <button class="tab-btn active" data-tab="0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg>
-          Igualdad
-        </button>
-        <button class="tab-btn" data-tab="1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Gestión
-        </button>
-        <button class="tab-btn" data-tab="2">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          Evaluación
-        </button>
-      </div>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <span>Servicios</span>
+      </nav>
+      <span class="label-tag">Lo que hacemos</span>
+      <h1>Nuestros servicios de consultoría</h1>
+      <p>Tres líneas estratégicas, un solo propósito: transformar tu organización.</p>
+    </div>
+  </section>
 
-      <!-- IGUALDAD -->
-      <div class="tab-panel active" id="igualdad">
-        <div class="service-detail">
-          <div class="service-detail-content reveal-left">
-            <span class="label-tag" style="background:rgba(123,104,150,0.12);color:var(--purple)">Perspectiva de género</span>
-            <h2>Igualdad de Género e Inclusión</h2>
-            <p>Ayudamos a organismos públicos y empresas a incorporar la perspectiva de género en sus políticas, procesos y cultura organizacional. Nuestras intervenciones generan cambios reales, medibles y sostenibles.</p>
-            <div class="entregables-label">¿Qué incluye el servicio?</div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Diagnóstico de igualdad laboral</strong> — Levantamiento y análisis de brechas de género en la organización.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Protocolo de atención a violencia</strong> — Diseño e implementación de protocolos internos conforme a la ley.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Cumplimiento NOM-035</strong> — Evaluación del entorno organizacional y plan de acción correctivo.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Certificación NMX-R-025</strong> — Acompañamiento integral para obtener la norma mexicana de igualdad laboral.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Talleres de sensibilización</strong> — Formación del personal en perspectiva de género, masculinidades y prevención de violencia.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Presupuesto con perspectiva de género</strong> — Análisis y reestructuración del gasto institucional con enfoque de género.</p></div>
-            <div class="normas-list"><span class="norma-tag">LGIMH</span><span class="norma-tag">NOM-035-STPS</span><span class="norma-tag">NMX-R-025</span><span class="norma-tag">PROIGUALDAD</span><span class="norma-tag">ODS 5 y 10</span></div>
-            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
-          </div>
-          <div class="service-detail-visual reveal-right">
-            <div class="service-big-card" style="background:linear-gradient(140deg,var(--purple-dark, #5E4F72),var(--navy))">
-              <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg></div>
-              <h3>Igualdad de Género</h3>
-              <p>Construimos organizaciones más justas donde el talento de todas las personas puede desarrollarse plenamente.</p>
-              <div class="mini-stats">
-                <div class="mini-stat"><div class="num">+80</div><div class="label">Diagnósticos realizados</div></div>
-                <div class="mini-stat"><div class="num">100%</div><div class="label">Cumplimiento legal</div></div>
-                <div class="mini-stat"><div class="num">+50</div><div class="label">Protocolos diseñados</div></div>
-                <div class="mini-stat"><div class="num">+500</div><div class="label">Personas capacitadas</div></div>
+  <!-- TABS -->
+  <section class="section" style="background:var(--canvas)" aria-labelledby="servicios-tabs-heading">
+    <div class="container">
+      <h2 id="servicios-tabs-heading" class="sr-only">Detalle de servicios de consultoría</h2>
+
+      <div class="tab-group">
+        <div class="tabs-nav" role="tablist" aria-label="Servicios de consultoría">
+          <button
+            type="button"
+            class="tab-btn active"
+            id="tab-igualdad"
+            role="tab"
+            aria-selected="true"
+            aria-controls="igualdad"
+            data-tab="0"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+            </svg>
+            Igualdad
+          </button>
+
+          <button
+            type="button"
+            class="tab-btn"
+            id="tab-gestion"
+            role="tab"
+            aria-selected="false"
+            aria-controls="gestion"
+            data-tab="1"
+            tabindex="-1"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Gestión
+          </button>
+
+          <button
+            type="button"
+            class="tab-btn"
+            id="tab-evaluacion"
+            role="tab"
+            aria-selected="false"
+            aria-controls="evaluacion"
+            data-tab="2"
+            tabindex="-1"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Evaluación
+          </button>
+        </div>
+
+        <!-- IGUALDAD -->
+        <div class="tab-panel active" id="igualdad" role="tabpanel" tabindex="0" aria-labelledby="tab-igualdad">
+          <div class="service-detail">
+            <div class="service-detail-content reveal-left">
+              <span class="label-tag" style="background:rgba(123,104,150,0.12);color:var(--purple)">Perspectiva de género</span>
+              <h2>Igualdad de Género e Inclusión</h2>
+              <p>Ayudamos a organismos públicos y empresas a incorporar la perspectiva de género en sus políticas, procesos y cultura organizacional. Nuestras intervenciones generan cambios reales, medibles y sostenibles.</p>
+
+              <div class="entregables-label">¿Qué incluye el servicio?</div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Diagnóstico de igualdad laboral</strong> — Levantamiento y análisis de brechas de género en la organización.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Protocolo de atención a violencia</strong> — Diseño e implementación de protocolos internos conforme a la ley.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Cumplimiento NOM-035</strong> — Evaluación del entorno organizacional y plan de acción correctivo.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Certificación NMX-R-025</strong> — Acompañamiento integral para obtener la norma mexicana de igualdad laboral.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Talleres de sensibilización</strong> — Formación del personal en perspectiva de género, masculinidades y prevención de violencia.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Presupuesto con perspectiva de género</strong> — Análisis y reestructuración del gasto institucional con enfoque de género.</p>
+              </div>
+
+              <div class="normas-list" aria-label="Normas y marcos relacionados">
+                <span class="norma-tag">LGIMH</span>
+                <span class="norma-tag">NOM-035-STPS</span>
+                <span class="norma-tag">NMX-R-025</span>
+                <span class="norma-tag">PROIGUALDAD</span>
+                <span class="norma-tag">ODS 5 y 10</span>
+              </div>
+
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar servicio de Igualdad de Género e Inclusión">Solicitar este servicio</a>
+            </div>
+
+            <div class="service-detail-visual reveal-right">
+              <div class="service-big-card" style="background:linear-gradient(140deg,var(--purple-dark, #5E4F72),var(--navy))">
+                <div class="card-icon-wrap" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+                  </svg>
+                </div>
+                <h3>Igualdad de Género</h3>
+                <p>Construimos organizaciones más justas donde el talento de todas las personas puede desarrollarse plenamente.</p>
+
+                <div class="mini-stats">
+                  <div class="mini-stat"><div class="num">+80</div><div class="label">Diagnósticos realizados</div></div>
+                  <div class="mini-stat"><div class="num">100%</div><div class="label">Cumplimiento legal</div></div>
+                  <div class="mini-stat"><div class="num">+50</div><div class="label">Protocolos diseñados</div></div>
+                  <div class="mini-stat"><div class="num">+500</div><div class="label">Personas capacitadas</div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- GESTIÓN -->
-      <div class="tab-panel" id="gestion">
-        <div class="service-detail">
-          <div class="service-detail-content reveal-left">
-            <span class="label-tag">Administración pública</span>
-            <h2>Gestión Pública Estratégica</h2>
-            <p>Fortalecemos las capacidades institucionales de gobiernos y organizaciones a través de diagnósticos organizacionales, planeación estratégica y modernización de procesos administrativos.</p>
-            <div class="entregables-label">¿Qué incluye el servicio?</div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Diagnóstico organizacional</strong> — Análisis de estructura, procesos, recursos y resultados institucionales.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Planeación estratégica</strong> — Diseño de planes institucionales con objetivos, indicadores y metas claras.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Rediseño de procesos</strong> — Identificación de cuellos de botella y propuesta de mejoras operativas.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Presupuesto basado en resultados</strong> — Vinculación del presupuesto a objetivos e indicadores de desempeño.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Matrices de Indicadores (MIR)</strong> — Construcción y validación de la Matriz de Indicadores para Resultados.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Capacitación al personal</strong> — Talleres prácticos para el fortalecimiento de capacidades del equipo.</p></div>
-            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
-          </div>
-          <div class="service-detail-visual reveal-right">
-            <div class="service-big-card" style="background:linear-gradient(140deg,var(--cyan-dark),var(--cyan))">
-              <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-              <h3>Gestión Pública</h3>
-              <p>Modernizamos la gestión institucional para que las organizaciones logren más con sus recursos actuales.</p>
-              <div class="mini-stats">
-                <div class="mini-stat"><div class="num">+60</div><div class="label">Diagnósticos entregados</div></div>
-                <div class="mini-stat"><div class="num">+40</div><div class="label">Planes estratégicos</div></div>
-                <div class="mini-stat"><div class="num">+30%</div><div class="label">Mejora en eficiencia</div></div>
-                <div class="mini-stat"><div class="num">+120</div><div class="label">MIRs construidas</div></div>
+        <!-- GESTIÓN -->
+        <div class="tab-panel" id="gestion" role="tabpanel" tabindex="0" aria-labelledby="tab-gestion" hidden>
+          <div class="service-detail">
+            <div class="service-detail-content reveal-left">
+              <span class="label-tag">Administración pública</span>
+              <h2>Gestión Pública Estratégica</h2>
+              <p>Fortalecemos las capacidades institucionales de gobiernos y organizaciones a través de diagnósticos organizacionales, planeación estratégica y modernización de procesos administrativos.</p>
+
+              <div class="entregables-label">¿Qué incluye el servicio?</div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Diagnóstico organizacional</strong> — Análisis de estructura, procesos, recursos y resultados institucionales.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Planeación estratégica</strong> — Diseño de planes institucionales con objetivos, indicadores y metas claras.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Rediseño de procesos</strong> — Identificación de cuellos de botella y propuesta de mejoras operativas.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Presupuesto basado en resultados</strong> — Vinculación del presupuesto a objetivos e indicadores de desempeño.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Matrices de Indicadores (MIR)</strong> — Construcción y validación de la Matriz de Indicadores para Resultados.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Capacitación al personal</strong> — Talleres prácticos para el fortalecimiento de capacidades del equipo.</p>
+              </div>
+
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar servicio de Gestión Pública Estratégica">Solicitar este servicio</a>
+            </div>
+
+            <div class="service-detail-visual reveal-right">
+              <div class="service-big-card" style="background:linear-gradient(140deg,var(--cyan-dark),var(--cyan))">
+                <div class="card-icon-wrap" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                  </svg>
+                </div>
+                <h3>Gestión Pública</h3>
+                <p>Modernizamos la gestión institucional para que las organizaciones logren más con sus recursos actuales.</p>
+
+                <div class="mini-stats">
+                  <div class="mini-stat"><div class="num">+60</div><div class="label">Diagnósticos entregados</div></div>
+                  <div class="mini-stat"><div class="num">+40</div><div class="label">Planes estratégicos</div></div>
+                  <div class="mini-stat"><div class="num">+30%</div><div class="label">Mejora en eficiencia</div></div>
+                  <div class="mini-stat"><div class="num">+120</div><div class="label">MIRs construidas</div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- EVALUACIÓN -->
-      <div class="tab-panel" id="evaluacion">
-        <div class="service-detail">
-          <div class="service-detail-content reveal-left">
-            <span class="label-tag" style="background:rgba(27,45,110,0.08);color:var(--navy)">Medición de impacto</span>
-            <h2>Evaluación de Programas y Políticas</h2>
-            <p>Diseñamos y ejecutamos evaluaciones rigurosas que permiten a gobiernos y organizaciones conocer el verdadero impacto de sus programas, tomar mejores decisiones y mejorar la rendición de cuentas.</p>
-            <div class="entregables-label">¿Qué incluye el servicio?</div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Evaluación de diseño</strong> — Análisis de la lógica, coherencia interna y viabilidad del programa.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Evaluación de procesos</strong> — Revisión de la operación, cuellos de botella y cumplimiento normativo.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Evaluación de impacto</strong> — Medición de los efectos del programa sobre la población objetivo.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Fichas de monitoreo</strong> — Diseño de sistemas de seguimiento con indicadores clave de desempeño.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Informe ejecutivo</strong> — Documentos claros y listos para presentar ante autoridades o financiadoras.</p></div>
-            <div class="entregable-item"><div class="entregable-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p><strong>Recomendaciones estratégicas</strong> — Plan de mejora con acciones concretas, responsables y plazos.</p></div>
-            <a href="contacto.html" class="btn btn-primary mt-32 service-cta">Solicitar este servicio</a>
-          </div>
-          <div class="service-detail-visual reveal-right">
-            <div class="service-big-card" style="background:linear-gradient(140deg,var(--navy-dark),var(--navy-light))">
-              <div class="card-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-              <h3>Evaluación de Programas</h3>
-              <p>Convertimos datos en conocimiento accionable para que tus programas sean cada vez más efectivos.</p>
-              <div class="mini-stats">
-                <div class="mini-stat"><div class="num">+70</div><div class="label">Evaluaciones realizadas</div></div>
-                <div class="mini-stat"><div class="num">+25</div><div class="label">Municipios atendidos</div></div>
-                <div class="mini-stat"><div class="num">+200</div><div class="label">Indicadores diseñados</div></div>
-                <div class="mini-stat"><div class="num">3</div><div class="label">Tipos de evaluación</div></div>
+        <!-- EVALUACIÓN -->
+        <div class="tab-panel" id="evaluacion" role="tabpanel" tabindex="0" aria-labelledby="tab-evaluacion" hidden>
+          <div class="service-detail">
+            <div class="service-detail-content reveal-left">
+              <span class="label-tag" style="background:rgba(27,45,110,0.08);color:var(--navy)">Medición de impacto</span>
+              <h2>Evaluación de Programas y Políticas</h2>
+              <p>Diseñamos y ejecutamos evaluaciones rigurosas que permiten a gobiernos y organizaciones conocer el verdadero impacto de sus programas, tomar mejores decisiones y mejorar la rendición de cuentas.</p>
+
+              <div class="entregables-label">¿Qué incluye el servicio?</div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Evaluación de diseño</strong> — Análisis de la lógica, coherencia interna y viabilidad del programa.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Evaluación de procesos</strong> — Revisión de la operación, cuellos de botella y cumplimiento normativo.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Evaluación de impacto</strong> — Medición de los efectos del programa sobre la población objetivo.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Fichas de monitoreo</strong> — Diseño de sistemas de seguimiento con indicadores clave de desempeño.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Informe ejecutivo</strong> — Documentos claros y listos para presentar ante autoridades o financiadoras.</p>
+              </div>
+
+              <div class="entregable-item">
+                <div class="entregable-check" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p><strong>Recomendaciones estratégicas</strong> — Plan de mejora con acciones concretas, responsables y plazos.</p>
+              </div>
+
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar servicio de Evaluación de Programas y Políticas">Solicitar este servicio</a>
+            </div>
+
+            <div class="service-detail-visual reveal-right">
+              <div class="service-big-card" style="background:linear-gradient(140deg,var(--navy-dark),var(--navy-light))">
+                <div class="card-icon-wrap" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                </div>
+                <h3>Evaluación de Programas</h3>
+                <p>Convertimos datos en conocimiento accionable para que tus programas sean cada vez más efectivos.</p>
+
+                <div class="mini-stats">
+                  <div class="mini-stat"><div class="num">+70</div><div class="label">Evaluaciones realizadas</div></div>
+                  <div class="mini-stat"><div class="num">+25</div><div class="label">Municipios atendidos</div></div>
+                  <div class="mini-stat"><div class="num">+200</div><div class="label">Indicadores diseñados</div></div>
+                  <div class="mini-stat"><div class="num">3</div><div class="label">Tipos de evaluación</div></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MODALIDADES -->
+  <section class="section" style="background:var(--canvas-light)" aria-labelledby="modalidades-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="label-tag">Cómo trabajamos contigo</span>
+        <h2 id="modalidades-heading">Modalidades de consultoría</h2>
+        <p>Adaptamos nuestro acompañamiento al tamaño y necesidades de tu organización.</p>
       </div>
 
-    </div>
-  </div>
-</section>
+      <div class="modalidades-grid">
+        <div class="modalidad-card reveal">
+          <div class="modalidad-label">Exploración</div>
+          <h3>Diagnóstico Inicial</h3>
+          <p>Para organizaciones que quieren conocer su situación antes de comprometerse con un proceso más amplio.</p>
 
-<!-- MODALIDADES -->
-<section class="section" style="background:var(--canvas-light)">
-  <div class="container">
-    <div class="section-header">
-      <span class="label-tag">Cómo trabajamos contigo</span>
-      <h2>Modalidades de consultoría</h2>
-      <p>Adaptamos nuestro acompañamiento al tamaño y necesidades de tu organización.</p>
-    </div>
-    <div class="modalidades-grid">
-      <div class="modalidad-card reveal">
-        <div class="modalidad-label">Exploración</div>
-        <h3>Diagnóstico Inicial</h3>
-        <p>Para organizaciones que quieren conocer su situación antes de comprometerse con un proceso más amplio.</p>
-        <div class="modalidad-features">
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Reunión de levantamiento de información</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Revisión documental básica</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Informe de hallazgos y recomendaciones</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sesión de presentación de resultados</div>
-        </div>
-        <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center">Solicitar diagnóstico</a>
-      </div>
-      <div class="modalidad-card featured reveal delay-200">
-        <div class="modalidad-badge">Más solicitado</div>
-        <div class="modalidad-label">Implementación</div>
-        <h3>Proyecto Integral</h3>
-        <p style="color:rgba(255,255,255,0.65)">Acompañamiento completo desde el diagnóstico hasta la entrega de documentos finales y capacitación.</p>
-        <div class="modalidad-features">
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Diagnóstico profundo</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Plan de trabajo personalizado</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Implementación con seguimiento</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Entregables ejecutivos completos</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Talleres de capacitación</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Soporte durante 3 meses</div>
-        </div>
-        <a href="contacto.html" class="btn btn-primary" style="width:100%;justify-content:center">Cotizar proyecto</a>
-      </div>
-      <div class="modalidad-card reveal delay-400">
-        <div class="modalidad-label">Alianza</div>
-        <h3>Asesoría Continua</h3>
-        <p>Para organizaciones que requieren un aliado estratégico permanente con disponibilidad recurrente.</p>
-        <div class="modalidad-features">
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Horas de consultoría mensuales</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Revisión de documentos</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Capacitaciones periódicas</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Actualizaciones normativas</div>
-          <div class="modalidad-feature"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Atención prioritaria</div>
-        </div>
-        <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center">Conocer más</a>
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="modalidad-features">
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Reunión de levantamiento de información
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Revisión documental básica
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Informe de hallazgos y recomendaciones
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Sesión de presentación de resultados
+            </div>
+          </div>
 
-<!-- CTA -->
-<section class="cta-banner">
-  <div class="container">
-    <div class="cta-banner-content">
-      <h2>¿No sabes por dónde empezar?</h2>
-      <p>Cuéntanos tu situación en una llamada sin costo y te orientamos hacia el servicio que más te conviene.</p>
-      <div class="cta-actions">
-        <a href="contacto.html" class="btn btn-primary">Agendar llamada gratuita</a>
-        <a href="https://wa.me/+5217222676413" class="btn btn-outline-white" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+          <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center" aria-label="Solicitar diagnóstico inicial">Solicitar diagnóstico</a>
+        </div>
+
+        <div class="modalidad-card featured reveal delay-200">
+          <div class="modalidad-badge">Más solicitado</div>
+          <div class="modalidad-label">Implementación</div>
+          <h3>Proyecto Integral</h3>
+          <p style="color:rgba(255,255,255,0.65)">Acompañamiento completo desde el diagnóstico hasta la entrega de documentos finales y capacitación.</p>
+
+          <div class="modalidad-features">
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Diagnóstico profundo
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Plan de trabajo personalizado
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Implementación con seguimiento
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Entregables ejecutivos completos
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Talleres de capacitación
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Soporte durante 3 meses
+            </div>
+          </div>
+
+          <a href="contacto.html" class="btn btn-primary" style="width:100%;justify-content:center" aria-label="Cotizar proyecto integral">Cotizar proyecto</a>
+        </div>
+
+        <div class="modalidad-card reveal delay-400">
+          <div class="modalidad-label">Alianza</div>
+          <h3>Asesoría Continua</h3>
+          <p>Para organizaciones que requieren un aliado estratégico permanente con disponibilidad recurrente.</p>
+
+          <div class="modalidad-features">
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Horas de consultoría mensuales
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Revisión de documentos
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Capacitaciones periódicas
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Actualizaciones normativas
+            </div>
+            <div class="modalidad-feature">
+              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              Atención prioritaria
+            </div>
+          </div>
+
+          <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center" aria-label="Conocer más sobre asesoría continua">Conocer más</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner" aria-labelledby="cta-servicios-heading">
+    <div class="container">
+      <div class="cta-banner-content">
+        <h2 id="cta-servicios-heading">¿No sabes por dónde empezar?</h2>
+        <p>Cuéntanos tu situación en una llamada sin costo y te orientamos hacia el servicio que más te conviene.</p>
+
+        <div class="cta-actions">
+          <a href="contacto.html" class="btn btn-primary">Agendar llamada gratuita</a>
+          <a href="https://wa.me/+5217222676413" class="btn btn-outline-white" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -328,45 +926,132 @@
         <div class="footer-logo">Visión y Estrategia</div>
         <div class="footer-tagline">Ideas Ágiles · Consultoría</div>
         <p>Especialistas en Igualdad, Gestión y Evaluación.</p>
+
         <div class="footer-social">
-          <a href="#" class="social-btn" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" class="social-btn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="https://wa.me/+5217222676413" class="social-btn" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+
+          <a href="https://wa.me/+5217222676413" class="social-btn" aria-label="WhatsApp">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </a>
         </div>
       </div>
-      <div class="footer-col"><h4>Servicios</h4><a href="#igualdad" class="footer-link">Igualdad de Género</a><a href="#gestion" class="footer-link">Gestión Pública</a><a href="#evaluacion" class="footer-link">Evaluación de Programas</a></div>
-      <div class="footer-col"><h4>Empresa</h4><a href="nosotros.html" class="footer-link">Nosotros</a><a href="servicios.html" class="footer-link">Servicios</a><a href="contacto.html" class="footer-link">Contacto</a></div>
-      <div class="footer-col"><h4>Contacto</h4><a href="tel:7225447945" class="footer-link">722-544-7945 Ext. 104</a><a href="tel:7222676413" class="footer-link">722-267-6413</a><a href="mailto:informes@visionyestrategia.com.mx" class="footer-link">informes@visionyestrategia.com.mx</a></div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <a href="#igualdad" class="footer-link" data-service-target="igualdad">Igualdad de Género</a>
+        <a href="#gestion" class="footer-link" data-service-target="gestion">Gestión Pública</a>
+        <a href="#evaluacion" class="footer-link" data-service-target="evaluacion">Evaluación de Programas</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <a href="nosotros.html" class="footer-link">Nosotros</a>
+        <a href="servicios.html" class="footer-link">Servicios</a>
+        <a href="contacto.html" class="footer-link">Contacto</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <a href="tel:7225447945" class="footer-link">722-544-7945 Ext. 104</a>
+        <a href="tel:7222676413" class="footer-link">722-267-6413</a>
+        <a href="mailto:informes@visionyestrategia.com.mx" class="footer-link">informes@visionyestrategia.com.mx</a>
+      </div>
     </div>
+
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 Visión y Estrategia Consultoría. Todos los derechos reservados.</p>
-      <div class="footer-bottom-links"><a href="#" class="footer-bottom-link">Aviso de privacidad</a><a href="#" class="footer-bottom-link">Términos de uso</a></div>
+
+      <div class="footer-bottom-links">
+        <a href="#" class="footer-bottom-link">Aviso de privacidad</a>
+        <a href="#" class="footer-bottom-link">Términos de uso</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <a href="https://wa.me/+5217222676413" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  </svg>
 </a>
-<button id="back-to-top" aria-label="Volver arriba"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg></button>
-<script type="module" src="/js/main.js"></script>
 
+<button id="back-to-top" aria-label="Volver arriba">
+  <svg aria-hidden="true" viewBox="0 0 24 24">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+<script type="module" src="/js/main.js"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const panels = document.querySelectorAll('.tab-panel');
-      const tabs   = document.querySelectorAll('.tab-btn');
-      panels.forEach((p, i) => {
-        if (p.id === hash) {
-          panels.forEach(x => x.classList.remove('active'));
-          tabs.forEach(x => x.classList.remove('active'));
-          p.classList.add('active'); tabs[i]?.classList.add('active');
-        }
+    const tabs = [...document.querySelectorAll('.tab-btn[role="tab"]')];
+    const panels = [...document.querySelectorAll('.tab-panel[role="tabpanel"]')];
+
+    function activateServiceTab(panelId, shouldFocusPanel = false) {
+      const targetPanel = document.getElementById(panelId);
+      if (!targetPanel) return;
+
+      const targetIndex = panels.findIndex((panel) => panel.id === panelId);
+      if (targetIndex < 0) return;
+
+      tabs.forEach((tab, index) => {
+        const isActive = index === targetIndex;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
       });
+
+      panels.forEach((panel, index) => {
+        const isActive = index === targetIndex;
+        panel.classList.toggle('active', isActive);
+        panel.hidden = !isActive;
+      });
+
+      if (shouldFocusPanel) {
+        setTimeout(() => {
+          targetPanel.focus({ preventScroll: true });
+          targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
     }
+
+    document.querySelectorAll('[data-service-target]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = link.getAttribute('data-service-target');
+        if (!target) return;
+
+        event.preventDefault();
+        history.replaceState(null, '', `#${target}`);
+        activateServiceTab(target, true);
+      });
+    });
+
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash) {
+      activateServiceTab(initialHash, false);
+    }
+
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) activateServiceTab(hash, true);
+    });
   });
 </script>
+
 </body>
 </html>

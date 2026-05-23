@@ -42,52 +42,122 @@
 </head>
 <body>
 <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
-<nav class="navbar scrolled">
+<nav class="navbar scrolled" aria-label="Navegación principal">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo">
+
+    <a href="index.html" class="nav-logo" aria-label="Visión y Estrategia — Inicio">
       <span class="logo-tag">Ideas Ágiles</span>
       <span class="logo-main">Visión y Estrategia</span>
       <span class="logo-sub">Consultoría</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="index.html"    class="nav-link">Inicio</a></li>
-      <li><a href="nosotros.html" class="nav-link active">Nosotros</a></li>
-      <li class="nav-item">
-        <a href="servicios.html" class="nav-link">Servicios ▾</a>
-        <div class="dropdown">
-          <a href="servicios.html#igualdad"   class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg></span>Igualdad</a>
-          <a href="servicios.html#gestion"    class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>Gestión</a>
-          <a href="servicios.html#evaluacion" class="dropdown-link"><span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Evaluación</a>
+
+    <ul class="nav-links" role="list">
+      <li>
+        <a href="index.html" class="nav-link">Inicio</a>
+      </li>
+
+      <li>
+        <a href="nosotros.html" class="nav-link">Nosotros</a>
+      </li>
+
+      <li class="nav-item has-dropdown">
+        <a
+          href="servicios.html"
+          class="nav-link nav-services-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="servicios-submenu"
+        >
+          Servicios <span aria-hidden="true">▾</span>
+        </a>
+
+        <div class="dropdown" id="servicios-submenu" aria-label="Submenú de servicios">
+          <a href="servicios.html#igualdad" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(123,104,150,0.10);color:var(--purple)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Igualdad</strong>
+              <small>Perspectiva de género</small>
+            </span>
+          </a>
+
+          <a href="servicios.html#gestion" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(0,169,206,0.10);color:var(--cyan)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Gestión</strong>
+              <small>Administración pública</small>
+            </span>
+          </a>
+
+          <a href="servicios.html#evaluacion" class="dropdown-link">
+            <span class="dropdown-icon-box" style="background:rgba(27,45,110,0.08);color:var(--navy)" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Evaluación</strong>
+              <small>Impacto y resultados</small>
+            </span>
+          </a>
         </div>
       </li>
-      <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+
+      <li>
+        <a href="contacto.html" class="nav-link">Contacto</a>
+      </li>
     </ul>
+
     <a href="contacto.html" class="btn btn-primary nav-cta">Agendar consulta</a>
-    <button class="hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+
+    <button
+      type="button"
+      class="hamburger"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
   </div>
 </nav>
 
-<div class="mobile-menu">
-  <a href="index.html"    class="mobile-link">Inicio</a>
+<div
+  class="mobile-menu"
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú móvil"
+  aria-hidden="true"
+  hidden
+>
+  <a href="index.html" class="mobile-link">Inicio</a>
   <a href="nosotros.html" class="mobile-link">Nosotros</a>
   <a href="servicios.html" class="mobile-link">Servicios</a>
-  <div class="mobile-sub-links">
-    <a href="servicios.html#igualdad"   class="mobile-sub-link">Igualdad de Género</a>
-    <a href="servicios.html#gestion"    class="mobile-sub-link">Gestión Pública</a>
+
+  <div class="mobile-sub-links" aria-label="Servicios">
+    <a href="servicios.html#igualdad" class="mobile-sub-link">Igualdad de Género</a>
+    <a href="servicios.html#gestion" class="mobile-sub-link">Gestión Pública</a>
     <a href="servicios.html#evaluacion" class="mobile-sub-link">Evaluación de Programas</a>
   </div>
+
   <a href="contacto.html" class="mobile-link">Contacto</a>
-  <a href="contacto.html" class="btn btn-primary mobile-cta" style="text-align:center;width:100%;justify-content:center">Agendar consulta</a>
+  <a href="contacto.html" class="btn btn-primary mobile-cta">Agendar consulta</a>
 </div>
-<main id="contenido-principal" tabindex="-1">
-  <section class="page-hero">
-    <div class="container">
-      <nav class="breadcrumb"><a href="index.html">Inicio</a> <span>›</span> <span>Nosotros</span></nav>
-      <span class="label-tag">Quiénes somos</span>
-      <h1>Un equipo con propósito</h1>
-      <p>Más de 15 años construyendo organizaciones más justas, eficientes y transparentes en México.</p>
-    </div>
-  </section>
+</section>
 
   <!-- MISIÓN / VISIÓN -->
   <section class="section" style="background:var(--canvas)">
