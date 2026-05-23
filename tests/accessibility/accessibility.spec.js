@@ -124,6 +124,84 @@ test.describe('WCAG 1.1.1 Contenido no textual', () => {
   }
 });
 
+test.describe('WCAG 1.3.1 Informacion y relaciones', () => {
+  for (const route of pages) {
+    test(`estructura semantica coherente en ${route}`, async ({ page }) => {
+      await gotoReady(page, route);
+
+      const issues = await page.evaluate(() => {
+        const visible = (element) => {
+          return !element.closest('[hidden], [aria-hidden="true"]');
+        };
+
+        const selectors = [
+          '.hero-stats',
+          '.grid-3',
+          '.valor-pillars',
+          '.proceso-steps',
+          '.about-tags',
+          '.testimonial-grid',
+          '.faq-grid',
+          '.valores-grid',
+          '.team-grid',
+          '.timeline',
+          '.normas-tags',
+          '.quick-contact-grid',
+          '.contact-details',
+          '.social-bar',
+          '.normas-list',
+          '.mini-stats',
+          '.modalidades-grid',
+          '.modalidad-features',
+        ];
+
+        const semanticIssues = [];
+        const mains = [...document.querySelectorAll('main')].filter(visible);
+        if (mains.length !== 1) {
+          semanticIssues.push(`main visible esperado: 1, encontrado: ${mains.length}`);
+        }
+
+        const main = mains[0] || document;
+        const h1s = [...main.querySelectorAll('h1')].filter(visible);
+        if (h1s.length !== 1) {
+          semanticIssues.push(`h1 visible dentro de main esperado: 1, encontrado: ${h1s.length}`);
+        }
+
+        const headings = [...main.querySelectorAll('h1, h2, h3, h4, h5, h6')].filter(visible);
+        headings.reduce((previousLevel, heading) => {
+          const level = Number(heading.tagName.slice(1));
+          if (previousLevel && level > previousLevel + 1) {
+            semanticIssues.push(`salto de encabezado h${previousLevel} a h${level}: ${heading.textContent.trim()}`);
+          }
+          return level;
+        }, 0);
+
+        selectors.forEach((selector) => {
+          document.querySelectorAll(selector).forEach((element) => {
+            if (!visible(element)) return;
+            const isList = ['UL', 'OL'].includes(element.tagName);
+            if (!isList) semanticIssues.push(`${selector} debe ser ul u ol`);
+          });
+        });
+
+        document.querySelectorAll('form input, form select, form textarea').forEach((control) => {
+          if (!visible(control) || ['hidden', 'submit', 'button', 'reset'].includes(control.type)) return;
+          const hasName = control.labels?.length ||
+            control.getAttribute('aria-label') ||
+            control.getAttribute('aria-labelledby');
+          if (!hasName) {
+            semanticIssues.push(`control de formulario sin label: ${control.outerHTML.slice(0, 120)}`);
+          }
+        });
+
+        return semanticIssues;
+      });
+
+      expect(issues).toEqual([]);
+    });
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');

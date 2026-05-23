@@ -33,7 +33,7 @@
     .timeline-item { position:relative; margin-bottom:40px; }
     .timeline-item::before { content:''; position:absolute; left:-37px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--cyan); box-shadow:0 0 0 4px rgba(0,169,206,0.18); }
     .timeline-year { font-family:var(--font-sans); font-size:0.70rem; font-weight:700; letter-spacing:0.10em; text-transform:uppercase; color:var(--cyan); margin-bottom:6px; }
-    .timeline-item h4 { font-family:var(--font-serif); margin-bottom:6px; }
+    .timeline-item h3 { font-family:var(--font-serif); margin-bottom:6px; font-size:1rem; }
     .timeline-item p  { font-size:0.86rem; }
     .normas-section { background:var(--navy); padding:80px 0; text-align:center; }
     .normas-tags { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:44px; }
@@ -159,30 +159,44 @@
   <a href="contacto.html" class="mobile-link">Contacto</a>
   <a href="contacto.html" class="btn btn-primary mobile-cta">Agendar consulta</a>
 </div>
-</section>
+
+<main id="contenido-principal" tabindex="-1">
+
+  <section class="page-hero" aria-labelledby="nosotros-heading">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <a href="index.html">Inicio</a>
+        <span aria-hidden="true">›</span>
+        <span>Nosotros</span>
+      </nav>
+      <span class="label-tag">Quiénes somos</span>
+      <h1 id="nosotros-heading">Conoce a Visión y Estrategia</h1>
+      <p>Un equipo multidisciplinario comprometido con la transformación institucional, la igualdad y la evaluación con evidencia.</p>
+    </div>
+  </section>
 
   <!-- MISIÓN / VISIÓN -->
-  <section class="section" style="background:var(--canvas)">
+  <section class="section" style="background:var(--canvas)" aria-labelledby="historia-heading">
     <div class="container">
       <div class="grid-2">
         <div class="reveal-left">
           <span class="label-tag">Nuestra historia</span>
-          <h2>Nacimos para transformar instituciones</h2>
+          <h2 id="historia-heading">Nacimos para transformar instituciones</h2>
           <p style="margin-top:16px">Visión y Estrategia surge de la convicción profunda de que las instituciones públicas y privadas pueden ser mejores: más equitativas, más eficientes y con mayor rendición de cuentas.</p>
           <p style="margin-top:14px">Fundada en Zinacantepec, Estado de México, nuestra consultoría integra tres líneas estratégicas — Igualdad, Gestión y Evaluación — que se complementan para ofrecer una visión integral del desarrollo institucional.</p>
           <p style="margin-top:14px">Hemos acompañado a más de 200 organizaciones, desde pequeños municipios hasta secretarías estatales, siempre con el mismo compromiso: soluciones que funcionan en la práctica, no solo en el papel.</p>
         </div>
         <div class="reveal-right" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start">
           <div style="background:var(--navy);border-radius:var(--radius-lg);padding:32px;color:white;">
-            <div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--cyan);margin-bottom:12px">Misión</div>
+            <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:var(--cyan);margin-bottom:12px">Misión</h3>
             <p style="color:rgba(255,255,255,0.70);font-size:0.87rem">Impulsar la transformación institucional a través de consultoría especializada en igualdad, gestión y evaluación.</p>
           </div>
           <div style="background:var(--purple);border-radius:var(--radius-lg);padding:32px;color:white;">
-            <div style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:rgba(255,255,255,0.92);margin-bottom:12px">Visión</div>
+            <h3 style="font-family:var(--font-serif);font-size:1.4rem;font-weight:700;color:rgba(255,255,255,0.92);margin-bottom:12px">Visión</h3>
             <p style="color:rgba(255,255,255,0.78);font-size:0.87rem">Ser la consultoría de referencia en México para organizaciones comprometidas con la equidad y la excelencia.</p>
           </div>
           <div style="grid-column:1/-1;background:var(--cyan);border-radius:var(--radius-lg);padding:32px;color:white;">
-            <div style="font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:10px">Ideas Ágiles</div>
+            <h3 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:700;margin-bottom:10px;color:white">Ideas Ágiles</h3>
             <p style="color:rgba(255,255,255,0.85);font-size:0.87rem">Nuestro lema refleja quiénes somos: expertos que aportan soluciones prácticas, innovadoras y adaptadas a cada realidad institucional, sin rigidez ni fórmulas genéricas.</p>
           </div>
         </div>
@@ -191,69 +205,69 @@
   </section>
 
   <!-- VALORES -->
-  <section class="section" style="background:var(--white)">
+  <section class="section" style="background:var(--white)" aria-labelledby="valores-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Nuestros valores</span>
-        <h2>Lo que nos guía todos los días</h2>
+        <h2 id="valores-heading">Lo que nos guía todos los días</h2>
       </div>
-      <div class="valores-grid stagger-children">
-        <div class="valor-card reveal">
+      <ul class="valores-grid stagger-children">
+        <li class="valor-card reveal">
           <div class="valor-card-icon" style="background:rgba(123,104,150,0.10);color:var(--purple)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/></svg>
           </div>
           <h3>Compromiso con la equidad</h3>
           <p>La perspectiva de género no es un añadido: es el corazón de nuestro trabajo y de cada intervención que realizamos.</p>
-        </div>
-        <div class="valor-card reveal delay-200">
+        </li>
+        <li class="valor-card reveal delay-200">
           <div class="valor-card-icon" style="background:rgba(0,169,206,0.10);color:var(--cyan)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
           <h3>Rigor metodológico</h3>
           <p>Cada proyecto descansa en evidencia sólida, metodologías probadas y un análisis profundo del contexto específico del cliente.</p>
-        </div>
-        <div class="valor-card reveal delay-400">
+        </li>
+        <li class="valor-card reveal delay-400">
           <div class="valor-card-icon" style="background:rgba(27,45,110,0.08);color:var(--navy)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h3>Acompañamiento genuino</h3>
           <p>No somos proveedores de informes. Somos aliados de proceso que caminan junto a las organizaciones hasta ver resultados reales.</p>
-        </div>
-        <div class="valor-card reveal">
+        </li>
+        <li class="valor-card reveal">
           <div class="valor-card-icon" style="background:rgba(0,169,206,0.10);color:var(--cyan)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
           <h3>Innovación práctica</h3>
           <p>Buscamos herramientas y enfoques nuevos permanentemente, pero con un criterio claro: si no es implementable, no sirve.</p>
-        </div>
-        <div class="valor-card reveal delay-200">
+        </li>
+        <li class="valor-card reveal delay-200">
           <div class="valor-card-icon" style="background:rgba(27,45,110,0.08);color:var(--navy)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
           <h3>Confidencialidad total</h3>
           <p>La información de nuestros clientes es sagrada. Operamos con los más altos estándares éticos en el manejo de datos institucionales.</p>
-        </div>
-        <div class="valor-card reveal delay-400">
+        </li>
+        <li class="valor-card reveal delay-400">
           <div class="valor-card-icon" style="background:rgba(123,104,150,0.10);color:var(--purple)">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <h3>Orientación a resultados</h3>
           <p>Definimos indicadores desde el inicio para que los avances sean medibles, comunicables y verificables por todas las partes.</p>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 
   <!-- EQUIPO -->
-  <section class="section" style="background:var(--canvas)">
+  <section class="section" style="background:var(--canvas)" aria-labelledby="equipo-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Nuestro equipo</span>
-        <h2>Especialistas apasionados por el cambio</h2>
+        <h2 id="equipo-heading">Especialistas apasionados por el cambio</h2>
         <p>Un equipo multidisciplinario con experiencia en sector público, academia y consultoría privada.</p>
       </div>
-      <div class="team-grid stagger-children">
-        <div class="team-card reveal">
+      <ul class="team-grid stagger-children">
+        <li class="team-card reveal">
           <div class="team-photo" style="background:linear-gradient(140deg,var(--navy),var(--purple))">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
@@ -262,8 +276,8 @@
             <h3>Directora General</h3>
             <p>Especialista en perspectiva de género y políticas públicas. Más de 15 años de trayectoria en consultoría institucional.</p>
           </div>
-        </div>
-        <div class="team-card reveal delay-200">
+        </li>
+        <li class="team-card reveal delay-200">
           <div class="team-photo" style="background:linear-gradient(140deg,var(--navy-light),var(--cyan-dark))">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
@@ -272,8 +286,8 @@
             <h3>Especialista en Gestión</h3>
             <p>Experto en planeación estratégica, presupuestación con perspectiva de género y rediseño de procesos institucionales.</p>
           </div>
-        </div>
-        <div class="team-card reveal delay-400">
+        </li>
+        <li class="team-card reveal delay-400">
           <div class="team-photo" style="background:linear-gradient(140deg,var(--purple),var(--navy))">
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
@@ -282,54 +296,54 @@
             <h3>Especialista en Evaluación</h3>
             <p>Metodóloga con experiencia en evaluaciones de diseño, proceso e impacto para programas sociales y políticas públicas.</p>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
       <p style="text-align:center;margin-top:28px;font-family:var(--font-sans);font-size:0.78rem;color:var(--text-light)">Reemplaza estos datos con los nombres reales y fotografías del personal.</p>
     </div>
   </section>
 
   <!-- TRAYECTORIA -->
-  <section class="section" style="background:var(--cloud)">
+  <section class="section" style="background:var(--cloud)" aria-labelledby="trayectoria-heading">
     <div class="container">
       <div class="section-header">
         <span class="label-tag">Nuestra trayectoria</span>
-        <h2>15 años de historia institucional</h2>
+        <h2 id="trayectoria-heading">15 años de historia institucional</h2>
       </div>
-      <div class="timeline">
-        <div class="timeline-item reveal"><div class="timeline-year">2009</div><h4>Fundación</h4><p>Visión y Estrategia abre sus puertas en Zinacantepec con el propósito de acompañar a organizaciones del Estado de México.</p></div>
-        <div class="timeline-item reveal"><div class="timeline-year">2013</div><h4>Expansión en género</h4><p>Consolidamos nuestra línea de Igualdad ante la creciente demanda de perspectiva de género en el sector público.</p></div>
-        <div class="timeline-item reveal"><div class="timeline-year">2017</div><h4>Primera evaluación nacional</h4><p>Realizamos nuestra primera evaluación de impacto para un programa social de alcance estatal, estableciendo un nuevo estándar de calidad.</p></div>
-        <div class="timeline-item reveal"><div class="timeline-year">2020</div><h4>Adaptación digital</h4><p>Incorporamos metodologías en línea que nos permitieron continuar acompañando clientes sin interrupciones.</p></div>
-        <div class="timeline-item reveal"><div class="timeline-year">2024</div><h4>Más de 200 proyectos</h4><p>Celebramos más de 200 proyectos exitosos y seguimos creciendo con nuevos clientes en todo el país.</p></div>
-      </div>
+      <ol class="timeline">
+        <li class="timeline-item reveal"><div class="timeline-year">2009</div><h3>Fundación</h3><p>Visión y Estrategia abre sus puertas en Zinacantepec con el propósito de acompañar a organizaciones del Estado de México.</p></li>
+        <li class="timeline-item reveal"><div class="timeline-year">2013</div><h3>Expansión en género</h3><p>Consolidamos nuestra línea de Igualdad ante la creciente demanda de perspectiva de género en el sector público.</p></li>
+        <li class="timeline-item reveal"><div class="timeline-year">2017</div><h3>Primera evaluación nacional</h3><p>Realizamos nuestra primera evaluación de impacto para un programa social de alcance estatal, estableciendo un nuevo estándar de calidad.</p></li>
+        <li class="timeline-item reveal"><div class="timeline-year">2020</div><h3>Adaptación digital</h3><p>Incorporamos metodologías en línea que nos permitieron continuar acompañando clientes sin interrupciones.</p></li>
+        <li class="timeline-item reveal"><div class="timeline-year">2024</div><h3>Más de 200 proyectos</h3><p>Celebramos más de 200 proyectos exitosos y seguimos creciendo con nuevos clientes en todo el país.</p></li>
+      </ol>
     </div>
   </section>
 
   <!-- NORMAS -->
-  <section class="normas-section">
+  <section class="normas-section" aria-labelledby="normas-heading">
     <div class="container">
       <span class="label-tag" style="background:rgba(0,169,206,0.18);color:var(--cyan)">Marco normativo</span>
-      <h2 style="color:var(--white);margin-top:8px">Expertos en el marco legal mexicano</h2>
-      <div class="normas-tags">
-        <span class="norma-tag">LGIMH</span>
-        <span class="norma-tag">NOM-035-STPS</span>
-        <span class="norma-tag">Ley General de Desarrollo Social</span>
-        <span class="norma-tag">PROIGUALDAD</span>
-        <span class="norma-tag">Presupuesto con perspectiva de género</span>
-        <span class="norma-tag">CONEVAL</span>
-        <span class="norma-tag">INMUJERES</span>
-        <span class="norma-tag">ODS / Agenda 2030</span>
-        <span class="norma-tag">Ley Federal del Trabajo</span>
-        <span class="norma-tag">NMX-R-025</span>
-      </div>
+      <h2 id="normas-heading" style="color:var(--white);margin-top:8px">Expertos en el marco legal mexicano</h2>
+      <ul class="normas-tags">
+        <li class="norma-tag">LGIMH</li>
+        <li class="norma-tag">NOM-035-STPS</li>
+        <li class="norma-tag">Ley General de Desarrollo Social</li>
+        <li class="norma-tag">PROIGUALDAD</li>
+        <li class="norma-tag">Presupuesto con perspectiva de género</li>
+        <li class="norma-tag">CONEVAL</li>
+        <li class="norma-tag">INMUJERES</li>
+        <li class="norma-tag">ODS / Agenda 2030</li>
+        <li class="norma-tag">Ley Federal del Trabajo</li>
+        <li class="norma-tag">NMX-R-025</li>
+      </ul>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="cta-banner">
+  <section class="cta-banner" aria-labelledby="cta-nosotros-heading">
     <div class="container">
       <div class="cta-banner-content">
-        <h2>¿Quieres conocernos mejor?</h2>
+        <h2 id="cta-nosotros-heading">¿Quieres conocernos mejor?</h2>
         <p>Agenda una sesión de diagnóstico sin costo. Cuéntanos tu reto y vemos juntos cómo resolverlo.</p>
         <div class="cta-actions">
           <a href="contacto.html" class="btn btn-primary">Agendar reunión gratuita</a>
@@ -359,10 +373,10 @@
           <a href="https://wa.me/+5217222676413" class="social-btn" aria-label="WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
         </div>
       </div>
-      <div class="footer-col"><h4>Servicios</h4><a href="servicios.html#igualdad" class="footer-link">Igualdad de Género</a><a href="servicios.html#gestion" class="footer-link">Gestión Pública</a><a href="servicios.html#evaluacion" class="footer-link">Evaluación de Programas</a></div>
-      <div class="footer-col"><h4>Empresa</h4><a href="nosotros.html" class="footer-link">Nosotros</a><a href="servicios.html" class="footer-link">Servicios</a><a href="contacto.html" class="footer-link">Contacto</a></div>
+      <div class="footer-col"><h2 class="footer-heading">Servicios</h2><a href="servicios.html#igualdad" class="footer-link">Igualdad de Género</a><a href="servicios.html#gestion" class="footer-link">Gestión Pública</a><a href="servicios.html#evaluacion" class="footer-link">Evaluación de Programas</a></div>
+      <div class="footer-col"><h2 class="footer-heading">Empresa</h2><a href="nosotros.html" class="footer-link">Nosotros</a><a href="servicios.html" class="footer-link">Servicios</a><a href="contacto.html" class="footer-link">Contacto</a></div>
       <div class="footer-col">
-        <h4>Contacto</h4>
+        <h2 class="footer-heading">Contacto</h2>
         <a href="tel:7225447945" class="footer-link">722-544-7945 Ext. 104</a>
         <a href="tel:7222676413" class="footer-link">722-267-6413</a>
         <a href="mailto:informes@visionyestrategia.com.mx" class="footer-link">informes@visionyestrategia.com.mx</a>
