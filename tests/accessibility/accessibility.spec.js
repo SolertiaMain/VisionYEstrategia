@@ -1,0 +1,270 @@
+import { expect, test } from '@playwright/test';
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const axePath = require.resolve('axe-core/axe.min.js');
+const pages = ['/', '/nosotros.html', '/servicios.html', '/contacto.html'];
+
+async function gotoReady(page, url) {
+  await page.goto(url);
+  await page.waitForLoadState('networkidle');
+  await page.waitForTimeout(850);
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let field = '';
+  let quoted = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+
+    if (char === '"' && quoted && next === '"') {
+      field += '"';
+      index += 1;
+    } else if (char === '"') {
+      quoted = !quoted;
+    } else if (char === ',' && !quoted) {
+      row.push(field);
+      field = '';
+    } else if ((char === '\n' || char === '\r') && !quoted) {
+      if (char === '\r' && next === '\n') index += 1;
+      row.push(field);
+      if (row.some((value) => value.trim())) rows.push(row);
+      row = [];
+      field = '';
+    } else {
+      field += char;
+    }
+  }
+
+  if (field || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+test.describe('Cobertura documental', () => {
+  test('cada prueba del CSV esta clasificada para automatizacion', async () => {
+    const csv = fs.readFileSync(path.resolve('PruebasAccesibilidad - Isaí.csv'), 'utf8');
+    const [, ...rows] = parseCsv(csv);
+    const matrix = JSON.parse(fs.readFileSync(path.resolve('tests/accessibility/test-matrix.json'), 'utf8'));
+    const mappedNames = new Set(matrix.map((item) => item.name));
+    const missing = rows.map((row) => row[0]).filter((name) => !mappedNames.has(name));
+
+    expect(missing).toEqual([]);
+  });
+});
+
+test.describe('Axe WCAG automatico', () => {
+  for (const route of pages) {
+    test(`sin violaciones critical/serious en ${route}`, async ({ page }) => {
+      await gotoReady(page, route);
+      await page.addScriptTag({ path: axePath });
+
+      const results = await page.evaluate(async () => {
+        return window.axe.run(document, {
+          resultTypes: ['violations'],
+        });
+      });
+
+      const blocking = results.violations.filter((violation) => {
+        return ['critical', 'serious'].includes(violation.impact);
+      });
+
+      expect(blocking, JSON.stringify(blocking, null, 2)).toEqual([]);
+    });
+  }
+});
+
+test.describe('Teclado y foco', () => {
+  test('skip link mueve el foco al contenido principal', async ({ page }) => {
+    await gotoReady(page, '/');
+
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.skip-link')).toBeFocused();
+
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#contenido-principal')).toBeFocused();
+  });
+
+  test('dropdown de Servicios abre con foco y cierra con Escape', async ({ page }) => {
+    test.skip(page.viewportSize()?.width < 768, 'El dropdown de escritorio no se muestra en viewport movil.');
+
+    await gotoReady(page, '/');
+
+    const trigger = page.locator('.nav-services-trigger').first();
+    await trigger.focus();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#servicios-submenu .dropdown-link').first()).toBeVisible();
+
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#servicios-submenu .dropdown-link').first()).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(trigger).toBeFocused();
+  });
+
+  test('menu movil abre, atrapa foco y cierra con Escape', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await gotoReady(page, '/');
+
+    const hamburger = page.locator('.hamburger');
+    const menu = page.locator('#mobile-menu');
+    await hamburger.focus();
+    await page.keyboard.press('Enter');
+
+    await expect(hamburger).toHaveAttribute('aria-expanded', 'true');
+    await expect(menu).toBeVisible();
+    await expect(menu.locator('a').first()).toBeFocused();
+
+    await menu.locator('a').last().focus();
+    await page.keyboard.press('Tab');
+    await expect(menu.locator('a').first()).toBeFocused();
+
+    await page.keyboard.press('Shift+Tab');
+    await expect(menu.locator('a').last()).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(hamburger).toHaveAttribute('aria-expanded', 'false');
+    await expect(menu).toBeHidden();
+    await expect(hamburger).toBeFocused();
+  });
+
+  test('FAQ responde a Enter, Espacio y Escape', async ({ page }) => {
+    await gotoReady(page, '/');
+
+    const question = page.locator('.faq-question').first();
+    const panel = page.locator(`#${await question.getAttribute('aria-controls')}`);
+    await question.focus();
+
+    await page.keyboard.press('Enter');
+    await expect(question).toHaveAttribute('aria-expanded', 'true');
+    await expect(panel).toBeVisible();
+
+    await page.keyboard.press('Enter');
+    await expect(question).toHaveAttribute('aria-expanded', 'false');
+
+    await page.keyboard.press('Space');
+    await expect(question).toHaveAttribute('aria-expanded', 'true');
+
+    await page.keyboard.press('Escape');
+    await expect(question).toHaveAttribute('aria-expanded', 'false');
+    await expect(question).toBeFocused();
+  });
+
+  test('tabs de servicios soportan flechas, Home, End, Enter y Espacio', async ({ page }) => {
+    await gotoReady(page, '/servicios.html');
+
+    const igualdad = page.locator('#tab-igualdad');
+    const gestion = page.locator('#tab-gestion');
+    const evaluacion = page.locator('#tab-evaluacion');
+
+    await igualdad.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(gestion).toBeFocused();
+    await expect(gestion).toHaveAttribute('aria-selected', 'true');
+    await expect(page.locator('#gestion')).toBeVisible();
+
+    await page.keyboard.press('End');
+    await expect(evaluacion).toBeFocused();
+    await expect(evaluacion).toHaveAttribute('aria-selected', 'true');
+
+    await page.keyboard.press('Home');
+    await expect(igualdad).toBeFocused();
+    await expect(igualdad).toHaveAttribute('aria-selected', 'true');
+
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('Space');
+    await expect(gestion).toHaveAttribute('aria-selected', 'true');
+
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('Enter');
+    await expect(evaluacion).toHaveAttribute('aria-selected', 'true');
+  });
+});
+
+test.describe('Formulario accesible', () => {
+  test('formulario vacio enfoca primer error y marca aria-invalid', async ({ page }) => {
+    await gotoReady(page, '/contacto.html');
+
+    await page.getByRole('button', { name: /enviar solicitud/i }).click();
+
+    await expect(page.locator('#nombre')).toBeFocused();
+    await expect(page.locator('#nombre')).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator('#nombre-error')).toBeVisible();
+    await expect(page.locator('#form-status')).toContainText('Hay errores en el formulario');
+  });
+
+  test('email y telefono invalidos muestran sugerencias', async ({ page }) => {
+    await gotoReady(page, '/contacto.html');
+
+    await page.locator('#nombre').fill('Isaí Prueba');
+    await page.locator('#organizacion').fill('Organizacion demo');
+    await page.locator('#mensaje').fill('Necesito una evaluacion de accesibilidad.');
+    await page.locator('#email').fill('isaigmail.com');
+    await page.locator('#telefono').fill('abc');
+    await page.getByRole('button', { name: /enviar solicitud/i }).click();
+
+    await expect(page.locator('#email')).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator('#email-error')).toContainText('nombre@dominio.com');
+
+    await page.locator('#email').fill('isai@example.com');
+    await page.locator('#telefono').blur();
+    await expect(page.locator('#telefono')).toHaveAttribute('aria-invalid', 'true');
+    await expect(page.locator('#telefono-error')).toContainText('722-000-0000');
+  });
+
+  test('campos tienen nombre accesible y el exito se anuncia como status', async ({ page }) => {
+    await gotoReady(page, '/contacto.html');
+
+    await expect(page.getByLabel(/nombre completo/i)).toBeVisible();
+    await expect(page.getByLabel(/^organización/i)).toBeVisible();
+    await expect(page.getByLabel(/correo electrónico/i)).toBeVisible();
+    await expect(page.getByLabel(/teléfono de contacto/i)).toBeVisible();
+    await expect(page.getByLabel(/cuéntanos tu situación/i)).toBeVisible();
+
+    await page.getByLabel(/nombre completo/i).fill('Isaí Prueba');
+    await page.getByLabel(/^organización/i).fill('Organizacion demo');
+    await page.getByLabel(/correo electrónico/i).fill('isai@example.com');
+    await page.getByLabel(/cuéntanos tu situación/i).fill('Necesito una evaluacion de accesibilidad.');
+    await page.getByRole('button', { name: /enviar solicitud/i }).click();
+
+    const success = page.locator('#form-success');
+    await expect(success).toBeVisible();
+    await expect(success).toHaveAttribute('role', 'status');
+    await expect(success).toHaveAttribute('aria-live', 'polite');
+    await expect(success).toBeFocused();
+  });
+});
+
+test.describe('Reflow y header fijo', () => {
+  for (const route of pages) {
+    test(`sin overflow horizontal a 320px en ${route}`, async ({ page }) => {
+      await page.setViewportSize({ width: 320, height: 900 });
+      await gotoReady(page, route);
+
+      const hasHorizontalOverflow = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+
+      expect(hasHorizontalOverflow).toBe(false);
+    });
+  }
+
+  test('anclas de servicios no quedan ocultas por header', async ({ page }) => {
+    await gotoReady(page, '/servicios.html#gestion');
+
+    const panelBox = await page.locator('#gestion').boundingBox();
+    const headerBox = await page.locator('.navbar').boundingBox();
+
+    expect(panelBox.top).toBeGreaterThanOrEqual(headerBox.height - 1);
+  });
+});
