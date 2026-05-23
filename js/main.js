@@ -63,7 +63,14 @@ function initNavbar() {
   setActiveNavigation();
 
   if (servicesItem && servicesTrigger && servicesDropdown) {
+    let skipNextServicesFocusOpen = false;
+
     const openDropdown = () => {
+      if (skipNextServicesFocusOpen) {
+        skipNextServicesFocusOpen = false;
+        return;
+      }
+
       servicesItem.classList.add('open');
       servicesTrigger.setAttribute('aria-expanded', 'true');
     };
@@ -86,6 +93,7 @@ function initNavbar() {
     servicesItem.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         closeDropdown();
+        skipNextServicesFocusOpen = true;
         servicesTrigger.focus();
       }
     });
