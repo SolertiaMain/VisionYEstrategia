@@ -295,30 +295,49 @@ function initFAQ() {
 
     if (!panel) return;
 
-    button.addEventListener('click', () => {
+    function closeItem(faqItem) {
+      const faqButton = $('.faq-question', faqItem);
+      if (!faqButton) return;
+
+      const faqPanel = document.getElementById(faqButton.getAttribute('aria-controls'));
+      const faqToggle = $('.faq-toggle', faqButton);
+
+      faqButton.setAttribute('aria-expanded', 'false');
+      faqItem.classList.remove('open');
+
+      if (faqPanel) faqPanel.hidden = true;
+      if (faqToggle) faqToggle.textContent = '+';
+    }
+
+    function toggleItem() {
       const isOpen = button.getAttribute('aria-expanded') === 'true';
 
       $$('.faq-item').forEach((otherItem) => {
-        const otherButton = $('.faq-question', otherItem);
-        if (!otherButton) return;
-
-        const otherPanel = document.getElementById(otherButton.getAttribute('aria-controls'));
-        otherButton.setAttribute('aria-expanded', 'false');
-
-        const otherToggle = $('.faq-toggle', otherButton);
-        if (otherToggle) otherToggle.textContent = '+';
-
-        if (otherPanel) otherPanel.hidden = true;
-
-        otherItem.classList.remove('open');
+        if (otherItem !== item) closeItem(otherItem);
       });
 
       button.setAttribute('aria-expanded', String(!isOpen));
       panel.hidden = isOpen;
-
-      if (toggle) toggle.textContent = isOpen ? '+' : '−';
-
       item.classList.toggle('open', !isOpen);
+
+      if (toggle) {
+        toggle.textContent = isOpen ? '+' : '−';
+      }
+    }
+
+    button.addEventListener('click', toggleItem);
+
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleItem();
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeItem(item);
+        button.focus();
+      }
     });
   });
 }
