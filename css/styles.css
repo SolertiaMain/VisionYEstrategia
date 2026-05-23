@@ -15,11 +15,12 @@
   --cyan-light:   #33BFDB;
   --cyan-dark:    #0087A8;
 
-  --navy:         #1B2D6E;   /* PANTONE 534 C  — El Ancla Institucional  */
-  --navy-dark:    #111E50;
-  --navy-light:   #243A88;
+  --navy:         #132452;   /* PANTONE 534 C  — El Ancla Institucional  */
+  --navy-dark:    #081333;
+  --navy-light:   #1B2D6E;
 
   --purple:       #7B6896;   /* PANTONE 667 C  — Toque de Igualdad       */
+  --purple-dark:  #5E4F72;
   --purple-light: #9887B0;
 
   --cloud:        #F0EDE8;   /* Cloud Dancer   — Calidez Humana          */
@@ -134,14 +135,14 @@ p {
 }
 
 .btn-primary {
-  background: var(--cyan);
+  background: linear-gradient(135deg,var(--purple),var(--cyan));
   color: var(--white);
-  box-shadow: 0 4px 18px rgba(0,169,206,0.28);
+  box-shadow: 0 10px 28px rgba(123,104,150,0.32);
 }
 .btn-primary:hover {
-  background: var(--cyan-dark);
+  background: linear-gradient(135deg,var(--purple-dark),var(--cyan-dark));
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(0,169,206,0.40);
+  box-shadow: 0 12px 34px rgba(123,104,150,0.42);
 }
 
 .btn-secondary {
@@ -179,9 +180,9 @@ p {
 }
 .navbar.transparent { background: transparent; }
 .navbar.scrolled {
-  background: rgba(17,30,80,0.97);
+  background: rgba(8,19,51,0.98);
   backdrop-filter: blur(14px);
-  box-shadow: 0 4px 28px rgba(17,30,80,0.30);
+  box-shadow: 0 6px 32px rgba(8,19,51,0.42);
 }
 
 .nav-container {
@@ -265,7 +266,12 @@ p {
 }
 .dropdown-icon-box svg { width: 15px; height: 15px; }
 
-.nav-cta { margin-left: 16px; }
+.nav-cta {
+  margin-left: 22px;
+  padding-inline: 24px;
+  background: linear-gradient(135deg,var(--purple),var(--cyan));
+  box-shadow: 0 10px 28px rgba(123,104,150,0.38);
+}
 
 .hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
@@ -450,6 +456,9 @@ p {
   text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--cyan); transition: var(--transition);
 }
+.service-card.igualdad .service-link { color: var(--purple); }
+.service-card.gestion .service-link  { color: var(--cyan); }
+.service-card.evalua .service-link   { color: var(--purple); }
 .service-link svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
 .service-card:hover .service-link svg { transform: translateX(6px); }
 
@@ -554,17 +563,85 @@ p {
 /* ============================================================
    FAQ
    ============================================================ */
-.faq-section { background: var(--white); }
-.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:960px; margin:0 auto; }
+.faq-section {
+  background: var(--white);
+}
 
-.faq-item { background:var(--canvas); border-radius:var(--radius); overflow:hidden; border:1px solid rgba(27,45,110,0.06); }
-.faq-question { padding:22px 24px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-family:var(--font-sans); font-weight:600; font-size:0.88rem; color:var(--navy); transition:var(--transition); gap:12px; }
-.faq-question:hover { color:var(--cyan); }
-.faq-toggle { width:26px; height:26px; border-radius:50%; background:var(--white); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem; font-weight:300; color:var(--navy); transition:var(--transition); }
-.faq-item.open .faq-toggle { background:var(--cyan); color:var(--white); transform:rotate(45deg); }
-.faq-answer { display:none; padding:0 24px 22px; font-family:var(--font-sans); font-size:0.86rem; line-height:1.75; color:var(--text-mid); }
-.faq-item.open { background:var(--white); }
-.faq-item.open .faq-answer { display:block; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 960px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.faq-item {
+  background: var(--canvas);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(27, 45, 110, 0.06);
+  transition: background 0.3s ease;
+}
+
+.faq-question {
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--navy);
+  transition: var(--transition);
+  gap: 12px;
+}
+
+.faq-question:hover {
+  color: var(--cyan);
+}
+
+.faq-toggle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--navy);
+  transition: var(--transition);
+}
+
+.faq-item.open .faq-toggle {
+  background: var(--cyan);
+  color: var(--white);
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--text-mid);
+  transition: max-height 0.45s ease, padding 0.45s ease;
+}
+
+.faq-item.open {
+  background: var(--white);
+}
+
+.faq-item.open .faq-answer {
+  max-height: 220px;
+  padding: 0 24px 22px;
+}
 
 /* ============================================================
    CTA BANNER
@@ -618,7 +695,7 @@ p {
 /* ============================================================
    FOOTER — PANTONE 534 C (navy oscuro) + Montserrat
    ============================================================ */
-.footer { background:var(--navy-dark); color:var(--white); padding:80px 0 32px; }
+.footer { background:linear-gradient(180deg,#0d1b43 0%,var(--navy-dark) 100%); color:var(--white); padding:80px 0 32px; }
 .footer-grid { display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr; gap:48px; margin-bottom:64px; }
 .footer-logo { font-family:var(--font-serif); font-size:1.22rem; font-weight:700; color:var(--white); margin-bottom:4px; }
 .footer-tagline { font-family:var(--font-sans); font-size:0.64rem; color:var(--cyan); text-transform:uppercase; letter-spacing:0.18em; margin-bottom:18px; }
