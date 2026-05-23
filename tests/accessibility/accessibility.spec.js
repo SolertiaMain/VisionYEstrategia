@@ -83,6 +83,47 @@ test.describe('Axe WCAG automatico', () => {
   }
 });
 
+test.describe('WCAG 1.1.1 Contenido no textual', () => {
+  for (const route of pages) {
+    test(`imagenes e iconos tienen alternativa adecuada en ${route}`, async ({ page }) => {
+      await gotoReady(page, route);
+
+      const issues = await page.evaluate(() => {
+        const text = (value) => (value || '').trim();
+        const isHidden = (element) => {
+          return Boolean(element.closest('[aria-hidden="true"], [hidden]'));
+        };
+
+        const imageIssues = [...document.querySelectorAll('img')].flatMap((image) => {
+          if (isHidden(image)) return [];
+          return image.hasAttribute('alt')
+            ? []
+            : [`img sin alt: ${image.outerHTML.slice(0, 120)}`];
+        });
+
+        const svgIssues = [...document.querySelectorAll('svg')].flatMap((svg) => {
+          if (isHidden(svg)) return [];
+
+          const hasAccessibleRole = svg.getAttribute('role') === 'img';
+          const hasAccessibleName = Boolean(
+            text(svg.getAttribute('aria-label')) ||
+            text(svg.getAttribute('aria-labelledby')) ||
+            text(svg.querySelector('title')?.textContent)
+          );
+
+          return hasAccessibleRole && hasAccessibleName
+            ? []
+            : [`svg sin aria-hidden o alternativa textual: ${svg.outerHTML.slice(0, 120)}`];
+        });
+
+        return [...imageIssues, ...svgIssues];
+      });
+
+      expect(issues).toEqual([]);
+    });
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
