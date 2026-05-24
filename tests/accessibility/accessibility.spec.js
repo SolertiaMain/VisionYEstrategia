@@ -202,6 +202,148 @@ test.describe('WCAG 1.3.1 Informacion y relaciones', () => {
   }
 });
 
+test.describe('WCAG 1.3.2 Secuencia significativa', () => {
+  for (const route of pages) {
+    test(`orden DOM coincide con el orden visual significativo en ${route}`, async ({ page }) => {
+      await gotoReady(page, route);
+
+      const issues = await page.evaluate(() => {
+        const isVisible = (element) => {
+          const style = window.getComputedStyle(element);
+          const rect = element.getBoundingClientRect();
+          return style.display !== 'none' &&
+            style.visibility !== 'hidden' &&
+            Number(style.opacity) !== 0 &&
+            rect.width > 0 &&
+            rect.height > 0 &&
+            !element.closest('[hidden], [aria-hidden="true"]');
+        };
+
+        const isInNormalFlow = (element) => {
+          const style = window.getComputedStyle(element);
+          return !['fixed', 'absolute', 'sticky'].includes(style.position);
+        };
+
+        const labelFor = (element) => {
+          return [
+            element.tagName.toLowerCase(),
+            element.id ? `#${element.id}` : '',
+            element.className ? `.${String(element.className).trim().split(/\s+/).join('.')}` : '',
+            element.textContent.trim().replace(/\s+/g, ' ').slice(0, 60),
+          ].filter(Boolean).join('');
+        };
+
+        const sequenceIssues = [];
+
+        document.querySelectorAll('[tabindex]').forEach((element) => {
+          const tabindex = Number(element.getAttribute('tabindex'));
+          if (tabindex > 0) {
+            sequenceIssues.push(`tabindex positivo no permitido: ${labelFor(element)}`);
+          }
+        });
+
+        document.querySelectorAll('main *').forEach((element) => {
+          const style = window.getComputedStyle(element);
+          if (style.order && Number(style.order) !== 0) {
+            sequenceIssues.push(`CSS order reordena contenido: ${labelFor(element)}`);
+          }
+          if (style.flexDirection.includes('reverse')) {
+            sequenceIssues.push(`flex-direction reverse altera secuencia: ${labelFor(element)}`);
+          }
+        });
+
+        const main = document.querySelector('main');
+        if (!main) return ['main no encontrado'];
+
+        const byVisualPosition = (a, b) => {
+          const aBox = a.getBoundingClientRect();
+          const bBox = b.getBoundingClientRect();
+          const topDelta = aBox.top - bBox.top;
+          if (Math.abs(topDelta) > 10) return topDelta;
+          return aBox.left - bBox.left;
+        };
+
+        const checkDirectChildren = (container, childSelector, label) => {
+          const children = [...container.querySelectorAll(`:scope > ${childSelector}`)]
+            .filter((element) => isVisible(element) && isInNormalFlow(element));
+          const visualChildren = [...children].sort(byVisualPosition);
+
+          children.forEach((element, domIndex) => {
+            const visualIndex = visualChildren.indexOf(element);
+            if (visualIndex !== domIndex) {
+              sequenceIssues.push(
+                `${label}: DOM ${domIndex + 1}, visual ${visualIndex + 1}, ${labelFor(element)}`
+              );
+            }
+          });
+        };
+
+        const groupedContainers = [
+          ['.hero-stats', 'li'],
+          ['.grid-3', 'li'],
+          ['.valor-pillars', 'li'],
+          ['.reveal-right', 'li'],
+          ['.proceso-steps', 'li'],
+          ['.about-tags', 'li'],
+          ['.testimonial-grid', 'li'],
+          ['.faq-grid', 'li'],
+          ['.valores-grid', 'li'],
+          ['.team-grid', 'li'],
+          ['.timeline', 'li'],
+          ['.normas-tags', 'li'],
+          ['.quick-contact-grid', 'li'],
+          ['.contact-details', 'li'],
+          ['.social-bar', 'li'],
+          ['.normas-list', 'li'],
+          ['.mini-stats', 'li'],
+          ['.modalidades-grid', 'li'],
+          ['.modalidad-features', 'li'],
+          ['.form-grid', '.form-field'],
+          ['.grid-2', '*'],
+          ['.contact-grid', '*'],
+          ['.service-detail', '*'],
+        ];
+
+        groupedContainers.forEach(([containerSelector, childSelector]) => {
+          document.querySelectorAll(containerSelector).forEach((container) => {
+            if (!isVisible(container) || !isInNormalFlow(container)) return;
+            checkDirectChildren(container, childSelector, containerSelector);
+          });
+        });
+
+        const focusableSelector = [
+          'a[href]',
+          'button:not([disabled])',
+          'input:not([disabled])',
+          'select:not([disabled])',
+          'textarea:not([disabled])',
+          '[tabindex]:not([tabindex="-1"])',
+        ].join(',');
+
+        document.querySelectorAll('.quick-card, .modalidad-card, .map-placeholder').forEach((container) => {
+          if (!isVisible(container)) return;
+          const focusables = [...container.querySelectorAll(focusableSelector)]
+            .filter((element) => isVisible(element) && isInNormalFlow(element));
+          const visualFocusOrder = [...focusables].sort(byVisualPosition);
+
+          focusables.forEach((element, domIndex) => {
+            const visualIndex = visualFocusOrder.indexOf(element);
+            if (visualIndex !== domIndex) {
+              sequenceIssues.push(
+                `orden de foco dentro de ${labelFor(container)}: DOM ${domIndex + 1}, visual ${visualIndex + 1}, ${labelFor(element)}`
+              );
+            }
+          });
+        });
+
+        return sequenceIssues;
+      });
+
+      expect(issues).toEqual([]);
+    });
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
