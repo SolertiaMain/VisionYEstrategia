@@ -1388,3 +1388,136 @@ iframe {
     background: var(--white);
   }
 }
+
+/* ============================================================
+   WCAG 2.2 AA — Correcciones de contraste
+   Incidencias: color contrast ratio thresholds
+   ============================================================ */
+
+:root {
+  /*
+    Variante accesible del cyan de marca.
+    No reemplaza el brand color original; solo se usa donde
+    el contraste AA falla.
+  */
+  --cyan-aa: #006B82;
+  --cyan-aa-dark: #005F73;
+  --label-bg-aa: #F4FBFC;
+}
+
+/* 1) Botones primarios:
+   Corrige blanco (#fff) sobre cyan #00A9CE.
+   Antes: 2.77:1
+   Después: aprox. 6.13:1
+*/
+.btn-primary {
+  background: var(--cyan-aa);
+  color: var(--white);
+  box-shadow: 0 4px 18px rgba(0, 107, 130, 0.28);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--cyan-aa-dark);
+  color: var(--white);
+  box-shadow: 0 8px 28px rgba(0, 95, 115, 0.40);
+}
+
+/* Conserva los CTA morados del navbar y menú móvil */
+.nav-cta.btn-primary,
+.mobile-cta.btn-primary {
+  background: var(--purple);
+  color: var(--white);
+  box-shadow: 0 4px 18px rgba(123, 104, 150, 0.28);
+}
+
+.nav-cta.btn-primary:hover,
+.nav-cta.btn-primary:focus-visible,
+.mobile-cta.btn-primary:hover,
+.mobile-cta.btn-primary:focus-visible {
+  background: var(--purple);
+  color: var(--white);
+  box-shadow: 0 8px 28px rgba(123, 104, 150, 0.40);
+}
+
+/* 2) Labels / etiquetas pequeñas:
+   Corrige "Nuestros Servicios", "Cómo trabajamos",
+   "Quiénes somos", "Lo que dicen nuestros clientes", etc.
+   Usa !important porque algunas label-tag tienen style inline.
+*/
+.label-tag,
+.section-header .label-tag,
+.valor-left .label-tag,
+.cta-banner .label-tag,
+.about-text .label-tag,
+.testimonials-section .label-tag,
+.proceso-section .label-tag,
+.services-section .label-tag {
+  color: var(--cyan-aa) !important;
+  background: var(--label-bg-aa) !important;
+  border: 1px solid rgba(0, 107, 130, 0.22);
+}
+
+/* 3) Números 01, 02, 03, 04 en propuesta de valor:
+   Corrige #38BCD9 sobre blanco.
+*/
+.feature-num {
+  color: var(--cyan-aa);
+  opacity: 1;
+}
+
+/* 4) Círculos 01–05 del proceso:
+   Corrige #00A9CE sobre blanco.
+*/
+.step-circle {
+  color: var(--cyan-aa);
+  border-color: var(--cyan-aa);
+  background: var(--white);
+}
+
+.step:hover .step-circle,
+.step:focus-within .step-circle {
+  background: var(--cyan-aa);
+  border-color: var(--cyan-aa);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 107, 130, 0.32);
+}
+
+/* 5) Tarjeta azul de "+15":
+   Corrige blanco sobre cyan #00A9CE.
+*/
+.about-card-accent {
+  background: var(--cyan-aa);
+  color: var(--white);
+}
+
+.about-card-accent .big-num,
+.about-card-accent .big-label {
+  color: var(--white);
+  opacity: 1;
+}
+
+/* 6) Roles de testimonios:
+   Corrige #8897A8 sobre #E2EEF3.
+*/
+.author-role {
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
+/* 7) Enlaces que usen cyan como texto sobre fondo claro */
+.service-link,
+.breadcrumb a,
+.footer-link:hover,
+.footer-bottom-link:hover,
+.mobile-link:hover,
+.mobile-sub-link:hover,
+.faq-question:hover {
+  color: var(--cyan-aa);
+}
+
+/* 8) Estados de foco: mantener contraste visible */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline-color: var(--cyan-aa);
+  box-shadow: 0 0 0 7px rgba(0, 107, 130, 0.24);
+}
