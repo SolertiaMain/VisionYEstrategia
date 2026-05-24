@@ -344,6 +344,82 @@ test.describe('WCAG 1.3.2 Secuencia significativa', () => {
   }
 });
 
+test.describe('WCAG 1.3.4 Orientacion', () => {
+  test('no hay bloqueo explicito de orientacion en CSS, JS o viewport', async ({ page }) => {
+    await gotoReady(page, '/');
+
+    const issues = await page.evaluate(() => {
+      const orientationIssues = [];
+      const viewport = document.querySelector('meta[name="viewport"]')?.getAttribute('content') || '';
+
+      if (/user-scalable\s*=\s*no/i.test(viewport)) {
+        orientationIssues.push('El viewport desactiva el zoom del usuario.');
+      }
+
+      if (/maximum-scale\s*=\s*1(?:\.0)?(?:\D|$)/i.test(viewport)) {
+        orientationIssues.push('El viewport limita el escalado maximo a 1.');
+      }
+
+      [...document.styleSheets].forEach((sheet) => {
+        let rules = [];
+        try {
+          rules = [...sheet.cssRules];
+        } catch {
+          return;
+        }
+
+        rules.forEach((rule) => {
+          if (rule instanceof CSSMediaRule && /orientation\s*:/i.test(rule.conditionText)) {
+            orientationIssues.push(`Media query restringe orientacion: ${rule.conditionText}`);
+          }
+        });
+      });
+
+      [...document.scripts].forEach((script) => {
+        const content = script.textContent || '';
+        if (/screen\.orientation\.lock|orientation\.lock/i.test(content)) {
+          orientationIssues.push('Script intenta bloquear la orientacion del dispositivo.');
+        }
+      });
+
+      return orientationIssues;
+    });
+
+    expect(issues).toEqual([]);
+  });
+
+  for (const route of pages) {
+    for (const viewport of [
+      { name: 'vertical', width: 390, height: 844 },
+      { name: 'horizontal', width: 844, height: 390 },
+    ]) {
+      test(`${route} funciona en orientacion ${viewport.name}`, async ({ page }) => {
+        await page.setViewportSize({ width: viewport.width, height: viewport.height });
+        await gotoReady(page, route);
+
+        await expect(page.locator('main')).toBeVisible();
+        await expect(page.locator('main h1')).toBeVisible();
+
+        const layoutIssues = await page.evaluate(() => {
+          const main = document.querySelector('main');
+          const h1 = document.querySelector('main h1');
+          const style = window.getComputedStyle(document.body);
+
+          return [
+            !main ? 'No se encontro main.' : '',
+            !h1 ? 'No se encontro h1 dentro de main.' : '',
+            style.overflow === 'hidden' && document.documentElement.scrollHeight > window.innerHeight
+              ? 'El body bloquea el scroll en esta orientacion.'
+              : '',
+          ].filter(Boolean);
+        });
+
+        expect(layoutIssues).toEqual([]);
+      });
+    }
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
