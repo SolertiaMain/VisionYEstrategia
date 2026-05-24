@@ -493,8 +493,9 @@ p {
 .valor-pillars { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
 .pillar { display: flex; align-items: flex-start; gap: 14px; }
 .pillar-line { width: 2px; height: 44px; background: var(--cyan); flex-shrink: 0; margin-top: 3px; border-radius: 2px; }
+.pillar-text h3,
 .pillar-text h4 { font-family: var(--font-serif); color: var(--white); font-size: 0.94rem; margin-bottom: 4px; }
-.pillar-text p  { color: rgba(255,255,255,0.52); font-size: 0.82rem; }
+.pillar-text p  { color: rgba(255,255,255,0.78); font-size: 0.82rem; }
 
 .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 22px; border-radius: var(--radius); transition: var(--transition); margin-bottom: 4px; }
 .feature-item:hover { background: var(--canvas); }
