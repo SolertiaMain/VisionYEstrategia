@@ -1521,3 +1521,86 @@ iframe {
   outline-color: var(--cyan-aa);
   box-shadow: 0 0 0 7px rgba(0, 107, 130, 0.24);
 }
+
+/* ============================================================
+   WCAG 2.2 AA — Corrección final contrastes home
+   Incidencias restantes: btn-primary, label-tag, footer
+   ============================================================ */
+
+:root {
+  --cyan-aa: #006B82;
+  --cyan-aa-dark: #005F73;
+  --footer-text-aa: #C7D2E5;
+  --label-bg-aa: #FFFFFF;
+}
+
+/* 1) Botón primario: blanco sobre #00A9CE no alcanza AA */
+.btn.btn-primary,
+a.btn.btn-primary,
+button.btn.btn-primary,
+.hero-actions .btn.btn-primary,
+.cta-actions .btn.btn-primary {
+  background: var(--cyan-aa) !important;
+  color: #FFFFFF !important;
+  border-color: var(--cyan-aa) !important;
+  box-shadow: 0 4px 18px rgba(0, 107, 130, 0.32) !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus-visible,
+.hero-actions .btn.btn-primary:hover,
+.hero-actions .btn.btn-primary:focus-visible,
+.cta-actions .btn.btn-primary:hover,
+.cta-actions .btn.btn-primary:focus-visible {
+  background: var(--cyan-aa-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--cyan-aa-dark) !important;
+  box-shadow: 0 8px 28px rgba(0, 95, 115, 0.42) !important;
+}
+
+/* Mantener los CTA morados del navbar y menú móvil */
+.nav-cta.btn-primary,
+.mobile-cta.btn-primary {
+  background: var(--purple) !important;
+  color: #FFFFFF !important;
+  border-color: var(--purple) !important;
+}
+
+.nav-cta.btn-primary:hover,
+.nav-cta.btn-primary:focus-visible,
+.mobile-cta.btn-primary:hover,
+.mobile-cta.btn-primary:focus-visible {
+  background: var(--purple) !important;
+  color: #FFFFFF !important;
+  border-color: var(--purple) !important;
+}
+
+/* 2) Etiquetas pequeñas: "Nuestros Servicios", "Cómo trabajamos",
+      "Lo que dicen nuestros clientes", "Preguntas frecuentes", etc. */
+.label-tag,
+span.label-tag,
+.section-header .label-tag,
+.services-section .label-tag,
+.proceso-section .label-tag,
+.testimonials-section .label-tag,
+.faq-section .label-tag,
+.cta-banner .label-tag,
+.about-text .label-tag,
+.valor-left .label-tag {
+  color: var(--cyan-aa) !important;
+  background: var(--label-bg-aa) !important;
+  border: 1px solid rgba(0, 107, 130, 0.35) !important;
+}
+
+/* 3) Footer: el gris anterior #5d6688 no alcanza contraste sobre #111e50 */
+.footer-copy,
+.footer-bottom-link,
+.footer-brand > p,
+.footer-link {
+  color: var(--footer-text-aa) !important;
+}
+
+.footer-bottom-link:hover,
+.footer-link:hover {
+  color: #FFFFFF !important;
+}
