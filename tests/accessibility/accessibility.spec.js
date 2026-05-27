@@ -551,6 +551,110 @@ test.describe('WCAG 1.4.4 Cambio de tamano de texto', () => {
   }
 });
 
+test.describe('WCAG 1.4.12 Espaciado de texto', () => {
+  for (const route of pages) {
+    for (const viewport of [
+      { name: 'desktop', width: 1280, height: 900 },
+      { name: 'mobile', width: 390, height: 844 },
+    ]) {
+      test(`${route} no pierde contenido con espaciado de texto aumentado en ${viewport.name}`, async ({ page }) => {
+        await page.setViewportSize({ width: viewport.width, height: viewport.height });
+        await gotoReady(page, route);
+
+        await page.addStyleTag({
+          content: `
+            * {
+              line-height: 1.5 !important;
+              letter-spacing: 0.12em !important;
+              word-spacing: 0.16em !important;
+            }
+
+            p,
+            li,
+            address,
+            .form-help,
+            .form-error {
+              margin-bottom: 2em !important;
+            }
+          `,
+        });
+        await page.waitForTimeout(300);
+
+        await expect(page.locator('main')).toBeVisible();
+        await expect(page.locator('main h1')).toBeVisible();
+
+        const issues = await page.evaluate(() => {
+          const isVisible = (element) => {
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return style.display !== 'none' &&
+              style.visibility !== 'hidden' &&
+              Number(style.opacity) !== 0 &&
+              rect.width > 0 &&
+              rect.height > 0 &&
+              !element.closest('[hidden], [aria-hidden="true"], .sr-only, .visually-hidden');
+          };
+
+          const labelFor = (element) => {
+            const text = element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80);
+            const selector = [
+              element.tagName.toLowerCase(),
+              element.id ? `#${element.id}` : '',
+              element.className ? `.${String(element.className).trim().split(/\s+/).join('.')}` : '',
+            ].filter(Boolean).join('');
+
+            return `${selector}${text ? ` "${text}"` : ''}`;
+          };
+
+          const spacingIssues = [];
+          const bodyStyle = window.getComputedStyle(document.body);
+          if (bodyStyle.overflow === 'hidden' && document.documentElement.scrollHeight > window.innerHeight) {
+            spacingIssues.push('El body bloquea el scroll con espaciado aumentado.');
+          }
+
+          const textSelector = [
+            'h1',
+            'h2',
+            'h3',
+            'h4',
+            'p',
+            'a',
+            'button',
+            'label',
+            'li',
+            'span',
+            'strong',
+            'small',
+            'address',
+            'input',
+            'textarea',
+            'select',
+          ].join(',');
+
+          document.querySelectorAll(textSelector).forEach((element) => {
+            if (!isVisible(element)) return;
+            if (!['INPUT', 'TEXTAREA', 'SELECT'].includes(element.tagName) && !element.textContent.trim()) return;
+
+            const style = window.getComputedStyle(element);
+            const clipsInline = ['hidden', 'clip'].includes(style.overflowX) &&
+              element.scrollWidth > element.clientWidth + 1;
+            const clipsBlock = ['hidden', 'clip'].includes(style.overflowY) &&
+              element.scrollHeight > element.clientHeight + 1;
+
+            if (clipsInline || clipsBlock) {
+              spacingIssues.push(`Contenido recortado con espaciado aumentado: ${labelFor(element)}`);
+            }
+          });
+
+          return spacingIssues;
+        });
+
+        expect(issues).toEqual([]);
+      });
+    }
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
