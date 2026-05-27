@@ -420,6 +420,137 @@ test.describe('WCAG 1.3.4 Orientacion', () => {
   }
 });
 
+test.describe('WCAG 1.4.4 Cambio de tamano de texto', () => {
+  test('la tipografia usa unidades relativas', async ({ page }) => {
+    await gotoReady(page, '/');
+
+    const issues = await page.evaluate(() => {
+      const textSizeIssues = [];
+
+      const scanRules = (rules, owner = 'stylesheet') => {
+        [...rules].forEach((rule) => {
+          if ('cssRules' in rule) {
+            scanRules(rule.cssRules, rule.conditionText || owner);
+            return;
+          }
+
+          if (!(rule instanceof CSSStyleRule)) return;
+          const fontSize = rule.style.getPropertyValue('font-size');
+          const font = rule.style.getPropertyValue('font');
+
+          if (/\b\d*\.?\d+px\b/i.test(fontSize) || /\b\d*\.?\d+px\b/i.test(font)) {
+            textSizeIssues.push(`${owner}: ${rule.selectorText} usa fuente en px`);
+          }
+        });
+      };
+
+      [...document.styleSheets].forEach((sheet) => {
+        try {
+          scanRules(sheet.cssRules, sheet.href || 'inline stylesheet');
+        } catch {
+          return;
+        }
+      });
+
+      document.querySelectorAll('[style]').forEach((element) => {
+        const fontSize = element.style.getPropertyValue('font-size');
+        const font = element.style.getPropertyValue('font');
+        if (/\b\d*\.?\d+px\b/i.test(fontSize) || /\b\d*\.?\d+px\b/i.test(font)) {
+          textSizeIssues.push(`inline style en ${element.tagName.toLowerCase()} usa fuente en px`);
+        }
+      });
+
+      return textSizeIssues;
+    });
+
+    expect(issues).toEqual([]);
+  });
+
+  for (const route of pages) {
+    for (const viewport of [
+      { name: 'desktop', width: 1280, height: 900 },
+      { name: 'mobile', width: 390, height: 844 },
+    ]) {
+      test(`${route} conserva contenido y funcionalidad con texto al 200% en ${viewport.name}`, async ({ page }) => {
+        await page.setViewportSize({ width: viewport.width, height: viewport.height });
+        await gotoReady(page, route);
+
+        await page.evaluate(() => {
+          document.documentElement.style.fontSize = '200%';
+        });
+        await page.waitForTimeout(300);
+
+        await expect(page.locator('main')).toBeVisible();
+        await expect(page.locator('main h1')).toBeVisible();
+
+        const issues = await page.evaluate(() => {
+          const isVisible = (element) => {
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return style.display !== 'none' &&
+              style.visibility !== 'hidden' &&
+              Number(style.opacity) !== 0 &&
+              rect.width > 0 &&
+              rect.height > 0 &&
+              !element.closest('[hidden], [aria-hidden="true"], .sr-only, .visually-hidden');
+          };
+
+          const labelFor = (element) => {
+            const text = element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80);
+            const selector = [
+              element.tagName.toLowerCase(),
+              element.id ? `#${element.id}` : '',
+              element.className ? `.${String(element.className).trim().split(/\s+/).join('.')}` : '',
+            ].filter(Boolean).join('');
+
+            return `${selector}${text ? ` "${text}"` : ''}`;
+          };
+
+          const resizeIssues = [];
+          const bodyStyle = window.getComputedStyle(document.body);
+          if (bodyStyle.overflow === 'hidden' && document.documentElement.scrollHeight > window.innerHeight) {
+            resizeIssues.push('El body bloquea el scroll con texto al 200%.');
+          }
+
+          const textSelector = [
+            'main h1',
+            'main h2',
+            'main h3',
+            'main h4',
+            'main p',
+            'main a',
+            'main button',
+            'main label',
+            'main li',
+            'main span',
+            'main strong',
+            'main small',
+            'main address',
+          ].join(',');
+
+          document.querySelectorAll(textSelector).forEach((element) => {
+            if (!isVisible(element) || !element.textContent.trim()) return;
+
+            const style = window.getComputedStyle(element);
+            const clipsInline = ['hidden', 'clip'].includes(style.overflowX) &&
+              element.scrollWidth > element.clientWidth + 1;
+            const clipsBlock = ['hidden', 'clip'].includes(style.overflowY) &&
+              element.scrollHeight > element.clientHeight + 1;
+
+            if (clipsInline || clipsBlock) {
+              resizeIssues.push(`Texto recortado al 200%: ${labelFor(element)}`);
+            }
+          });
+
+          return resizeIssues;
+        });
+
+        expect(issues).toEqual([]);
+      });
+    }
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
