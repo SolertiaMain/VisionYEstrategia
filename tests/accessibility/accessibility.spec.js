@@ -718,6 +718,74 @@ test.describe('WCAG 1.4.13 Contenido al pasar cursor o recibir foco', () => {
   });
 });
 
+test.describe('WCAG 2.5.8 Tamano minimo de objetivos', () => {
+  for (const route of pages) {
+    for (const viewport of [
+      { name: 'desktop', width: 1280, height: 900 },
+      { name: 'mobile', width: 390, height: 844 },
+    ]) {
+      test(`${route} tiene objetivos tactiles de al menos 24x24 en ${viewport.name}`, async ({ page }) => {
+        await page.setViewportSize({ width: viewport.width, height: viewport.height });
+        await gotoReady(page, route);
+
+        const issues = await page.evaluate(() => {
+          const targetSelector = [
+            'a[href]',
+            'button:not([disabled])',
+            'input:not([type="hidden"]):not([disabled])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            '[role="button"]',
+            '[tabindex]:not([tabindex="-1"])',
+          ].join(',');
+
+          const isVisible = (element) => {
+            const style = window.getComputedStyle(element);
+            const rect = element.getBoundingClientRect();
+            return style.display !== 'none' &&
+              style.visibility !== 'hidden' &&
+              Number(style.opacity) !== 0 &&
+              rect.width > 0 &&
+              rect.height > 0 &&
+              !element.closest('[hidden], [aria-hidden="true"]');
+          };
+
+          const labelFor = (element) => {
+            const text = (
+              element.getAttribute('aria-label') ||
+              element.textContent ||
+              element.getAttribute('name') ||
+              element.getAttribute('href') ||
+              ''
+            ).trim().replace(/\s+/g, ' ').slice(0, 80);
+            const selector = [
+              element.tagName.toLowerCase(),
+              element.id ? `#${element.id}` : '',
+              element.className ? `.${String(element.className).trim().split(/\s+/).join('.')}` : '',
+            ].filter(Boolean).join('');
+
+            return `${selector}${text ? ` "${text}"` : ''}`;
+          };
+
+          return [...document.querySelectorAll(targetSelector)]
+            .filter(isVisible)
+            .flatMap((element) => {
+              const rect = element.getBoundingClientRect();
+              const width = Math.round(rect.width * 10) / 10;
+              const height = Math.round(rect.height * 10) / 10;
+
+              return width >= 24 && height >= 24
+                ? []
+                : [`${labelFor(element)} mide ${width}x${height}px`];
+            });
+        });
+
+        expect(issues).toEqual([]);
+      });
+    }
+  }
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');
