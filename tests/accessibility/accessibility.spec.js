@@ -655,6 +655,69 @@ test.describe('WCAG 1.4.12 Espaciado de texto', () => {
   }
 });
 
+test.describe('WCAG 1.4.13 Contenido al pasar cursor o recibir foco', () => {
+  for (const route of pages) {
+    test(`submenu de servicios es descartable, hoverable y persistente en ${route}`, async ({ page }) => {
+      test.skip(page.viewportSize()?.width < 768, 'El dropdown de escritorio no se muestra en viewport movil.');
+
+      await gotoReady(page, route);
+
+      const trigger = page.locator('.nav-services-trigger').first();
+      const dropdown = page.locator('#servicios-submenu').first();
+
+      await trigger.hover();
+      await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      await expect(dropdown).toBeVisible();
+
+      await page.keyboard.press('Escape');
+      await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+      await expect(dropdown).toBeHidden();
+
+      await page.mouse.move(0, 0);
+      await page.waitForTimeout(350);
+      await trigger.hover();
+      await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+      await expect(dropdown).toBeVisible();
+
+      const dropdownBox = await dropdown.boundingBox();
+      expect(dropdownBox).not.toBeNull();
+
+      await page.mouse.move(dropdownBox.x + dropdownBox.width / 2, dropdownBox.y + dropdownBox.height / 2);
+      await page.waitForTimeout(350);
+      await expect(dropdown).toBeVisible();
+      await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+
+      await trigger.focus();
+      await expect(dropdown).toBeVisible();
+      await page.keyboard.press('Escape');
+      await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+      await expect(dropdown).toBeHidden();
+      await expect(trigger).toBeFocused();
+    });
+  }
+
+  test('no hay otros tooltips o popovers personalizados sin validar', async ({ page }) => {
+    await gotoReady(page, '/');
+
+    const issues = await page.evaluate(() => {
+      const hoverContentSelectors = [
+        '[role="tooltip"]',
+        '[popover]',
+        '.tooltip',
+        '.popover',
+        '[data-tooltip]',
+        '[data-popover]',
+      ].join(',');
+
+      return [...document.querySelectorAll(hoverContentSelectors)].map((element) => {
+        return element.outerHTML.slice(0, 160);
+      });
+    });
+
+    expect(issues).toEqual([]);
+  });
+});
+
 test.describe('Teclado y foco', () => {
   test('skip link mueve el foco al contenido principal', async ({ page }) => {
     await gotoReady(page, '/');

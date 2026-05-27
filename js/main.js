@@ -64,6 +64,7 @@ function initNavbar() {
 
   if (servicesItem && servicesTrigger && servicesDropdown) {
     let skipNextServicesFocusOpen = false;
+    let dropdownCloseTimer = null;
 
     const openDropdown = () => {
       if (skipNextServicesFocusOpen) {
@@ -71,17 +72,37 @@ function initNavbar() {
         return;
       }
 
+      window.clearTimeout(dropdownCloseTimer);
+      servicesItem.classList.remove('dismissed');
       servicesItem.classList.add('open');
       servicesTrigger.setAttribute('aria-expanded', 'true');
     };
 
     const closeDropdown = () => {
+      window.clearTimeout(dropdownCloseTimer);
       servicesItem.classList.remove('open');
       servicesTrigger.setAttribute('aria-expanded', 'false');
     };
 
+    const dismissDropdown = ({ restoreFocus = false } = {}) => {
+      closeDropdown();
+      servicesItem.classList.add('dismissed');
+      skipNextServicesFocusOpen = restoreFocus;
+
+      if (restoreFocus) {
+        servicesTrigger.focus();
+      }
+    };
+
+    const closeDropdownSoon = () => {
+      window.clearTimeout(dropdownCloseTimer);
+      dropdownCloseTimer = window.setTimeout(closeDropdown, 300);
+    };
+
     servicesItem.addEventListener('mouseenter', openDropdown);
-    servicesItem.addEventListener('mouseleave', closeDropdown);
+    servicesItem.addEventListener('mouseleave', closeDropdownSoon);
+    servicesDropdown.addEventListener('mouseenter', openDropdown);
+    servicesDropdown.addEventListener('mouseleave', closeDropdownSoon);
     servicesItem.addEventListener('focusin', openDropdown);
 
     servicesItem.addEventListener('focusout', (event) => {
@@ -92,9 +113,13 @@ function initNavbar() {
 
     servicesItem.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
-        closeDropdown();
-        skipNextServicesFocusOpen = true;
-        servicesTrigger.focus();
+        dismissDropdown({ restoreFocus: true });
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && servicesTrigger.getAttribute('aria-expanded') === 'true') {
+        dismissDropdown();
       }
     });
   }

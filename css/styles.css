@@ -933,6 +933,12 @@ section[id],
   transform: translateX(-50%) translateY(0);
 }
 
+.nav-item.has-dropdown.dismissed .dropdown {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-8px);
+}
+
 .dropdown-link strong {
   display: block;
   font-family: var(--font-sans);
