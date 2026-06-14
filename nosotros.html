@@ -31,52 +31,103 @@
 
     .team-level { margin-bottom:46px; }
     .team-level-title {
-      font-family:var(--font-serif);
+      display:flex;
+      align-items:center;
+      gap:18px;
+
+      margin:0 0 28px;
+
       color:var(--navy);
-      text-align:center;
-      font-size:1.25rem;
-      margin-bottom:18px;
+      font-family:var(--font-sans);
+      font-size:.80rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .team-level-title::before,
+    .team-level-title::after {
+      content:'';
+      flex:1;
+      height:1px;
+      background:rgba(27, 45, 110, 0.493);
     }
 
     .team-card {
-      background:var(--white);
-      border-radius:var(--radius-lg);
+      background:rgba(255,255,255,0.55);
+      border:1px solid rgba(27,45,110,0.10);
+      border-radius:18px;
+      box-shadow:0 10px 28px rgba(27,45,110,0.08);
       overflow:hidden;
-      box-shadow:var(--shadow-sm);
-      border:1px solid rgba(27,45,110,0.07);
       transition:var(--transition);
     }
-    .team-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-md); }
+
+    .team-card:hover {
+      transform:translateY(-6px);
+      border-color:rgba(0,169,206,0.35);
+      box-shadow:0 18px 40px rgba(27,45,110,0.16);
+    }
 
     .team-photo {
       width:100%;
-      height:240px;
+      aspect-ratio:4/5;
       object-fit:cover;
-      object-position:center center;
+      object-position:center top;
       display:block;
+      border-radius:4px;
+      box-shadow:0 18px 35px rgba(27,45,110,.18);
     }
 
-    .team-card.wide .team-photo {
+    .vicente-photo{
+      object-position:45% top;
+    }
+
+    .ramon-photo{
+      object-position:40% top;
+    }
+
+    .camila-photo{
+      object-position:65% top;
+    }
+
+    .itzel-photo{
+      object-position:38% top;
+    }
+
+    .edgar-photo{
+      object-position:40% top;
+    }
+
+    .cori-photo{
+      object-position:36% top;
+    }
+
+    /* .team-card.wide .team-photo {
       width:100%;
       height:280px;
       object-fit:cover;
       object-position:center 5%;
-    }
+    } */
 
-    .team-info { padding:28px; }
+    .team-info {
+      padding:20px 20px 18px;
+    }
     .team-role {
       font-family:var(--font-sans);
-      font-size:0.70rem;
+      font-size:0.75rem;
       font-weight:700;
       letter-spacing:0.10em;
       text-transform:uppercase;
       color:var(--cyan);
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
     .team-info h3 {
-      font-family:var(--font-serif);
-      font-size:1.08rem;
-      margin-bottom:10px;
+      font-family:var(--font-sans);
+      font-size:1.45rem;
+      font-weight:900;
+      line-height:1;
+      margin-bottom:8px;
+      color:var(--navy);
     }
     .team-info p { font-size:0.84rem; }
     .timeline { max-width:660px; margin:0 auto; position:relative; padding-left:32px; }
@@ -94,7 +145,7 @@
       .valores-grid{grid-template-columns:1fr}
       .team-grid,
       .team-grid.leadership{grid-template-columns:1fr}
-      .team-card.wide .team-photo{height:300px}
+      /* .team-card.wide .team-photo{height:300px} */
     }
   </style>
 </head>
@@ -323,9 +374,10 @@
       </div>
   
       <div class="team-level">
+        <h3 class="team-level-title">Dirección</h3>
         <ul class="team-grid leadership stagger-children">
           <li class="team-card wide reveal">
-            <img class="team-photo" src="assets/images/equipo/VICENTE.JPG" alt="Vicente Martínez Iniesta">
+            <img class="team-photo vicente-photo" src="assets/images/equipo/VICENTE.JPG" alt="Vicente Martínez Iniesta">
             <div class="team-info">
               <div class="team-role">Director General</div>
               <h3>Vicente Martínez Iniesta</h3>
@@ -335,7 +387,7 @@
           </li>
   
           <li class="team-card wide reveal delay-200">
-            <img class="team-photo" src="assets/images/equipo/RAMON.JPG" alt="Ramón Cuevas Martínez">
+            <img class="team-photo ramon-photo" src="assets/images/equipo/RAMON.JPG" alt="Ramón Cuevas Martínez">
             <div class="team-info">
               <div class="team-role">Director de Desarrollo de Proyectos</div>
               <h3>Ramón Cuevas Martínez</h3>
@@ -345,9 +397,14 @@
                 programas sociales.</p>
             </div>
           </li>
+        </ul>
+      </div>
   
+      <div class="team-level">
+        <h3 class="team-level-title">Administración y Diseño</h3>
+        <ul class="team-grid leadership stagger-children">
           <li class="team-card wide reveal">
-            <img class="team-photo" src="assets/images/equipo/CAMILA.JPG" alt="Ana Camila Cuevas Ocaña">
+            <img class="team-photo camila-photo" src="assets/images/equipo/CAMILA.JPG" alt="Ana Camila Cuevas Ocaña">
             <div class="team-info">
               <div class="team-role">Directora de Administración</div>
               <h3>Ana Camila Cuevas Ocaña</h3>
@@ -369,6 +426,7 @@
       </div>
   
       <div class="team-level">
+        <h3 class="team-level-title">Jefaturas</h3>
         <ul class="team-grid stagger-children">
           <li class="team-card reveal">
             <img class="team-photo" src="assets/images/equipo/IRMA.JPG" alt="Irma Yolanda Hernández Vilchis">
@@ -405,9 +463,10 @@
       </div>
   
       <div class="team-level">
+        <h3 class="team-level-title">Equipo Especialista</h3>
         <ul class="team-grid stagger-children">
           <li class="team-card reveal">
-            <img class="team-photo" src="assets/images/equipo/ITZEL.JPG" alt="Itzel Jeareny Leonardo de Jesús">
+            <img class="team-photo itzel-photo" src="assets/images/equipo/ITZEL.JPG" alt="Itzel Jeareny Leonardo de Jesús">
             <div class="team-info">
               <div class="team-role">Evaluadora</div>
               <h3>Itzel Jeareny Leonardo de Jesús</h3>
@@ -416,7 +475,7 @@
           </li>
   
           <li class="team-card reveal delay-200">
-            <img class="team-photo" src="assets/images/equipo/EDGAR.JPG" alt="Edgar Moisés Ramírez Sánchez">
+            <img class="team-photo edgar-photo" src="assets/images/equipo/EDGAR.JPG" alt="Edgar Moisés Ramírez Sánchez">
             <div class="team-info">
               <div class="team-role">Evaluador</div>
               <h3>Edgar Moisés Ramírez Sánchez</h3>
@@ -425,7 +484,7 @@
           </li>
   
           <li class="team-card reveal delay-400">
-            <img class="team-photo" src="assets/images/equipo/CORI.JPG" alt="Corina Concepción Galván Suárez">
+            <img class="team-photo cori-photo" src="assets/images/equipo/CORI.JPG" alt="Corina Concepción Galván Suárez">
             <div class="team-info">
               <div class="team-role">Especialista en género</div>
               <h3>Corina Concepción Galván Suárez</h3>
