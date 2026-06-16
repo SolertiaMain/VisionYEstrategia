@@ -4,7 +4,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Servicios de consultoría en Igualdad de Género, Gestión Pública y Evaluación de Programas. Visión y Estrategia." />
+  <meta name="description" content="Servicios de consultoría en Igualdad Laboral y No Discriminación, Sistemas de Gestión y Evaluación. Visión y Estrategia." />
   <title>Servicios | Visión y Estrategia Consultoría</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,6 +65,8 @@
 
     /* === DETALLE DE SERVICIO === */
     .service-detail { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+    .service-detail-content,
+    .service-detail-visual { min-width:0; }
     .service-detail-content h2 { font-family:var(--font-sans); font-size:clamp(1.45rem,2.6vw,2.1rem); font-weight:800; letter-spacing:0; margin-bottom:18px; }
     .service-detail-content > p { font-family:var(--font-sans); font-size:1.01rem; line-height:1.80; margin-bottom:32px; font-weight:500; color:var(--text-mid); }
 
@@ -124,6 +126,78 @@
       font-family:var(--font-sans);
       font-size:0.87rem;
       font-weight:500;
+      margin:0;
+    }
+
+    .service-catalog {
+      display:grid;
+      gap:18px;
+      margin-top:26px;
+    }
+
+    .service-catalog-card {
+      background:rgba(255,255,255,0.78);
+      border:1px solid rgba(19,36,82,0.09);
+      border-left:4px solid var(--service-accent);
+      border-radius:8px;
+      padding:22px;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .service-catalog-card h3 {
+      font-family:var(--font-sans);
+      font-size:1rem;
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:10px;
+    }
+
+    .service-catalog-card p,
+    .service-catalog-card li {
+      font-family:var(--font-sans);
+      font-size:0.86rem;
+      line-height:1.68;
+      color:var(--text-mid);
+      font-weight:500;
+      overflow-wrap:anywhere;
+    }
+
+    .service-catalog-card p {
+      margin-bottom:12px;
+    }
+
+    .service-catalog-card ul {
+      display:grid;
+      gap:7px;
+      padding-left:18px;
+    }
+
+    .service-catalog-card li::marker {
+      color:var(--service-accent);
+    }
+
+    .service-summary {
+      display:grid;
+      gap:14px;
+      margin:28px 0 4px;
+    }
+
+    .service-summary-item {
+      background:rgba(240,237,232,0.72);
+      border-radius:8px;
+      padding:18px;
+    }
+
+    .service-summary-item h3 {
+      font-family:var(--font-sans);
+      font-size:0.92rem;
+      color:var(--navy);
+      margin-bottom:8px;
+    }
+
+    .service-summary-item p {
+      font-size:0.86rem;
+      line-height:1.65;
       margin:0;
     }
 
@@ -358,6 +432,7 @@
     @media(max-width:768px){
       .service-detail{grid-template-columns:1fr;gap:48px}
       .service-detail-visual{position:static}
+      .service-detail-visual.reveal-right{transform:none}
       .modalidades-grid{grid-template-columns:1fr}
       .modalidad-card.featured{transform:none}
     }
@@ -406,7 +481,7 @@
             </span>
             <span>
               <strong>Igualdad</strong>
-              <small>Perspectiva de género</small>
+              <small>Laboral y no discriminación</small>
             </span>
           </a>
 
@@ -421,7 +496,7 @@
             </span>
             <span>
               <strong>Gestión</strong>
-              <small>Administración pública</small>
+              <small>Sistemas de gestión</small>
             </span>
           </a>
 
@@ -475,9 +550,9 @@
   <a href="servicios.html" class="mobile-link active" aria-current="page">Servicios</a>
 
   <div class="mobile-sub-links" aria-label="Servicios">
-    <a href="#igualdad" class="mobile-sub-link" data-service-target="igualdad">Igualdad de Género</a>
-    <a href="#gestion" class="mobile-sub-link" data-service-target="gestion">Gestión Pública</a>
-    <a href="#evaluacion" class="mobile-sub-link" data-service-target="evaluacion">Evaluación de Programas</a>
+    <a href="#igualdad" class="mobile-sub-link" data-service-target="igualdad">Igualdad Laboral</a>
+    <a href="#gestion" class="mobile-sub-link" data-service-target="gestion">Sistemas de Gestión</a>
+    <a href="#evaluacion" class="mobile-sub-link" data-service-target="evaluacion">Evaluación</a>
   </div>
 
   <a href="contacto.html" class="mobile-link">Contacto</a>
@@ -518,7 +593,7 @@
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
             </svg>
-            Igualdad
+            Igualdad Laboral
           </button>
 
           <button
@@ -534,7 +609,7 @@
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
             </svg>
-            Gestión
+            Sistemas de Gestión
           </button>
 
           <button
@@ -559,9 +634,20 @@
         <div class="tab-panel active" id="igualdad" role="tabpanel" tabindex="0" aria-labelledby="tab-igualdad">
           <div class="service-detail">
             <div class="service-detail-content reveal-left">
-              <span class="label-tag" style="background:rgba(123,104,150,0.12);color:var(--purple)">Perspectiva de género</span>
-              <h2>Igualdad de Género e Inclusión</h2>
-              <p>Ayudamos a organismos públicos y empresas a incorporar la perspectiva de género en sus políticas, procesos y cultura organizacional. Nuestras intervenciones generan cambios reales, medibles y sostenibles.</p>
+              <span class="label-tag" style="background:rgba(123,104,150,0.12);color:var(--purple)">Igualdad Laboral y No Discriminación</span>
+              <h2>Igualdad Laboral y No Discriminación</h2>
+              <p>Promovemos espacios inclusivos de colaboración en el ámbito laboral para todas y todos los colaboradores en un centro de trabajo, mediante asesoramiento, consultoría, capacitación e implantación normativa.</p>
+
+              <div class="service-summary" aria-label="Resumen del servicio de Igualdad Laboral y No Discriminación">
+                <div class="service-summary-item">
+                  <h3>Perspectiva de género</h3>
+                  <p>Desarrollamos acciones y proyectos aplicados a violencia de género, trata de personas, planeación, presupuestación, evaluación con perspectiva de género, cultura institucional y embarazo adolescente.</p>
+                </div>
+                <div class="service-summary-item">
+                  <h3>Objetivo</h3>
+                  <p>Impulsar la igualdad sustantiva con servicios de asesoramiento y capacitación que fortalezcan la inclusión, la equidad y entornos más justos, seguros y competitivos.</p>
+                </div>
+              </div>
 
               <div class="entregables-label" id="igualdad-entregables">¿Qué incluye el servicio?</div>
 
@@ -570,54 +656,62 @@
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Diagnóstico de igualdad laboral</strong> — Levantamiento y análisis de brechas de género en la organización.</p>
+                <p><strong>Asesoramiento</strong> — Alineamos proyectos e iniciativas para impulsar la igualdad sustantiva y la perspectiva de género.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Protocolo de atención a violencia</strong> — Diseño e implementación de protocolos internos conforme a la ley.</p>
+                <p><strong>Consultoría</strong> — Estudios e investigaciones sobre violencia de género, cultura institucional y protocolos de atención de la violencia laboral.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Cumplimiento NOM-035</strong> — Evaluación del entorno organizacional y plan de acción correctivo.</p>
+                <p><strong>Capacitación especializada</strong> — Cursos en liderazgo adolescente, empoderamiento de mujeres a través del deporte, perspectiva de género y derechos humanos.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Certificación NMX-R-025</strong> — Acompañamiento integral para obtener la norma mexicana de igualdad laboral.</p>
-              </li>
-
-              <li class="entregable-item">
-                <div class="entregable-check" aria-hidden="true">
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <p><strong>Talleres de sensibilización</strong> — Formación del personal en perspectiva de género, masculinidades y prevención de violencia.</p>
-              </li>
-
-              <li class="entregable-item">
-                <div class="entregable-check" aria-hidden="true">
-                  <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <p><strong>Presupuesto con perspectiva de género</strong> — Análisis y reestructuración del gasto institucional con enfoque de género.</p>
+                <p><strong>Implantación NMX-R-025-SCFI-2015</strong> — Acompañamiento para centros de trabajo públicos, privados y sociales que buscan certificarse o renovar su certificado.</p>
               </li>
               </ul>
+
+              <div class="service-catalog" aria-label="Servicios de Igualdad Laboral y No Discriminación">
+                <article class="service-catalog-card">
+                  <h3>NMX-R-025-SCFI-2015</h3>
+                  <p>Asesoramos a centros de trabajo de cualquier tamaño, sector o actividad en la República Mexicana para certificarse en la Norma Mexicana en Igualdad Laboral y No Discriminación.</p>
+                  <ul>
+                    <li>Procesos de reclutamiento, selección y capacitación con igualdad de oportunidades.</li>
+                    <li>Medición del clima laboral y uso de lenguaje incluyente, no sexista y accesible.</li>
+                    <li>Salas de lactancia, flexibilidad de horarios, licencias de paternidad y medidas de cuidado.</li>
+                    <li>Accesibilidad de espacios físicos y mecanismos para prevenir, atender y sancionar discriminación y violencia laboral.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Capacitación NMX-R-025</h3>
+                  <ul>
+                    <li>Inducción a la Norma Mexicana NMX-R-025-SCFI-2015.</li>
+                    <li>Implantación de la Norma en centros de trabajo.</li>
+                    <li>Herramientas para la mejora continua del centro de trabajo certificado.</li>
+                    <li>Formación del equipo auditor en la Norma Mexicana.</li>
+                  </ul>
+                </article>
+              </div>
 
               <ul class="normas-list" aria-label="Normas y marcos relacionados">
-                <li class="norma-tag">LGIMH</li>
-                <li class="norma-tag">NOM-035-STPS</li>
-                <li class="norma-tag">NMX-R-025</li>
-                <li class="norma-tag">PROIGUALDAD</li>
-                <li class="norma-tag">ODS 5 y 10</li>
+                <li class="norma-tag">NMX-R-025-SCFI-2015</li>
+                <li class="norma-tag">Igualdad sustantiva</li>
+                <li class="norma-tag">Perspectiva de género</li>
+                <li class="norma-tag">Derechos humanos</li>
               </ul>
 
-              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Igualdad de Género e Inclusión">Solicitar este servicio</a>
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Igualdad Laboral y No Discriminación">Solicitar este servicio</a>
             </div>
 
             <div class="service-detail-visual reveal-right">
@@ -627,8 +721,8 @@
                     <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
                   </svg>
                 </div>
-                <h3>Igualdad de Género</h3>
-                <p>Construimos organizaciones más justas donde el talento de todas las personas puede desarrollarse plenamente.</p>
+                <h3>Igualdad Laboral</h3>
+                <p>Implementamos medidas para la igualdad de oportunidades, acciones afirmativas y transversalización de la perspectiva de género.</p>
 
                 <ul class="mini-stats">
                   <li class="mini-stat"><div class="num">+80</div><div class="label">Diagnósticos realizados</div></li>
@@ -645,9 +739,20 @@
         <div class="tab-panel" id="gestion" role="tabpanel" tabindex="0" aria-labelledby="tab-gestion" hidden>
           <div class="service-detail">
             <div class="service-detail-content reveal-left">
-              <span class="label-tag">Administración pública</span>
-              <h2>Gestión Pública Estratégica</h2>
-              <p>Fortalecemos las capacidades institucionales de gobiernos y organizaciones a través de diagnósticos organizacionales, planeación estratégica y modernización de procesos administrativos.</p>
+              <span class="label-tag">Sistemas de Gestión</span>
+              <h2>Sistemas de Gestión</h2>
+              <p>Fortalecemos la gestión de tu centro de trabajo mediante lineamientos y herramientas alineadas con estándares internacionales para optimizar procesos, fortalecer la transparencia, gestionar riesgos, promover ambientes laborales saludables y consolidar la mejora continua.</p>
+
+              <div class="service-summary" aria-label="Resumen del servicio de Sistemas de Gestión">
+                <div class="service-summary-item">
+                  <h3>Experiencia</h3>
+                  <p>Diseñamos, implementamos, acompañamos y damos seguimiento a Sistemas de Gestión basados en normas internacionales, oficiales mexicanas y mexicanas.</p>
+                </div>
+                <div class="service-summary-item">
+                  <h3>Objetivo</h3>
+                  <p>Impulsar sistemas integrales mediante servicios de implantación, asesoría y capacitación que optimicen procesos, fortalezcan el desempeño organizacional y promuevan el cumplimiento normativo.</p>
+                </div>
+              </div>
 
               <div class="entregables-label" id="gestion-entregables">¿Qué incluye el servicio?</div>
 
@@ -656,46 +761,104 @@
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Diagnóstico organizacional</strong> — Análisis de estructura, procesos, recursos y resultados institucionales.</p>
+                <p><strong>Implantación</strong> — Diagnóstico, diseño documental, implementación, auditoría interna, revisión por la Dirección y acompañamiento para certificación.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Planeación estratégica</strong> — Diseño de planes institucionales con objetivos, indicadores y metas claras.</p>
+                <p><strong>Asesoría y acompañamiento</strong> — Adaptamos modelos a la realidad interna y externa de cada organización.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Rediseño de procesos</strong> — Identificación de cuellos de botella y propuesta de mejoras operativas.</p>
+                <p><strong>Acciones correctivas</strong> — Determinamos causas raíz, planes de acción, seguimiento, verificación, validación y cierre.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Presupuesto basado en resultados</strong> — Vinculación del presupuesto a objetivos e indicadores de desempeño.</p>
+                <p><strong>Capacitación</strong> — Inducción, interpretación, implementación, formación y actualización de equipos auditores.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Matrices de Indicadores (MIR)</strong> — Construcción y validación de la Matriz de Indicadores para Resultados.</p>
+                <p><strong>Mejora continua</strong> — Diseño de tableros de control, indicadores, monitoreo y revisión de resultados.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Capacitación al personal</strong> — Talleres prácticos para el fortalecimiento de capacidades del equipo.</p>
+                <p><strong>Cumplimiento normativo</strong> — Implementación de estándares ISO, NOM, NMX y UNE de acuerdo con las necesidades del centro de trabajo.</p>
               </li>
               </ul>
 
-              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Gestión Pública Estratégica">Solicitar este servicio</a>
+              <div class="service-catalog" aria-label="Normas y servicios de Sistemas de Gestión">
+                <article class="service-catalog-card">
+                  <h3>ISO 9001:2015 · Sistema de Gestión de Calidad</h3>
+                  <p>Implementamos sistemas para aumentar la satisfacción del usuario mediante procesos eficaces, mejora continua y cumplimiento de requisitos legales, reglamentarios y del usuario.</p>
+                  <ul>
+                    <li>Adecuación documental, capacitación, consultoría y acompañamiento.</li>
+                    <li>Auditoría interna, revisión por la Dirección y preparación para auditoría de certificación o mantenimiento.</li>
+                    <li>Capacitación en interpretación, metodologías de implementación y formación de auditores internos.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>ISO 37001:2016 · Sistema de Gestión Antisoborno</h3>
+                  <p>Acompañamos a organizaciones de cualquier tipo y tamaño para establecer, implementar, mantener, revisar y mejorar un sistema que gestione riesgos de soborno y promueva una cultura ética.</p>
+                  <ul>
+                    <li>Diagnóstico, planificación, diseño, implementación, tablero de control, auditoría interna y revisión por la Dirección.</li>
+                    <li>Preauditoría, acompañamiento en certificación y capacitación para implementadores y auditores líderes.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>ISO 31000:2018 · Gestión del Riesgo</h3>
+                  <p>Desarrollamos planes de gestión de riesgos adaptados al tamaño y contexto de cada organización.</p>
+                  <ul>
+                    <li>Contexto, identificación, análisis, evaluación, tratamiento, comunicación, consulta y monitoreo de riesgos.</li>
+                    <li>Inducción, pensamiento basado en riesgos y formación de equipo auditor.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>ISO/TS 54001:2019 · Organizaciones Electorales</h3>
+                  <p>Implementamos sistemas de gestión electoral para procesos más fiables, transparentes, libres y justos.</p>
+                  <ul>
+                    <li>Diagnóstico a procesos clave, reunión con alta autoridad, capacitación y despliegue estratégico.</li>
+                    <li>Diseño, documentación, preauditoría y auditoría de certificación.</li>
+                    <li>Capacitación en fundamentos, mapeo de procesos, indicadores, documentación y auditoría electoral.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>NOM-035-STPS-2018 · Factores de Riesgo Psicosocial</h3>
+                  <p>Implementamos elementos para identificar, analizar y prevenir factores de riesgo psicosocial y promover entornos organizacionales favorables.</p>
+                  <ul>
+                    <li>Comité de implementación, capacitación, política preventiva, sensibilización y difusión.</li>
+                    <li>Identificación, análisis, evaluación del entorno laboral y programa de prevención y controles.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Norma UNE 93200 · Cartas de Servicios</h3>
+                  <p>Desarrollamos cartas de servicios como herramienta para comunicar servicios, compromisos e indicadores de calidad a personas usuarias.</p>
+                  <ul>
+                    <li>Equipo de trabajo, evaluación del servicio, encuestas, focus group, compromisos e indicadores.</li>
+                    <li>Procesos ligados al servicio, medidas de subsanación, difusión, comparación de expectativas y redacción de la carta.</li>
+                  </ul>
+                </article>
+              </div>
+
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Sistemas de Gestión">Solicitar este servicio</a>
             </div>
 
             <div class="service-detail-visual reveal-right">
@@ -705,14 +868,14 @@
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                   </svg>
                 </div>
-                <h3>Gestión Pública</h3>
-                <p>Modernizamos la gestión institucional para que las organizaciones logren más con sus recursos actuales.</p>
+                <h3>Sistemas de Gestión</h3>
+                <p>Implementamos estándares ISO, NOM, NMX y UNE para fortalecer procesos, riesgos, transparencia, calidad y mejora continua.</p>
 
                 <ul class="mini-stats">
-                  <li class="mini-stat"><div class="num">+60</div><div class="label">Diagnósticos entregados</div></li>
-                  <li class="mini-stat"><div class="num">+40</div><div class="label">Planes estratégicos</div></li>
-                  <li class="mini-stat"><div class="num">+30%</div><div class="label">Mejora en eficiencia</div></li>
-                  <li class="mini-stat"><div class="num">+120</div><div class="label">MIRs construidas</div></li>
+                  <li class="mini-stat"><div class="num">+300</div><div class="label">Procesos documentados</div></li>
+                  <li class="mini-stat"><div class="num">ISO</div><div class="label">Estándares internacionales</div></li>
+                  <li class="mini-stat"><div class="num">NOM</div><div class="label">Normas oficiales</div></li>
+                  <li class="mini-stat"><div class="num">NMX</div><div class="label">Normas mexicanas</div></li>
                 </ul>
               </div>
             </div>
@@ -723,9 +886,20 @@
         <div class="tab-panel" id="evaluacion" role="tabpanel" tabindex="0" aria-labelledby="tab-evaluacion" hidden>
           <div class="service-detail">
             <div class="service-detail-content reveal-left">
-              <span class="label-tag" style="background:rgba(27,45,110,0.08);color:var(--navy)">Medición de impacto</span>
-              <h2>Evaluación de Programas y Políticas</h2>
-              <p>Diseñamos y ejecutamos evaluaciones rigurosas que permiten a gobiernos y organizaciones conocer el verdadero impacto de sus programas, tomar mejores decisiones y mejorar la rendición de cuentas.</p>
+              <span class="label-tag" style="background:rgba(27,45,110,0.08);color:var(--navy)">Evaluación</span>
+              <h2>Evaluación</h2>
+              <p>Fortalecemos los procesos de evaluación mediante metodologías y herramientas que permiten medir resultados, identificar áreas de oportunidad y promover la mejora continua en instituciones, programas y proyectos.</p>
+
+              <div class="service-summary" aria-label="Resumen del servicio de Evaluación">
+                <div class="service-summary-item">
+                  <h3>Experiencia</h3>
+                  <p>Diseñamos, implementamos y damos seguimiento a procesos de evaluación orientados al análisis de desempeño, impacto y cumplimiento de objetivos.</p>
+                </div>
+                <div class="service-summary-item">
+                  <h3>Objetivo</h3>
+                  <p>Impulsar procesos de evaluación integrales con asesoramiento y capacitación para optimizar resultados, fortalecer la transparencia y promover la mejora continua.</p>
+                </div>
+              </div>
 
               <div class="entregables-label" id="evaluacion-entregables">¿Qué incluye el servicio?</div>
 
@@ -734,46 +908,89 @@
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Evaluación de diseño</strong> — Análisis de la lógica, coherencia interna y viabilidad del programa.</p>
+                <p><strong>Programa Anual de Evaluación (PAE)</strong> — Diseño, desarrollo, lineamientos, términos de referencia y evaluación de programas presupuestarios o fondos federales.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Evaluación de procesos</strong> — Revisión de la operación, cuellos de botella y cumplimiento normativo.</p>
+                <p><strong>Presupuesto Basado en Resultados (PbR)</strong> — Metodología para mejorar la calidad del gasto público, rendición de cuentas y toma de decisiones orientada a resultados.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Evaluación de impacto</strong> — Medición de los efectos del programa sobre la población objetivo.</p>
+                <p><strong>Administración Gubernamental por Resultados (AGpR)</strong> — Capacitación y evaluación para fortalecer planeación, seguimiento, evaluación y comunicación de la gestión pública.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Fichas de monitoreo</strong> — Diseño de sistemas de seguimiento con indicadores clave de desempeño.</p>
+                <p><strong>Consultoría</strong> — Evaluaciones con base en el Programa Anual de Evaluación, la metodología de Marco Lógico y los objetivos de planeación institucional.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Informe ejecutivo</strong> — Documentos claros y listos para presentar ante autoridades o financiadoras.</p>
+                <p><strong>Capacitación</strong> — Inducción, términos de referencia, convenios de mejora, informes de resultados y certificación.</p>
               </li>
 
               <li class="entregable-item">
                 <div class="entregable-check" aria-hidden="true">
                   <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p><strong>Recomendaciones estratégicas</strong> — Plan de mejora con acciones concretas, responsables y plazos.</p>
+                <p><strong>Mejora continua</strong> — Información útil para retroalimentar diseño, gestión y resultados de programas públicos.</p>
               </li>
               </ul>
 
-              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Evaluación de Programas y Políticas">Solicitar este servicio</a>
+              <div class="service-catalog" aria-label="Servicios de Evaluación">
+                <article class="service-catalog-card">
+                  <h3>Programa Anual de Evaluación (PAE)</h3>
+                  <p>Instrumento normativo que establece las evaluaciones a programas, subprogramas, estrategias o políticas durante cada ejercicio fiscal, conforme a las obligaciones aplicables a entes públicos.</p>
+                  <ul>
+                    <li>Diseño y desarrollo del Programa Anual de Evaluación.</li>
+                    <li>Elaboración de Lineamientos Generales para la Evaluación de Programas Presupuestarios.</li>
+                    <li>Construcción de Términos de Referencia para la Evaluación.</li>
+                    <li>Evaluación de programas presupuestarios y fondos federales.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Capacitación PAE</h3>
+                  <ul>
+                    <li>Inducción al Programa Anual de Evaluación.</li>
+                    <li>Elaboración de Términos de Referencia.</li>
+                    <li>Diseño de Convenio para la Mejora de Resultados Gubernamentales.</li>
+                    <li>Desarrollo Integral del Programa Anual de Evaluaciones.</li>
+                    <li>Elaboración del Informe de Resultados.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Presupuesto Basado en Resultados (PbR)</h3>
+                  <p>Metodología para vincular la asignación de recursos públicos con el logro de resultados, en apego a los objetivos de planeación federal, estatal y municipal.</p>
+                  <ul>
+                    <li>Consultoría para incorporar el enfoque PbR al ciclo presupuestario.</li>
+                    <li>Taller de Gestión Integral del Presupuesto Basado en Resultados.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Administración Gubernamental por Resultados (AGpR)</h3>
+                  <p>Estándar de competencia desarrollado a partir de la Gestión para Resultados, orientado a personas que participan en la administración gubernamental federal, estatal o municipal.</p>
+                  <ul>
+                    <li>Evaluación de habilidades para fortalecer una cultura de monitoreo y evaluación.</li>
+                    <li>Planeación, seguimiento, evaluación y comunicación de una gestión pública orientada a resultados.</li>
+                    <li>Programa de Certificación e implantación del Sistema de Gestión para Resultados en el Sector Público.</li>
+                  </ul>
+                </article>
+              </div>
+
+              <a href="contacto.html" class="btn btn-primary mt-32 service-cta" aria-label="Solicitar este servicio de Evaluación">Solicitar este servicio</a>
             </div>
 
             <div class="service-detail-visual reveal-right">
@@ -784,14 +1001,14 @@
                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                   </svg>
                 </div>
-                <h3>Evaluación de Programas</h3>
-                <p>Convertimos datos en conocimiento accionable para que tus programas sean cada vez más efectivos.</p>
+                <h3>Evaluación</h3>
+                <p>Convertimos los procesos de evaluación en información útil para fortalecer resultados, transparencia y toma de decisiones.</p>
 
                 <ul class="mini-stats">
-                  <li class="mini-stat"><div class="num">+70</div><div class="label">Evaluaciones realizadas</div></li>
-                  <li class="mini-stat"><div class="num">+25</div><div class="label">Municipios atendidos</div></li>
-                  <li class="mini-stat"><div class="num">+200</div><div class="label">Indicadores diseñados</div></li>
-                  <li class="mini-stat"><div class="num">3</div><div class="label">Tipos de evaluación</div></li>
+                  <li class="mini-stat"><div class="num">PAE</div><div class="label">Programa anual</div></li>
+                  <li class="mini-stat"><div class="num">PbR</div><div class="label">Presupuesto por resultados</div></li>
+                  <li class="mini-stat"><div class="num">AGpR</div><div class="label">Gestión gubernamental</div></li>
+                  <li class="mini-stat"><div class="num">ML</div><div class="label">Marco Lógico</div></li>
                 </ul>
               </div>
             </div>
@@ -967,9 +1184,9 @@
 
       <div class="footer-col">
         <h2 class="footer-heading">Servicios</h2>
-        <a href="#igualdad" class="footer-link" data-service-target="igualdad">Igualdad de Género</a>
-        <a href="#gestion" class="footer-link" data-service-target="gestion">Gestión Pública</a>
-        <a href="#evaluacion" class="footer-link" data-service-target="evaluacion">Evaluación de Programas</a>
+        <a href="#igualdad" class="footer-link" data-service-target="igualdad">Igualdad Laboral</a>
+        <a href="#gestion" class="footer-link" data-service-target="gestion">Sistemas de Gestión</a>
+        <a href="#evaluacion" class="footer-link" data-service-target="evaluacion">Evaluación</a>
       </div>
 
       <div class="footer-col">
