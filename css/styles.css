@@ -1663,3 +1663,8 @@ span.label-tag,
     min-height: auto;
   }
 }
+
+.proceso-steps .step h3 {
+  min-height: 10px;
+  margin-bottom: 14px;
+}
