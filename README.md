@@ -130,7 +130,7 @@ En el bloque `.about-card-main`, reemplaza el placeholder con:
 | Tabs de servicios         | `servicios.html` |
 | Partículas hero           | `js/main.js`   |
 | Page loader               | `js/main.js`   |
-| Botón "volver arriba"     | `js/main.js`   |
+| Botón "Volver al inicio de la página"     | `js/main.js`   |
 | WhatsApp flotante         | Todos los HTML |
 
 ---
