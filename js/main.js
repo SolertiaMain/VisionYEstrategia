@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initFAQ();
   initForms();
-  initParticles();
+  // initParticles();
   initTabs();
   initBackToTop();
 });
