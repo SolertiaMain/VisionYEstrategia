@@ -29,7 +29,7 @@
   /* Texto */
   --text-dark:    #1a1f3a;
   --text-mid:     #4a5068;
-  --text-light:   #8897a8;
+  --text-light: #5E6B7A;
   --white:        #ffffff;
 
   /* Tipografías del brandboard */
@@ -693,7 +693,7 @@ p {
 .cta-banner::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(to right,transparent,var(--cyan),var(--purple),transparent); }
 .cta-banner-content { position:relative; z-index:2; }
 .cta-banner h2 { font-family:var(--font-serif); color:var(--white); margin-bottom:18px; }
-.cta-banner p  { font-family:var(--font-sans); color:rgba(255,255,255,0.65); max-width:540px; margin:0 auto 44px; font-size:1.02rem; }
+.cta-banner p  { font-family:var(--font-sans); color:rgba(255,255,255,0.85); max-width:540px; margin:0 auto 44px; font-size:1.02rem; }
 .cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
 
 /* ============================================================
@@ -706,7 +706,7 @@ p {
 .contact-detail  { display:flex; align-items:flex-start; gap:16px; }
 .contact-icon-box { width:44px; height:44px; border-radius:10px; background:rgba(27,45,110,0.07); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--navy); }
 .contact-icon-box svg { width:18px; height:18px; }
-.contact-detail-label { font-family:var(--font-sans); font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--cyan); margin-bottom:4px; }
+.contact-detail-label { font-family:var(--font-sans); font-size:0.66rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color: var(--cyan-aa); margin-bottom:4px; }
 .contact-detail-value { font-family:var(--font-sans); font-size:0.87rem; color:var(--text-dark); font-weight:500; font-style:normal; }
 
 .contact-form-card { background:var(--white); padding:48px; border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); }
@@ -774,9 +774,9 @@ p {
 .page-hero { background:linear-gradient(140deg,var(--navy-dark),var(--navy)); padding:140px 0 84px; text-align:center; position:relative; overflow:hidden; }
 .page-hero::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:60px; background:var(--canvas); clip-path:ellipse(55% 100% at 50% 100%); }
 .page-hero h1 { color:var(--white); margin-bottom:16px; }
-.page-hero p  { color:rgba(255,255,255,0.65); max-width:560px; margin:0 auto; font-size:1.02rem; }
+.page-hero p  { color:rgba(255,255,255,0.85); max-width:560px; margin:0 auto; font-size:1.02rem; }
 
-.breadcrumb { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:24px; font-family:var(--font-sans); font-size:0.74rem; color:rgba(255,255,255,0.42); }
+.breadcrumb { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:24px; font-family:var(--font-sans); font-size:0.74rem; color:rgba(255,255,255,0.75); }
 .breadcrumb a { display:inline-flex; align-items:center; min-height:24px; color:var(--cyan); transition:var(--transition); }
 .breadcrumb a:hover { color:var(--white); }
 
@@ -1662,4 +1662,64 @@ span.label-tag,
   .services-section .service-card h3 {
     min-height: auto;
   }
+}
+
+.proceso-steps .step h3 {
+  min-height: 10px;
+  margin-bottom: 14px;
+}
+
+:root {
+  --cyan-aa: #006B82;
+  --cyan-aa-dark: #005F73;
+  --footer-text-aa: #C7D2E5;
+  --label-bg-aa: #FFFFFF;
+}
+
+/* Botones primarios */
+.btn.btn-primary,
+a.btn.btn-primary,
+button.btn.btn-primary,
+.hero-actions .btn.btn-primary,
+.cta-actions .btn.btn-primary {
+  background: var(--cyan-aa) !important;
+  color: #FFFFFF !important;
+  border-color: var(--cyan-aa) !important;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus-visible {
+  background: var(--cyan-aa-dark) !important;
+  color: #FFFFFF !important;
+  border-color: var(--cyan-aa-dark) !important;
+}
+
+/* Etiquetas pequeñas */
+.label-tag {
+  color: var(--cyan-aa) !important;
+  background: var(--label-bg-aa) !important;
+  border: 1px solid rgba(0, 107, 130, 0.35) !important;
+}
+
+/* Links y texto del footer */
+.footer-copy,
+.footer-bottom-link,
+.footer-brand > p,
+.footer-link {
+  color: var(--footer-text-aa) !important;
+}
+
+.footer-bottom-link:hover,
+.footer-link:hover {
+  color: #FFFFFF !important;
+}
+
+/* Logo tag */
+.logo-tag {
+  color: #005F73 !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 95, 115, 0.25);
+  border-radius: 999px;
+  padding: 2px 8px;
+  width: max-content;
 }
