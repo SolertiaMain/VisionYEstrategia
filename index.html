@@ -15,7 +15,9 @@
 </head>
 
 <body>
-<a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+<nav class="skip-nav" aria-label="Enlaces de salto">
+  <a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+</nav>
 
 <!-- PAGE LOADER -->
 <div class="page-loader" aria-hidden="true">
@@ -29,10 +31,14 @@
 <nav class="navbar transparent" aria-label="Navegación principal">
   <div class="nav-container">
 
-    <a href="index.html" class="nav-logo" aria-label="Ideas Ágiles — Visión y Estrategia Consultoría — Inicio">
-      <span class="logo-tag">Ideas Ágiles</span>
-      <span class="logo-main">Visión y Estrategia</span>
-      <span class="logo-sub">Consultoría</span>
+    <a href="index.html" class="nav-logo nav-logo-combo" aria-label="Ideas Ágiles — Visión y Estrategia Consultoría — Inicio">
+      <span class="nav-logo-mark" aria-hidden="true">
+        <img
+          src="assets/images/logos/Imagotipo_Visión_y_Estrategia.png"
+          alt=""
+          class="nav-logo-img"
+        />
+      </span>
     </a>
 
     <ul class="nav-links" role="list">
@@ -145,21 +151,21 @@
 
 <main id="contenido-principal" tabindex="-1">
 
-  <!-- HERO -->
-  <section class="hero" aria-labelledby="hero-heading">
-    <div class="hero-stripe" aria-hidden="true"></div>
-    <!-- <div class="hero-particles" aria-hidden="true"></div> -->
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-stripe" aria-hidden="true"></div>
 
-    <!-- V decorativa del logo -->
-    <div class="hero-v-deco" aria-hidden="true">
-      <svg aria-hidden="true" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="white">
-        <path d="M20 30 L150 270 L280 30 M55 30 L150 220 L245 30" stroke="white" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+  <!-- V decorativa del logo -->
+  <div class="hero-v-deco" aria-hidden="true">
+    <svg aria-hidden="true" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="white">
+      <path d="M20 30 L150 270 L280 30 M55 30 L150 220 L245 30" stroke="white" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 
-    <div class="container">
+  <div class="container">
+    <div class="hero-grid">
+
       <div class="hero-content">
-
         <h1 id="hero-heading">
           Transformamos organizaciones con<br>
           <em>ideas ágiles</em>.
@@ -205,479 +211,435 @@
           </li>
         </ul>
       </div>
-    </div>
 
-    <!-- <div class="hero-scroll" aria-hidden="true">
-      <span lang="en">Scroll</span>
-      <span class="hero-scroll-line"></span>
-    </div> -->
-  </section>
-
-  <!-- SERVICIOS -->
-  <section class="section services-section" id="servicios" aria-labelledby="servicios-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="label-tag">Nuestros Servicios</span>
-        <h2 id="servicios-heading">Soluciones integrales para tu organización</h2>
-        <p>Tres líneas estratégicas que responden a los retos actuales de organismos públicos y empresas privadas.</p>
+      <div class="hero-cert-card" aria-label="Certificación vigente en Igualdad Laboral y No Discriminación">
+        <img
+          src="assets/images/certificados/CertificadoMaxan-025-208_VigenciaFebrero2030.jpeg"
+          alt="Centro de trabajo certificado MAXAN-025-208. Vigencia: febrero 2030."
+          class="hero-cert-img"
+        />
       </div>
 
-      <ul class="grid-3 stagger-children">
-
-        <li>
-          <article class="service-card igualdad reveal">
-            <div class="service-icon-box purple" aria-hidden="true">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
-              </svg>
-            </div>
-
-            <h3>Igualdad Laboral y No Discriminación</h3>
-            <p>Brindamos servicios de asesoramiento, consultoría y capacitación en temas de respeto a los derechos humanos, igualdad sustantiva, inclusión y combate de la violencia laboral con perspectiva de género.</p>
-
-            <a href="servicios.html#igualdad" class="service-link" aria-label="Ver servicio de Igualdad de Género">
-              Ver servicio
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </article>
-        </li>
-
-        <li>
-          <article class="service-card gestion reveal delay-200">
-            <div class="service-icon-box cyan" aria-hidden="true">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-
-            <h3>Sistemas de Gestión</h3>
-            <p> Implementamos sistemas de gestión (ISO 9001, ISO 37001, ISO 31000, NOM-035, UNE 93200, NMX-025) para optimizar procesos internos y asegurar el cumplimiento normativo.</p>
-
-            <a href="servicios.html#gestion" class="service-link" aria-label="Ver servicio de Gestión Pública">
-              Ver servicio
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </article>
-        </li>
-
-        <li>
-          <article class="service-card evalua reveal delay-400">
-            <div class="service-icon-box navy" aria-hidden="true">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"/>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                <line x1="11" y1="8" x2="11" y2="14"/>
-                <line x1="8" y1="11" x2="14" y2="11"/>
-              </svg>
-            </div>
-
-            <h3>Evaluación a programas públicos</h3>
-            <p>Evaluamos planes y programas públicos mediante PAE, PbR y estándares de gestión por resultados, ofreciendo consultoría y capacitación para fortalecer la calidad de la gestión pública.</p>
-
-            <a href="servicios.html#evaluacion" class="service-link" aria-label="Ver servicio de Evaluación de Programas">
-              Ver servicio
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </article>
-        </li>
-
-      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROPUESTA DE VALOR -->
-  <section class="section valor-section" aria-labelledby="valor-heading">
-    <div class="container">
-      <div class="valor-content">
+<!-- SERVICIOS -->
+<section class="section services-section" id="servicios" aria-labelledby="servicios-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-tag">Nuestros Servicios</span>
+      <h2 id="servicios-heading">Soluciones integrales para tu organización</h2>
+      <p>Tres líneas estratégicas que responden a los retos actuales de organismos públicos y empresas privadas.</p>
+    </div>
 
-        <div class="valor-left reveal-left">
-          <span class="label-tag">¿Por qué elegirnos?</span>
-          <h2 id="valor-heading">Experiencia que se traduce en resultados</h2>
-          <p>Somos un equipo multidisciplinario con profundo conocimiento del marco legal y más de 15 años construyendo organizaciones justas, eficaces y transparentes.</p>
+    <ul class="grid-3 stagger-children">
+      <li>
+        <article class="service-card igualdad reveal">
+          <div class="service-icon-box purple" aria-hidden="true">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18M6 8l6-4 6 4M5 12h14M7 17h10"/>
+            </svg>
+          </div>
 
-          <ul class="valor-pillars">
-            <li class="pillar">
-              <div class="pillar-line" aria-hidden="true"></div>
-              <div class="pillar-text">
-                <h3>Sólido respaldo normativo</h3>
-                <p>Cumplimiento normativo garantizado: Estándares Internacionales (ISO), Normas de Producto (Normas Oficiales Mexicanas y Normas Mexicanas), y demás normatividad aplicable en sistemas de gestión, igualdad laboral, perspectiva de género y/o evaluación del gasto público.</p>
-              </div>
-            </li>
+          <h3>Igualdad Laboral y No Discriminación</h3>
+          <p>Brindamos servicios de asesoramiento, consultoría y capacitación en temas de respeto a los derechos humanos, igualdad sustantiva, inclusión y combate de la violencia laboral con perspectiva de género.</p>
 
-            <li class="pillar">
-              <div class="pillar-line" aria-hidden="true"></div>
-              <div class="pillar-text">
-                <h3>Metodología probada</h3>
-                <p>Procesos estructurados con resultados, adaptados a la realidad de cada cliente.</p>
-              </div>
-            </li>
+          <a href="servicios.html#igualdad" class="service-link" aria-label="Ver servicio de Igualdad de Género">
+            Ver servicio
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </article>
+      </li>
 
-            <li class="pillar">
-              <div class="pillar-line" aria-hidden="true"></div>
-              <div class="pillar-text">
-                <h3>Acompañamiento continuo</h3>
-                <p>No entregamos solo documentación — acompañamos la implementación hasta ver resultados.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+      <li>
+        <article class="service-card gestion reveal delay-200">
+          <div class="service-icon-box cyan" aria-hidden="true">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
 
-        <ul class="reveal-right">
-          <li class="feature-item">
-            <div class="feature-num" aria-hidden="true">01</div>
-            <div>
-              <h3>Diagnóstico integral</h3>
-              <p>Analizamos con precisión tu centro de trabajo para identificar brechas reales y áreas de mejora, fortaleciendo procesos y resultados.</p>
+          <h3>Sistemas de Gestión</h3>
+          <p>Implementamos sistemas de gestión (ISO 9001, ISO 37001, ISO 31000, NOM-035, UNE 93200, NMX-025) para optimizar procesos internos y asegurar el cumplimiento normativo.</p>
+
+          <a href="servicios.html#gestion" class="service-link" aria-label="Ver servicio de Gestión Pública">
+            Ver servicio
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </article>
+      </li>
+
+      <li>
+        <article class="service-card evalua reveal delay-400">
+          <div class="service-icon-box navy" aria-hidden="true">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/>
+              <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+
+          <h3>Evaluación a programas públicos</h3>
+          <p>Evaluamos planes y programas públicos mediante PAE, PbR y estándares de gestión por resultados, ofreciendo consultoría y capacitación para fortalecer la calidad de la gestión pública.</p>
+
+          <a href="servicios.html#evaluacion" class="service-link" aria-label="Ver servicio de Evaluación de Programas">
+            Ver servicio
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROPUESTA DE VALOR -->
+<section class="section valor-section" aria-labelledby="valor-heading">
+  <div class="container">
+    <div class="valor-content">
+
+      <div class="valor-left reveal-left">
+        <span class="label-tag">¿Por qué elegirnos?</span>
+        <h2 id="valor-heading">Experiencia que se traduce en resultados</h2>
+        <p>Somos un equipo multidisciplinario con profundo conocimiento del marco legal y más de 15 años construyendo organizaciones justas, eficaces y transparentes.</p>
+
+        <ul class="valor-pillars">
+          <li class="pillar">
+            <div class="pillar-line" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <h3>Sólido respaldo normativo</h3>
+              <p>Cumplimiento normativo garantizado: Estándares Internacionales (ISO), Normas de Producto (Normas Oficiales Mexicanas y Normas Mexicanas), y demás normatividad aplicable en sistemas de gestión, igualdad laboral, perspectiva de género y/o evaluación del gasto público.</p>
             </div>
           </li>
 
-          <li class="feature-item">
-            <div class="feature-num" aria-hidden="true">02</div>
-            <div>
-              <h3>Estrategias adaptadas a tu realidad</h3>
-              <p>Cada propuesta es diseñada específicamente para tu contexto, recursos y objetivos institucionales, asegurando soluciones sostenibles.</p>
+          <li class="pillar">
+            <div class="pillar-line" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <h3>Metodología probada</h3>
+              <p>Procesos estructurados con resultados, adaptados a la realidad de cada cliente.</p>
             </div>
           </li>
 
-          <li class="feature-item">
-            <div class="feature-num" aria-hidden="true">03</div>
-            <div>
-              <h3>Equipo certificado</h3>
-              <p>Especialistas con amplia experiencia de género, sistemas de gestión y evaluación.</p>
-            </div>
-          </li>
-
-          <li class="feature-item">
-            <div class="feature-num" aria-hidden="true">04</div>
-            <div>
-              <h3>Impacto medible</h3>
-              <p>Establecemos indicadores desde el inicio para demostrar el avance y comunicar los resultados a todas las partes interesadas.</p>
+          <li class="pillar">
+            <div class="pillar-line" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <h3>Acompañamiento continuo</h3>
+              <p>No entregamos solo documentación — acompañamos la implementación hasta ver resultados.</p>
             </div>
           </li>
         </ul>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESO -->
-  <section class="section proceso-section" id="proceso" aria-labelledby="proceso-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="label-tag">Cómo trabajamos</span>
-        <h2 id="proceso-heading">Nuestro proceso de consultoría</h2>
-        <p>Un método claro y estructurado que garantiza resultados desde el primer día.</p>
       </div>
 
-      <ol class="proceso-steps stagger-children">
-        <li class="step reveal">
-          <div class="step-circle" aria-hidden="true">01</div>
-          <h3>Diagnóstico y diseño</h3>
-          <p>Identificamos tus necesidades y ajustamos nuestra propuesta a tu centro de trabajo, a través de planes de acción y ciclos de evaluación.</p>
-        </li>
-
-        <li class="step reveal delay-100">
-          <div class="step-circle" aria-hidden="true">02</div>
-          <h3>Implementación y Capacitación</h3>
-          <p>Capacitamos al personal y adaptamos tus procesos en el servicio que sea de su interés.</p>
-        </li>
-
-        <li class="step reveal delay-200">
-          <div class="step-circle" aria-hidden="true">03</div>
-          <h3>Implantación</h3>
-          <p>Ponemos en marcha tu servicio mediante la ejecución de los procesos y estrategias diseñadas.</p>
-        </li>
-
-        <li class="step reveal delay-300">
-          <div class="step-circle" aria-hidden="true">04</div>
-          <h3>Evaluación y mejora continua</h3>
-          <p>Analizamos tus resultados para identificar oportunidades de mejora.</p>
-        </li>
-
-        <li class="step reveal delay-400">
-          <div class="step-circle" aria-hidden="true">05</div>
-          <h3>Seguimiento</h3>
-          <p>Te ofrecemos sesiones de seguimiento para asegurar la continuidad por hasta 6 meses.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- NOSOTROS PREVIEW -->
-  <!-- <section class="section about-section" aria-labelledby="about-preview-heading">
-    <div class="container">
-      <div class="grid-2">
-
-        <div class="about-text reveal-left">
-          <span class="label-tag">Quiénes somos</span>
-          <h2 id="about-preview-heading">Un equipo comprometido con la transformación</h2>
-          <p>Visión y Estrategia nace con el convencimiento de incitar y fortalecer la calidad, la innovación y los resultados en los servicios de instituciones públicas y privadas.</p>
-          <p>Nuestro equipo altamente competente suscita resultados ofreciendo servicios profesionales con confianza, calidad y valor público.</p>
-
-          <ul class="about-tags" aria-label="Áreas de especialidad">
-            <li class="about-tag">Perspectiva de género</li>
-            <li class="about-tag">Políticas públicas</li>
-            <li class="about-tag">NOM-035</li>
-            <li class="about-tag">LGIMH</li>
-            <li class="about-tag">Evaluación de impacto</li>
-          </ul>
-
-          <a href="nosotros.html" class="btn btn-secondary mt-32">Conocer al equipo</a>
-        </div>
-
-        <div class="about-visual reveal-right">
-          <div class="about-card-main">
-            <div style="text-align:center;color:rgba(255,255,255,0.25);padding:40px;">
-              <svg aria-hidden="true" style="width:80px;height:80px;margin:0 auto 16px;opacity:0.4" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-              <p style="font-family:var(--font-sans);font-size:0.80rem;color:rgba(255,255,255,0.28)">Fotografía del equipo</p>
-            </div>
-          </div>
-
-          <div class="about-card-accent float-element">
-            <div class="big-num">+15</div>
-            <div class="big-label">Años transformando organizaciones</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section> -->
-
-  <!-- TESTIMONIOS -->
-  <section class="section testimonials-section" aria-labelledby="testimonios-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="label-tag">Lo que dicen nuestros clientes</span>
-        <h2 id="testimonios-heading">Resultados que hablan por sí solos</h2>
-      </div>
-
-      <ul class="testimonial-grid stagger-children">
-        <li class="testimonial-card reveal">
-          <p class="testimonial-text">El equipo de Visión y Estrategia nos acompañó en todo el proceso de Certificación en la Norma Mexicana NMX-R-025-SCFI-2015 en Igualdad Laboral y No Discriminación. Su conocimiento de la Norma y su atención especializada marcaron la diferencia. Cumplimos con los requisitos de certificación.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">MC</div>
-            <div>
-              <div class="author-name">M. Cruz</div>
-              <div class="author-role">Titular del Instituto Municipal de la Mujer de Toluca</div>
-            </div>
+      <ul class="reveal-right">
+        <li class="feature-item">
+          <div class="feature-num" aria-hidden="true">01</div>
+          <div>
+            <h3>Diagnóstico integral</h3>
+            <p>Analizamos con precisión tu centro de trabajo para identificar brechas reales y áreas de mejora, fortaleciendo procesos y resultados.</p>
           </div>
         </li>
 
-        <li class="testimonial-card reveal delay-200">
-          <p class="testimonial-text">La evaluación de diseño que realizaron para nuestro programa social fue impecable. Nos dieron claridad sobre lo que estaba funcionando y lo que debíamos mejorar. Hoy somos un programa más efectivo.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">JR</div>
-            <div>
-              <div class="author-name">J. Ramírez</div>
-              <div class="author-role">Director de la Unidad de Información, Planeación, Programación y Evaluación del Gobierno Municipal.</div>
-            </div>
+        <li class="feature-item">
+          <div class="feature-num" aria-hidden="true">02</div>
+          <div>
+            <h3>Estrategias adaptadas a tu realidad</h3>
+            <p>Cada propuesta es diseñada específicamente para tu contexto, recursos y objetivos institucionales, asegurando soluciones sostenibles.</p>
           </div>
         </li>
 
-        <li class="testimonial-card reveal delay-400">
-          <p class="testimonial-text">Implementar un Sistema de Gestión de la Calidad en nuestra empresa parecía complejo, pero Visión y Estrategia lo hizo sencillo, práctico y con un enfoque 100% aplicable. Los talleres fueron excelentes.</p>
-          <div class="testimonial-author">
-            <div class="author-avatar" aria-hidden="true">AL</div>
-            <div>
-              <div class="author-name">A. López</div>
-              <div class="author-role">Gerente General, Empresa privada</div>
-            </div>
+        <li class="feature-item">
+          <div class="feature-num" aria-hidden="true">03</div>
+          <div>
+            <h3>Equipo certificado</h3>
+            <p>Especialistas con amplia experiencia de género, sistemas de gestión y evaluación.</p>
+          </div>
+        </li>
+
+        <li class="feature-item">
+          <div class="feature-num" aria-hidden="true">04</div>
+          <div>
+            <h3>Impacto medible</h3>
+            <p>Establecemos indicadores desde el inicio para demostrar el avance y comunicar los resultados a todas las partes interesadas.</p>
           </div>
         </li>
       </ul>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FAQ -->
-  <section class="section faq-section" aria-labelledby="faq-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="label-tag">Preguntas frecuentes</span>
-        <h2 id="faq-heading">Resolvemos tus dudas</h2>
-      </div>
-
-      <ul class="faq-grid">
-
-        <li class="faq-item reveal">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-1"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-1"
-            >
-              <span>¿A qué tipo de organizaciones asesoran?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-1"
-            role="region"
-            aria-labelledby="faq-pregunta-1"
-            hidden
-          >
-            <p>Trabajamos con organismos públicos municipales y estatales, secretarías de gobierno, empresas privadas de todos los tamaños y organizaciones de la sociedad civil.</p>
-          </div>
-        </li>
-
-        <li class="faq-item reveal delay-100">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-2"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-2"
-            >
-              <span>¿Cuánto tiempo toma un proyecto?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-2"
-            role="region"
-            aria-labelledby="faq-pregunta-2"
-            hidden
-          >
-            <p>Depende del alcance. Un diagnóstico básico puede tomar 1-3 semanas; un proceso de certificación de igualdad laboral puede durar 1-4 meses. Siempre definimos tiempos claros desde la propuesta inicial.</p>
-          </div>
-        </li>
-
-        <li class="faq-item reveal delay-200">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-3"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-3"
-            >
-              <span>¿Trabajan fuera del Estado de México?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-3"
-            role="region"
-            aria-labelledby="faq-pregunta-3"
-            hidden
-          >
-            <p>Sí, aunque estamos ubicados  en Zinacantepec, hemos colaborado con instituciones en varios estados de la república. También ofrecemos modalidades en línea para todo el territorio nacional.</p>
-          </div>
-        </li>
-
-        <li class="faq-item reveal delay-300">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-4"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-4"
-            >
-              <span>¿Cómo sé si necesito una consulta de igualdad de género?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-4"
-            role="region"
-            aria-labelledby="faq-pregunta-4"
-            hidden
-          >
-            <p>Si tu organización tiene más de 50 personas, ya tienes obligaciones legales bajo la NOM-035. Te ayudamos a diagnosticar tu situación en una primera reunión sin costo.</p>
-          </div>
-        </li>
-
-        <li class="faq-item reveal delay-100">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-5"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-5"
-            >
-              <span>¿Qué diferencia a Visión y Estrategia?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-5"
-            role="region"
-            aria-labelledby="faq-pregunta-5"
-            hidden
-          >
-            <p>Combinamos tres especialidades únicas: género, gestión pública, sistemas de gestión y evaluación. No subcontratamos: trabajas directamente con los especialistas y acompañamos la implementación, no solo la entrega del informe.</p>
-          </div>
-        </li>
-
-        <li class="faq-item reveal delay-200">
-          <h3>
-            <button
-              type="button"
-              class="faq-question"
-              id="faq-pregunta-6"
-              aria-expanded="false"
-              aria-controls="faq-respuesta-6"
-            >
-              <span>¿Cómo puedo solicitar una cotización?</span>
-              <span class="faq-toggle" aria-hidden="true">+</span>
-            </button>
-          </h3>
-
-          <div
-            class="faq-answer"
-            id="faq-respuesta-6"
-            role="region"
-            aria-labelledby="faq-pregunta-6"
-            hidden
-          >
-            <p>Puedes escribirnos por WhatsApp, llamarnos directamente o llenar el formulario de contacto. Respondemos en menos de 24 horas hábiles con una propuesta preliminar sin compromiso.</p>
-          </div>
-        </li>
-
-      </ul>
+<!-- PROCESO -->
+<section class="section proceso-section" id="proceso" aria-labelledby="proceso-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-tag">Cómo trabajamos</span>
+      <h2 id="proceso-heading">Nuestro proceso de consultoría</h2>
+      <p>Un método claro y estructurado que garantiza resultados desde el primer día.</p>
     </div>
-  </section>
 
-  <!-- CTA BANNER -->
-  <section class="cta-banner" aria-labelledby="cta-home-heading">
-    <div class="container">
-      <div class="cta-banner-content">
-        <span class="label-tag">¿Listo para comenzar?</span>
-        <h2 id="cta-home-heading">Tu organización merece<br>una consultoría de alto nivel</h2>
-        <p>Primera sesión de diagnóstico sin costo. Cuéntanos tu reto y en 24 horas te presentamos cómo podemos ayudarte.</p>
+    <ol class="proceso-steps stagger-children">
+      <li class="step reveal">
+        <div class="step-circle" aria-hidden="true">01</div>
+        <h3>Diagnóstico y diseño</h3>
+        <p>Identificamos tus necesidades y ajustamos nuestra propuesta a tu centro de trabajo, a través de planes de acción y ciclos de evaluación.</p>
+      </li>
 
-        <div class="cta-actions">
-          <a href="contacto.html" class="btn btn-primary">Agendar consulta gratuita</a>
-          <a href="https://wa.me/+5217222676413" class="btn btn-outline-white" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+      <li class="step reveal delay-100">
+        <div class="step-circle" aria-hidden="true">02</div>
+        <h3>Implementación y Capacitación</h3>
+        <p>Capacitamos al personal y adaptamos tus procesos en el servicio que sea de su interés.</p>
+      </li>
+
+      <li class="step reveal delay-200">
+        <div class="step-circle" aria-hidden="true">03</div>
+        <h3>Implantación</h3>
+        <p>Ponemos en marcha tu servicio mediante la ejecución de los procesos y estrategias diseñadas.</p>
+      </li>
+
+      <li class="step reveal delay-300">
+        <div class="step-circle" aria-hidden="true">04</div>
+        <h3>Evaluación y mejora continua</h3>
+        <p>Analizamos tus resultados para identificar oportunidades de mejora.</p>
+      </li>
+
+      <li class="step reveal delay-400">
+        <div class="step-circle" aria-hidden="true">05</div>
+        <h3>Seguimiento</h3>
+        <p>Te ofrecemos sesiones de seguimiento para asegurar la continuidad por hasta 6 meses.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="section testimonials-section" aria-labelledby="testimonios-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-tag">Lo que dicen nuestros clientes</span>
+      <h2 id="testimonios-heading">Resultados que hablan por sí solos</h2>
+    </div>
+
+    <ul class="testimonial-grid stagger-children">
+      <li class="testimonial-card reveal">
+        <p class="testimonial-text">El equipo de Visión y Estrategia nos acompañó en todo el proceso de Certificación en la Norma Mexicana NMX-R-025-SCFI-2015 en Igualdad Laboral y No Discriminación. Su conocimiento de la Norma y su atención especializada marcaron la diferencia. Cumplimos con los requisitos de certificación.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">MC</div>
+          <div>
+            <div class="author-name">M. Cruz</div>
+            <div class="author-role">Titular del Instituto Municipal de la Mujer de Toluca</div>
+          </div>
         </div>
+      </li>
+
+      <li class="testimonial-card reveal delay-200">
+        <p class="testimonial-text">La evaluación de diseño que realizaron para nuestro programa social fue impecable. Nos dieron claridad sobre lo que estaba funcionando y lo que debíamos mejorar. Hoy somos un programa más efectivo.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">JR</div>
+          <div>
+            <div class="author-name">J. Ramírez</div>
+            <div class="author-role">Director de la Unidad de Información, Planeación, Programación y Evaluación del Gobierno Municipal.</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="testimonial-card reveal delay-400">
+        <p class="testimonial-text">Implementar un Sistema de Gestión de la Calidad en nuestra empresa parecía complejo, pero Visión y Estrategia lo hizo sencillo, práctico y con un enfoque 100% aplicable. Los talleres fueron excelentes.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">AL</div>
+          <div>
+            <div class="author-name">A. López</div>
+            <div class="author-role">Gerente General, Empresa privada</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="label-tag">Preguntas frecuentes</span>
+      <h2 id="faq-heading">Resolvemos tus dudas</h2>
+    </div>
+
+    <ul class="faq-grid">
+      <li class="faq-item reveal">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-1"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-1"
+          >
+            <span>¿A qué tipo de organizaciones asesoran?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-1"
+          role="region"
+          aria-labelledby="faq-pregunta-1"
+          hidden
+        >
+          <p>Trabajamos con organismos públicos municipales y estatales, secretarías de gobierno, empresas privadas de todos los tamaños y organizaciones de la sociedad civil.</p>
+        </div>
+      </li>
+
+      <li class="faq-item reveal delay-100">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-2"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-2"
+          >
+            <span>¿Cuánto tiempo toma un proyecto?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-2"
+          role="region"
+          aria-labelledby="faq-pregunta-2"
+          hidden
+        >
+          <p>Depende del alcance. Un diagnóstico básico puede tomar 1-3 semanas; un proceso de certificación de igualdad laboral puede durar 1-4 meses. Siempre definimos tiempos claros desde la propuesta inicial.</p>
+        </div>
+      </li>
+
+      <li class="faq-item reveal delay-200">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-3"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-3"
+          >
+            <span>¿Trabajan fuera del Estado de México?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-3"
+          role="region"
+          aria-labelledby="faq-pregunta-3"
+          hidden
+        >
+          <p>Sí, aunque estamos ubicados en Zinacantepec, hemos colaborado con instituciones en varios estados de la república. También ofrecemos modalidades en línea para todo el territorio nacional.</p>
+        </div>
+      </li>
+
+      <li class="faq-item reveal delay-300">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-4"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-4"
+          >
+            <span>¿Cómo sé si necesito una consulta de igualdad de género?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-4"
+          role="region"
+          aria-labelledby="faq-pregunta-4"
+          hidden
+        >
+          <p>Si tu organización tiene más de 50 personas, ya tienes obligaciones legales bajo la NOM-035. Te ayudamos a diagnosticar tu situación en una primera reunión sin costo.</p>
+        </div>
+      </li>
+
+      <li class="faq-item reveal delay-100">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-5"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-5"
+          >
+            <span>¿Qué diferencia a Visión y Estrategia?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-5"
+          role="region"
+          aria-labelledby="faq-pregunta-5"
+          hidden
+        >
+          <p>Combinamos tres especialidades únicas: género, gestión pública, sistemas de gestión y evaluación. No subcontratamos: trabajas directamente con los especialistas y acompañamos la implementación, no solo la entrega del informe.</p>
+        </div>
+      </li>
+
+      <li class="faq-item reveal delay-200">
+        <h3>
+          <button
+            type="button"
+            class="faq-question"
+            id="faq-pregunta-6"
+            aria-expanded="false"
+            aria-controls="faq-respuesta-6"
+          >
+            <span>¿Cómo puedo solicitar una cotización?</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+        </h3>
+
+        <div
+          class="faq-answer"
+          id="faq-respuesta-6"
+          role="region"
+          aria-labelledby="faq-pregunta-6"
+          hidden
+        >
+          <p>Puedes escribirnos por WhatsApp, llamarnos directamente o llenar el formulario de contacto. Respondemos en menos de 24 horas hábiles con una propuesta preliminar sin compromiso.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner" aria-labelledby="cta-home-heading">
+  <div class="container">
+    <div class="cta-banner-content">
+      <span class="label-tag">¿Listo para comenzar?</span>
+      <h2 id="cta-home-heading">Tu organización merece<br>una consultoría de alto nivel</h2>
+      <p>Primera sesión de diagnóstico sin costo. Cuéntanos tu reto y en 24 horas te presentamos cómo podemos ayudarte.</p>
+
+      <div class="cta-actions">
+        <a href="contacto.html" class="btn btn-primary">Agendar consulta gratuita</a>
+        <a href="https://wa.me/+5217222676413" class="btn btn-outline-white" target="_blank" rel="noopener">Contactar por WhatsApp</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
@@ -760,7 +722,7 @@
     </svg>
   </a>
 
-  <button id="back-to-top" aria-label="Volver al inicio de la página">
+  <button id="back-to-top" type="button" aria-label="Volver al inicio de la página">
     <svg aria-hidden="true" viewBox="0 0 24 24">
       <path d="M18 15l-6-6-6 6"/>
     </svg>

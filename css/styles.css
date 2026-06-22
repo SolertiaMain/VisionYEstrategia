@@ -1741,3 +1741,469 @@ button.btn.btn-primary,
   padding: 2px 8px;
   width: max-content;
 }
+
+/* ==============================
+   Navbar logo corregido
+============================== */
+
+.navbar {
+  height: 88px;
+}
+
+.nav-container {
+  height: 188px;
+  align-items: center;
+}
+
+.nav-logo-combo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px;
+  text-decoration: none;
+  max-width: 420px;
+  overflow: hidden;
+}
+
+.nav-logo-mark {
+  width: 56px;
+  height: 56px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 56px;
+}
+
+.nav-logo-text {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.nav-logo-text .logo-tag {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav-logo-text .logo-main {
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.nav-logo-text .logo-sub {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.navbar.scrolled .nav-logo-text .logo-main {
+  color: var(--navy);
+}
+
+.navbar.scrolled .nav-logo-text .logo-sub {
+  color: rgba(27, 45, 110, 0.65);
+}
+
+/* =========================================================
+   Certificado Hero - Integrado con fondo azul
+========================================================= */
+
+.hero-cert-card {
+  width: 100% !important;
+  max-width: 430px !important;
+  justify-self: center !important;
+  align-self: center !important;
+  padding: 22px !important;
+  border-radius: 30px !important;
+
+  /* Fondo tipo glass, no blanco puro */
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.24), transparent 48%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06)) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow:
+    0 28px 75px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+
+  backdrop-filter: blur(16px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(130%) !important;
+
+  position: relative !important;
+  z-index: 4 !important;
+  overflow: hidden !important;
+}
+
+/* Glow suave alrededor */
+.hero-cert-card::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  background:
+    radial-gradient(circle, rgba(0, 169, 206, 0.28), transparent 58%);
+  opacity: 0.55;
+  z-index: -1;
+}
+
+/* Difuminado interior para que no parezca imagen pegada */
+.hero-cert-card::after {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 45%),
+    radial-gradient(circle at center, transparent 42%, rgba(27, 45, 110, 0.10) 100%);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+/* Quita el golpe visual del fondo blanco usando blend */
+.hero-cert-img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 260px !important;
+  display: block !important;
+  object-fit: contain !important;
+  border-radius: 22px !important;
+
+  /* Esto hace que el blanco se integre con el azul */
+  mix-blend-mode: multiply;
+
+  /* Suaviza el contraste */
+  opacity: 0.92;
+  filter: contrast(1.05) saturate(1.05);
+
+  /* Fondo interno muy sutil por si el blend no carga igual en todos lados */
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow:
+    inset 0 0 35px rgba(27, 45, 110, 0.10),
+    0 12px 30px rgba(0, 0, 0, 0.10);
+}
+
+.hero-cert-kicker {
+  display: inline-flex !important;
+  margin-bottom: 14px !important;
+  padding: 8px 13px !important;
+  border-radius: 999px !important;
+  background: rgba(0, 169, 206, 0.16) !important;
+  color: #ffffff !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+/* ============================================================
+   FIX FINAL — LOGO NAVBAR VISIBLE Y SIN RECORTE
+   ============================================================ */
+
+.navbar {
+  height: 88px !important;
+  padding: 0 48px !important;
+  background: var(--navy) !important;
+}
+
+.nav-container {
+  height: 100% !important;
+  max-width: 1440px !important;
+  align-items: center !important;
+}
+
+/* Contenedor del logo */
+.nav-logo-combo,
+.nav-logo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  min-width: 170px !important;
+  max-width: 260px !important;
+  overflow: visible !important;
+}
+
+/* Ya NO recorta el logo */
+.nav-logo-mark {
+  width: 130px !important;
+  height: 58px !important;
+  flex: 0 0 130px !important;
+  position: relative !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Imagen del logo completa */
+.nav-logo-img,
+.nav-logo-mark .nav-logo-img,
+.nav-logo img,
+.nav-logo-combo img {
+  position: static !important;
+  width: 130px !important;
+  max-width: 130px !important;
+  height: auto !important;
+  max-height: 58px !important;
+  object-fit: contain !important;
+  display: block !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Si el logo trae texto integrado, ocultamos textos duplicados */
+.nav-logo-text {
+  display: none !important;
+}
+
+/* Menú centrado correctamente */
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Botón superior */
+.nav-cta.btn-primary {
+  padding: 16px 34px !important;
+  border-radius: 6px !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .navbar {
+    height: 82px !important;
+    padding: 0 24px !important;
+  }
+
+  .nav-logo-mark {
+    width: 115px !important;
+    height: 52px !important;
+    flex-basis: 115px !important;
+  }
+
+  .nav-logo-img,
+  .nav-logo-mark .nav-logo-img,
+  .nav-logo img,
+  .nav-logo-combo img {
+    width: 115px !important;
+    max-width: 115px !important;
+    max-height: 52px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-logo-mark {
+    width: 100px !important;
+    height: 46px !important;
+    flex-basis: 100px !important;
+  }
+
+  .nav-logo-img,
+  .nav-logo-mark .nav-logo-img,
+  .nav-logo img,
+  .nav-logo-combo img {
+    width: 100px !important;
+    max-width: 100px !important;
+    max-height: 46px !important;
+  }
+}
+
+/* ============================================================
+   LOGO NAVBAR MÁS GRANDE Y VISIBLE
+   ============================================================ */
+
+.navbar {
+  height: 92px !important;
+  padding: 0 36px !important;
+}
+
+.nav-container {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Contenedor general del logo */
+.nav-logo-combo,
+.nav-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  overflow: visible !important;
+}
+
+/* Caja del logo: HAZLA MÁS GRANDE */
+.nav-logo-mark {
+  width: 200px !important;
+  height: 10px !important;
+  flex: 0 0 180px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Imagen del logo */
+.nav-logo-img,
+.nav-logo-mark .nav-logo-img,
+.nav-logo img,
+.nav-logo-combo img {
+  position: static !important;
+  width: 200% !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: 150px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-logo-mark {
+    width: 150px !important;
+    height: 56px !important;
+    flex-basis: 150px !important;
+  }
+
+  .nav-logo-img,
+  .nav-logo-mark .nav-logo-img,
+  .nav-logo img,
+  .nav-logo-combo img {
+    max-height: 56px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-logo-mark {
+    width: 125px !important;
+    height: 48px !important;
+    flex-basis: 125px !important;
+  }
+
+  .nav-logo-img,
+  .nav-logo-mark .nav-logo-img,
+  .nav-logo img,
+  .nav-logo-combo img {
+    max-height: 48px !important;
+  }
+}
+
+/* =========================================================
+   FIX FINAL HERO + CERTIFICADO
+   Pegar al FINAL de css/styles.css
+========================================================= */
+
+.hero {
+  position: relative !important;
+  min-height: 100vh !important;
+  padding-top: 135px !important;
+  padding-bottom: 70px !important;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+.hero .container {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+}
+
+/* Regresamos el hero a una composición limpia */
+.hero-grid {
+  display: block !important;
+  position: relative !important;
+}
+
+.hero-content {
+  max-width: 760px !important;
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.hero-content h1 {
+  margin-top: 0 !important;
+}
+
+/* Evita que la línea de stats atraviese toda la pantalla */
+.hero-stats {
+  max-width: 760px !important;
+}
+
+/* Tarjeta del certificado colocada a la derecha */
+.hero-cert-card {
+  position: absolute !important;
+  top: 50% !important;
+  right: clamp(24px, 4vw, 70px) !important;
+  transform: translateY(-42%) !important;
+
+  width: clamp(300px, 28vw, 430px) !important;
+  max-width: 430px !important;
+  padding: 12px !important;
+
+  border-radius: 28px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset !important;
+
+  z-index: 4 !important;
+  overflow: hidden !important;
+
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Glow sutil detrás, no encima */
+.hero-cert-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -25px !important;
+  border-radius: 36px !important;
+  background: radial-gradient(circle, rgba(0, 169, 206, 0.20), transparent 65%) !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+/* Quita efectos anteriores */
+.hero-cert-card::after {
+  content: none !important;
+}
+
+/* Ocultamos el texto superior para que no se vea cargado */
+.hero-cert-kicker {
+  display: none !important;
+}
+
+/* Imagen natural, sin mezcla extraña */
+.hero-cert-img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 255px !important;
+  display: block !important;
+  object-fit: contain !important;
+
+  border-radius: 22px !important;
+  background: #ffffff !important;
+
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  filter: none !important;
+
+  box-shadow: none !important;
+}

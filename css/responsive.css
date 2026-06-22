@@ -73,3 +73,185 @@
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1 !important; transform: none !important; }
 }
+
+@media (max-width: 1024px) {
+  .nav-logo-combo {
+    max-width: 320px;
+  }
+
+  .nav-logo-text .logo-main {
+    font-size: 1.05rem;
+  }
+
+  .nav-logo-text .logo-tag {
+    font-size: 0.58rem;
+  }
+
+  .nav-logo-text .logo-sub {
+    font-size: 0.58rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar,
+  .nav-container {
+    height: 76px;
+  }
+
+  .nav-logo-mark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .nav-logo-mark .nav-logo-img {
+    left: -15px;
+    top: -8px;
+    width: 145px !important;
+  }
+
+  .nav-logo-text {
+    gap: 6px;
+  }
+
+  .nav-logo-text .logo-tag {
+    padding: 4px 8px;
+    font-size: 0.52rem;
+  }
+
+  .nav-logo-text .logo-main {
+    font-size: 0.9rem;
+  }
+
+  .nav-logo-text .logo-sub {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Responsive hero con certificado
+========================================================= */
+
+@media (max-width: 1100px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+
+  .hero-cert-card {
+    justify-self: start !important;
+    max-width: 420px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 110px !important;
+    padding-bottom: 52px !important;
+    min-height: auto !important;
+  }
+
+  .hero-grid {
+    gap: 30px !important;
+  }
+
+  .hero-cert-card {
+    max-width: 100% !important;
+    padding: 14px !important;
+    border-radius: 22px !important;
+  }
+
+  .hero-cert-img {
+    max-height: 230px !important;
+    border-radius: 14px !important;
+  }
+
+  .hero-cert-kicker {
+    font-size: 0.62rem !important;
+    padding: 7px 10px !important;
+  }
+}
+@media (max-width: 768px) {
+  .hero-cert-card {
+    max-width: 100% !important;
+    padding: 16px !important;
+    border-radius: 24px !important;
+  }
+
+  .hero-cert-img {
+    max-height: 220px !important;
+    border-radius: 18px !important;
+  }
+
+  .hero-cert-kicker {
+    font-size: 0.62rem !important;
+    padding: 7px 10px !important;
+  }
+}
+
+/* =========================================================
+   Responsive certificado hero
+   Pegar al FINAL de css/responsive.css
+========================================================= */
+
+@media (max-width: 1200px) {
+  .hero-content {
+    max-width: 680px !important;
+  }
+
+  .hero-stats {
+    max-width: 680px !important;
+  }
+
+  .hero-cert-card {
+    width: 340px !important;
+    right: 32px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    min-height: auto !important;
+    padding-top: 120px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .hero-content {
+    max-width: 100% !important;
+  }
+
+  .hero-stats {
+    max-width: 100% !important;
+  }
+
+  .hero-cert-card {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+
+    width: min(100%, 420px) !important;
+    max-width: 420px !important;
+    margin-top: 36px !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 105px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .hero-cert-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
+    border-radius: 22px !important;
+  }
+
+  .hero-cert-img {
+    max-height: 220px !important;
+    border-radius: 18px !important;
+  }
+}
