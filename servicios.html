@@ -29,6 +29,10 @@
       justify-content:center;
     }
 
+    .tab-group.is-overview .tabs-nav {
+      display:none;
+    }
+
     .tab-btn {
       font-family:var(--font-sans);
       font-size:0.76rem;
@@ -80,12 +84,24 @@
       margin-bottom:18px;
     }
 
+    .service-detail-content > ul[aria-labelledby$="-entregables"] {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+
     .entregable-item {
       display:flex;
       align-items:flex-start;
-      gap:14px;
-      padding:14px 0;
-      border-bottom:1px solid rgba(27,45,110,0.07);
+      gap:12px;
+      padding:16px;
+      min-height:100%;
+      border:1px solid rgba(27,45,110,0.08);
+      border-left:3px solid var(--service-accent);
+      border-radius:8px;
+      background:rgba(255,255,255,0.54);
+      box-shadow:0 4px 18px rgba(27,45,110,0.05);
     }
 
     .entregable-check {
@@ -124,7 +140,8 @@
 
     .entregable-item p {
       font-family:var(--font-sans);
-      font-size:0.87rem;
+      font-size:0.82rem;
+      line-height:1.58;
       font-weight:500;
       margin:0;
     }
@@ -160,6 +177,7 @@
       color:var(--text-mid);
       font-weight:500;
       overflow-wrap:anywhere;
+      list-style:disc;
     }
 
     .service-catalog-card p {
@@ -220,7 +238,11 @@
     }
 
     .service-cta {
-      margin-top:36px;
+      display:flex !important;
+      width:max-content !important;
+      max-width:100%;
+      justify-content:center;
+      margin:36px auto 0 !important;
       background:linear-gradient(135deg,var(--purple),var(--cyan));
       box-shadow:0 12px 32px rgba(123,104,150,0.34);
     }
@@ -441,12 +463,147 @@
       stroke-linejoin:round;
     }
 
+    .service-modalidades {
+      margin-top:64px;
+      padding-top:56px;
+      border-top:1px solid rgba(27,45,110,0.10);
+    }
+
+    .service-detail-content > .service-catalog {
+      display:none;
+    }
+
+    .service-modalidades .section-header {
+      margin-bottom:48px;
+    }
+
+    .service-modalidades .section-header h3 {
+      font-family:var(--font-serif);
+      font-size:clamp(1.65rem,3vw,2.25rem);
+      color:var(--navy);
+      margin-bottom:14px;
+    }
+
+    .service-modalidades .section-header p {
+      max-width:680px;
+      margin-inline:auto;
+    }
+
+    .service-modalidades .modalidad-card {
+      display:flex;
+      flex-direction:column;
+    }
+
+    .service-modalidades .modalidad-features {
+      flex:1;
+    }
+
+    .service-modalidades .modalidad-card .btn {
+      width:100%;
+      justify-content:center;
+      margin-top:auto;
+    }
+
+    .service-technical-details {
+      display:grid;
+      gap:14px;
+      margin-top:36px;
+    }
+
+    .service-technical-details details {
+      background:rgba(255,255,255,0.70);
+      border:1px solid rgba(27,45,110,0.10);
+      border-radius:8px;
+      padding:18px 20px;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .service-technical-details summary {
+      cursor:pointer;
+      font-family:var(--font-sans);
+      font-size:0.9rem;
+      font-weight:800;
+      color:var(--navy);
+    }
+
+    .service-technical-details p,
+    .service-technical-details li {
+      font-family:var(--font-sans);
+      font-size:0.84rem;
+      line-height:1.65;
+      color:var(--text-mid);
+      font-weight:500;
+    }
+
+    .service-technical-details p {
+      margin-top:12px;
+    }
+
+    .service-technical-details ul {
+      display:grid;
+      gap:7px;
+      padding-left:18px;
+      margin-top:12px;
+    }
+
+    .service-technical-details li {
+      list-style:disc;
+    }
+
+    .service-technical-details li::marker {
+      color:var(--service-accent);
+    }
+
+    .services-overview {
+      padding-top:12px;
+    }
+
+    .services-overview[hidden] {
+      display:none;
+    }
+
+    .overview-service-actions {
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .overview-branches {
+      margin-top:64px;
+      padding-top:44px;
+      border-top:1px solid rgba(27,45,110,0.10);
+      text-align:center;
+    }
+
+    .overview-branches h3 {
+      font-family:var(--font-serif);
+      font-size:clamp(1.6rem,3vw,2.35rem);
+      color:var(--navy);
+      margin-bottom:12px;
+    }
+
+    .overview-branches p {
+      max-width:720px;
+      margin:0 auto;
+      font-size:0.98rem;
+    }
+
+    .overview-service-actions .btn {
+      min-width:240px;
+      justify-content:center;
+      padding:16px 28px;
+    }
+
     @media(max-width:768px){
       .service-detail{grid-template-columns:1fr;gap:48px}
       .service-detail-visual{position:static}
       .service-detail-visual.reveal-right{transform:none}
+      .service-detail-content > ul[aria-labelledby$="-entregables"]{grid-template-columns:1fr}
       .modalidades-grid{grid-template-columns:1fr}
       .modalidad-card.featured{transform:none}
+      .overview-service-actions .btn{width:100%;justify-content:center}
     }
   </style>
 </head>
@@ -594,14 +751,14 @@
     <div class="container">
       <h2 id="servicios-tabs-heading" class="sr-only">Detalle de servicios de consultoría</h2>
 
-      <div class="tab-group">
+      <div class="tab-group is-overview">
         <div class="tabs-nav" role="tablist" aria-label="Servicios de consultoría">
           <button
             type="button"
-            class="tab-btn active"
+            class="tab-btn"
             id="tab-igualdad"
             role="tab"
-            aria-selected="true"
+            aria-selected="false"
             aria-controls="igualdad"
             data-tab="0"
           >
@@ -645,8 +802,74 @@
           </button>
         </div>
 
+        <div class="services-overview" id="servicios-overview">
+          <div class="section-header">
+            <span class="label-tag">Cómo trabajamos contigo</span>
+            <h2>Modalidades de consultoría</h2>
+            <p>Primero identificamos qué necesita tu organización y después aterrizamos el servicio en una de nuestras tres líneas: Igualdad Laboral, Sistemas de Gestión o Evaluación.</p>
+          </div>
+
+          <div class="modalidades-grid">
+            <article class="modalidad-card reveal">
+              <div class="modalidad-label">Implementación</div>
+              <h3>Puesta en marcha</h3>
+              <p>Acompañamos el proceso completo para convertir requisitos, diagnósticos y objetivos en acciones operables dentro de tu organización.</p>
+
+              <ul class="modalidad-features">
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Diagnóstico inicial y definición del alcance</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Plan de trabajo adaptado a tu contexto</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Desarrollo de documentos, procesos y evidencias</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Seguimiento, ajustes y preparación para revisión</li>
+              </ul>
+
+            </article>
+
+            <article class="modalidad-card featured reveal delay-200">
+              <div class="modalidad-badge">Proceso integral</div>
+              <div class="modalidad-label">Capacitación</div>
+              <h3>Fortalecimiento interno</h3>
+              <p>Formamos equipos para que comprendan el proceso, adopten herramientas y sostengan los resultados después del acompañamiento.</p>
+
+              <ul class="modalidad-features">
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sesiones de inducción y sensibilización</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Talleres prácticos por perfil y responsabilidad</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Materiales claros para consulta interna</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Transferencia de capacidades para mejora continua</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Agente Capacitador Externo STPS: DDC120622736-0013-DC-3</li>
+              </ul>
+
+            </article>
+
+            <article class="modalidad-card reveal delay-400">
+              <div class="modalidad-label">Consultoría</div>
+              <h3>Acompañamiento experto</h3>
+              <p>Analizamos tu situación, proponemos soluciones y acompañamos decisiones clave con metodología, evidencia y criterio técnico.</p>
+
+              <ul class="modalidad-features">
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Levantamiento de información y revisión documental</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Identificación de brechas y áreas de oportunidad</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Recomendaciones técnicas y ruta de acción</li>
+                <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sesiones de seguimiento y asesoría especializada</li>
+              </ul>
+
+            </article>
+          </div>
+
+          <div class="overview-branches">
+            <span class="label-tag">Elige una línea de servicio</span>
+            <h3>Tres ramas de especialización</h3>
+            <p>Selecciona el área que corresponde a tu necesidad para ver sus servicios, normativas y alcances específicos.</p>
+
+            <div class="overview-service-actions" aria-label="Elegir línea de servicio">
+              <a href="servicios.html#igualdad" class="btn btn-secondary">Igualdad Laboral</a>
+              <a href="servicios.html#gestion" class="btn btn-primary">Sistemas de Gestión</a>
+              <a href="servicios.html#evaluacion" class="btn btn-secondary">Evaluación</a>
+            </div>
+          </div>
+        </div>
+
         <!-- IGUALDAD -->
-        <div class="tab-panel active" id="igualdad" role="tabpanel" tabindex="0" aria-labelledby="tab-igualdad">
+        <div class="tab-panel" id="igualdad" role="tabpanel" tabindex="0" aria-labelledby="tab-igualdad" hidden>
           <div class="service-detail">
             <div class="service-detail-content reveal-left">
               <span class="label-tag" style="background:rgba(123,104,150,0.12);color:var(--purple)">Igualdad Laboral y No Discriminación</span>
@@ -696,25 +919,40 @@
               </li>
               </ul>
 
-              <section class="service-catalog" aria-label="Servicios de Igualdad Laboral y No Discriminación">
+              <section class="service-catalog" aria-label="Modalidades de Igualdad Laboral y No Discriminación">
                 <article class="service-catalog-card">
-                  <h3>NMX-R-025-SCFI-2015</h3>
-                  <p>Asesoramos a centros de trabajo de cualquier tamaño, sector o actividad en la República Mexicana para certificarse en la Norma Mexicana en Igualdad Laboral y No Discriminación.</p>
+                  <h3>Implementación</h3>
+                  <p>Acompañamos la puesta en marcha de prácticas, evidencias y procesos para centros de trabajo que buscan certificarse o renovar su certificado.</p>
                   <ul>
+                    <li>NMX-R-025-SCFI-2015 en Igualdad Laboral y No Discriminación.</li>
                     <li>Procesos de reclutamiento, selección y capacitación con igualdad de oportunidades.</li>
                     <li>Medición del clima laboral y uso de lenguaje incluyente, no sexista y accesible.</li>
-                    <li>Salas de lactancia, flexibilidad de horarios, licencias de paternidad y medidas de cuidado.</li>
+                    <li>Salas de lactancia, flexibilidad de horarios, licencias de paternidad y medidas de cuidado corresponsable.</li>
                     <li>Accesibilidad de espacios físicos y mecanismos para prevenir, atender y sancionar discriminación y violencia laboral.</li>
                   </ul>
                 </article>
 
                 <article class="service-catalog-card">
-                  <h3>Capacitación NMX-R-025</h3>
+                  <h3>Capacitación</h3>
+                  <p>Cursos y talleres especializados para fortalecer capacidades internas en igualdad, inclusión, derechos humanos y mejora continua.</p>
                   <ul>
                     <li>Inducción a la Norma Mexicana NMX-R-025-SCFI-2015.</li>
                     <li>Implantación de la Norma en centros de trabajo.</li>
                     <li>Herramientas para la mejora continua del centro de trabajo certificado.</li>
                     <li>Formación del equipo auditor en la Norma Mexicana.</li>
+                    <li>Perspectiva de Género y Derechos Humanos de la Mujer y el Hombre.</li>
+                    <li>Escuela de Liderazgo Adolescente y empoderamiento de las mujeres a través del deporte.</li>
+                  </ul>
+                </article>
+
+                <article class="service-catalog-card">
+                  <h3>Consultoría</h3>
+                  <p>Desarrollamos diagnósticos, asesorías y proyectos especializados para impulsar la igualdad sustantiva y la perspectiva de género.</p>
+                  <ul>
+                    <li>Asesoría en la NMX-R-025-SCFI-2015.</li>
+                    <li>Estudios sobre violencia de género y cultura institucional.</li>
+                    <li>Protocolos de atención de la violencia laboral.</li>
+                    <li>Planeación, presupuestación y evaluación con perspectiva de género.</li>
                   </ul>
                 </article>
               </section>
@@ -748,6 +986,107 @@
               </div>
             </div>
           </div>
+
+          <section class="service-modalidades" aria-label="Modalidades de consultoría en Igualdad Laboral y No Discriminación">
+            <div class="section-header">
+              <span class="label-tag">Cómo trabajamos contigo</span>
+              <h3>Modalidades de consultoría</h3>
+              <p>Adaptamos el acompañamiento de Igualdad Laboral y No Discriminación al alcance y necesidades de tu centro de trabajo.</p>
+            </div>
+
+            <div class="modalidades-grid">
+              <article class="modalidad-card reveal">
+                <div class="modalidad-label">Implementación</div>
+                <h3>Implantación normativa</h3>
+                <p>Acompañamiento para poner en marcha prácticas, evidencias y procesos requeridos por la Norma.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>NMX-R-025-SCFI-2015 para certificación o renovación</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Procesos de reclutamiento, selección y capacitación con igualdad de oportunidades</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Medición de clima laboral y lenguaje incluyente, no sexista y accesible</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Medidas de corresponsabilidad y mecanismos contra discriminación y violencia laboral</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar implementación de Igualdad Laboral">Solicitar servicio</a>
+              </article>
+
+              <article class="modalidad-card featured reveal delay-200">
+                <div class="modalidad-badge">Más solicitado</div>
+                <div class="modalidad-label">Capacitación</div>
+                <h3>Formación especializada</h3>
+                <p>Cursos y talleres para fortalecer capacidades internas en igualdad, inclusión y mejora continua.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Inducción e implantación de la NMX-R-025-SCFI-2015</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Herramientas para mejora continua del centro certificado</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Formación del equipo auditor en la Norma Mexicana</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Perspectiva de género y derechos humanos</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Liderazgo adolescente y empoderamiento de mujeres a través del deporte</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-primary" aria-label="Solicitar capacitación de Igualdad Laboral">Solicitar capacitación</a>
+              </article>
+
+              <article class="modalidad-card reveal delay-400">
+                <div class="modalidad-label">Consultoría</div>
+                <h3>Asesoramiento experto</h3>
+                <p>Diagnóstico, asesoría y desarrollo de proyectos especializados en igualdad sustantiva y perspectiva de género.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Asesoría en la NMX-R-025-SCFI-2015</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Estudios sobre violencia de género y cultura institucional</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Protocolos de atención de la violencia laboral</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Planeación, presupuestación y evaluación con perspectiva de género</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar consultoría de Igualdad Laboral">Solicitar consultoría</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-technical-details" aria-label="Detalle técnico de Igualdad Laboral y No Discriminación">
+            <details>
+              <summary>Detalle de asesoramiento y consultoría</summary>
+              <p>Nos alineamos con proyectos e iniciativas que impulsen la igualdad sustantiva y la perspectiva de género, colaborando con instituciones públicas, organizaciones sociales y el sector privado para fortalecer la implementación de políticas, estrategias y acciones.</p>
+              <ul>
+                <li>Asesoría en la Norma Mexicana NMX-R-025-SCFI-2015 en Igualdad Laboral y No Discriminación.</li>
+                <li>Estudios e investigaciones sobre violencia de género.</li>
+                <li>Cultura institucional con perspectiva de género en los ámbitos federal, estatal y municipal, incluyendo modelos de intervención.</li>
+                <li>Protocolos de atención de la violencia laboral.</li>
+                <li>Planeación, presupuestación y evaluación con perspectiva de género.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Detalle de implantación NMX-R-025-SCFI-2015</summary>
+              <p>Asesoramos a centros de trabajo públicos, privados y sociales establecidos en la República Mexicana, de cualquier tamaño, sector o actividad, para certificarse en la Norma Mexicana en Igualdad Laboral y No Discriminación.</p>
+              <ul>
+                <li>Procesos de reclutamiento, selección y capacitación de personal con igualdad de oportunidades.</li>
+                <li>Medición del clima laboral.</li>
+                <li>Uso de lenguaje incluyente, no sexista y accesible.</li>
+                <li>Salas de lactancia.</li>
+                <li>Flexibilización de horarios de trabajo.</li>
+                <li>Licencias de paternidad.</li>
+                <li>Medidas para apoyar necesidades de cuidado que contemplen la diversidad de familias y hogares.</li>
+                <li>Accesibilidad de espacios físicos.</li>
+                <li>Mecanismos para prevenir, atender y sancionar la discriminación y la violencia laboral.</li>
+              </ul>
+              <p>Hemos diseñado la Guía de Aplicación de la NMX-R-025-SCFI-2015 para centros de trabajo, con lenguaje claro y sencillo, para identificar cumplimientos, documentos y evidencias que deben elaborarse y presentarse en preauditoría o auditoría para obtener la certificación o renovación del certificado.</p>
+            </details>
+
+            <details>
+              <summary>Detalle de capacitación</summary>
+              <ul>
+                <li>Escuela de Liderazgo Adolescente.</li>
+                <li>Empoderamiento de las mujeres a través del deporte.</li>
+                <li>Perspectiva de Género y Derechos Humanos de la Mujer y el Hombre.</li>
+                <li>Inducción a la Norma Mexicana NMX-R-025-SCFI-2015 en Igualdad Laboral y No Discriminación.</li>
+                <li>Implantación de Norma Mexicana NMX-R-025-SCFI-2015 en centros de trabajo.</li>
+                <li>Herramientas para la mejora continua del centro de trabajo una vez certificado.</li>
+                <li>Formación del equipo auditor en la Norma Mexicana NMX-R-025-SCFI-2015.</li>
+              </ul>
+            </details>
+          </section>
         </div>
 
         <!-- GESTIÓN -->
@@ -815,60 +1154,48 @@
               </li>
               </ul>
 
-              <section class="service-catalog" aria-label="Normas y servicios de Sistemas de Gestión">
+              <section class="service-catalog" aria-label="Modalidades de Sistemas de Gestión">
                 <article class="service-catalog-card">
-                  <h3>ISO 9001:2015 · Sistema de Gestión de Calidad</h3>
-                  <p>Implementamos sistemas para aumentar la satisfacción del usuario mediante procesos eficaces, mejora continua y cumplimiento de requisitos legales, reglamentarios y del usuario.</p>
+                  <h3>Implementación</h3>
+                  <p>Diseñamos, documentamos y ponemos en marcha sistemas de gestión con seguimiento, auditoría interna y preparación para certificación o mantenimiento.</p>
                   <ul>
-                    <li>Adecuación documental, capacitación, consultoría y acompañamiento.</li>
-                    <li>Auditoría interna, revisión por la Dirección y preparación para auditoría de certificación o mantenimiento.</li>
-                    <li>Capacitación en interpretación, metodologías de implementación y formación de auditores internos.</li>
+                    <li>ISO 9001:2015 · Sistema de Gestión de Calidad.</li>
+                    <li>ISO 37001:2016 · Sistema de Gestión Antisoborno.</li>
+                    <li>ISO 31000:2018 · Gestión del Riesgo.</li>
+                    <li>ISO/TS 54001:2019 · Gestión de Calidad para Organizaciones Electorales.</li>
+                    <li>ISO 18091:2019 · Sistema de Gestión para Gobiernos Locales.</li>
+                    <li>ISO 45001 · Sistema de Gestión de Seguridad y Salud en el Trabajo.</li>
+                    <li>NOM-035-STPS-2018 · Factores de Riesgo Psicosocial.</li>
+                    <li>Norma UNE 93200 · Cartas de Servicios.</li>
                   </ul>
                 </article>
 
                 <article class="service-catalog-card">
-                  <h3>ISO 37001:2016 · Sistema de Gestión Antisoborno</h3>
-                  <p>Acompañamos a organizaciones de cualquier tipo y tamaño para establecer, implementar, mantener, revisar y mejorar un sistema que gestione riesgos de soborno y promueva una cultura ética.</p>
+                  <h3>Capacitación</h3>
+                  <p>Formamos equipos para interpretar normas, implementar metodologías, operar sistemas y realizar auditorías internas o líderes.</p>
                   <ul>
-                    <li>Diagnóstico, planificación, diseño, implementación, tablero de control, auditoría interna y revisión por la Dirección.</li>
-                    <li>Preauditoría, acompañamiento en certificación y capacitación para implementadores y auditores líderes.</li>
+                    <li>Interpretación, implementación y auditoría interna en ISO 9001:2015.</li>
+                    <li>Inducción, implementador(a) líder y auditor(a) líder en ISO 37001:2016.</li>
+                    <li>Inducción, pensamiento basado en riesgos y equipo auditor en ISO 31000:2018.</li>
+                    <li>Fundamentos, procesos, indicadores, documentación y auditoría electoral en ISO/TS 54001:2019.</li>
+                    <li>Talleres de ISO 18091:2019 para gobiernos locales, autodiagnóstico, ODS e información documentada.</li>
+                    <li>Formación de equipo auditor y operación del Observatorio Ciudadano Integral con ISO 18091:2019.</li>
+                    <li>Obligaciones e implantación de la NOM-035-STPS-2018.</li>
+                    <li>Gestión, certificación y metodología de cartas de servicios con Norma UNE 93200.</li>
                   </ul>
                 </article>
 
                 <article class="service-catalog-card">
-                  <h3>ISO 31000:2018 · Gestión del Riesgo</h3>
-                  <p>Desarrollamos planes de gestión de riesgos adaptados al tamaño y contexto de cada organización.</p>
+                  <h3>Consultoría</h3>
+                  <p>Acompañamos a la organización para adaptar modelos, atender hallazgos, fortalecer controles y consolidar la mejora continua.</p>
                   <ul>
-                    <li>Contexto, identificación, análisis, evaluación, tratamiento, comunicación, consulta y monitoreo de riesgos.</li>
-                    <li>Inducción, pensamiento basado en riesgos y formación de equipo auditor.</li>
-                  </ul>
-                </article>
-
-                <article class="service-catalog-card">
-                  <h3>ISO/TS 54001:2019 · Organizaciones Electorales</h3>
-                  <p>Implementamos sistemas de gestión electoral para procesos más fiables, transparentes, libres y justos.</p>
-                  <ul>
-                    <li>Diagnóstico a procesos clave, reunión con alta autoridad, capacitación y despliegue estratégico.</li>
-                    <li>Diseño, documentación, preauditoría y auditoría de certificación.</li>
-                    <li>Capacitación en fundamentos, mapeo de procesos, indicadores, documentación y auditoría electoral.</li>
-                  </ul>
-                </article>
-
-                <article class="service-catalog-card">
-                  <h3>NOM-035-STPS-2018 · Factores de Riesgo Psicosocial</h3>
-                  <p>Implementamos elementos para identificar, analizar y prevenir factores de riesgo psicosocial y promover entornos organizacionales favorables.</p>
-                  <ul>
-                    <li>Comité de implementación, capacitación, política preventiva, sensibilización y difusión.</li>
-                    <li>Identificación, análisis, evaluación del entorno laboral y programa de prevención y controles.</li>
-                  </ul>
-                </article>
-
-                <article class="service-catalog-card">
-                  <h3>Norma UNE 93200 · Cartas de Servicios</h3>
-                  <p>Desarrollamos cartas de servicios como herramienta para comunicar servicios, compromisos e indicadores de calidad a personas usuarias.</p>
-                  <ul>
-                    <li>Equipo de trabajo, evaluación del servicio, encuestas, focus group, compromisos e indicadores.</li>
-                    <li>Procesos ligados al servicio, medidas de subsanación, difusión, comparación de expectativas y redacción de la carta.</li>
+                    <li>Consultoría y acompañamiento ISO 9001:2015.</li>
+                    <li>Acompañamiento para certificación ISO 37001:2016.</li>
+                    <li>Planes de gestión de riesgos ISO 31000:2018.</li>
+                    <li>Autodiagnóstico, información documentada e integración del Observatorio Ciudadano en ISO 18091:2019.</li>
+                    <li>Identificación de peligros, evaluación de riesgos y programas de SST con ISO 45001.</li>
+                    <li>Preauditorías, auditorías internas y acciones correctivas.</li>
+                    <li>Tableros de control, indicadores, seguimiento y revisión por la Dirección.</li>
                   </ul>
                 </article>
               </section>
@@ -895,6 +1222,211 @@
               </div>
             </div>
           </div>
+
+          <section class="service-modalidades" aria-label="Modalidades de consultoría en Sistemas de Gestión">
+            <div class="section-header">
+              <span class="label-tag">Cómo trabajamos contigo</span>
+              <h3>Modalidades de consultoría</h3>
+              <p>Organizamos el acompañamiento de Sistemas de Gestión en implementación, capacitación y consultoría especializada.</p>
+            </div>
+
+            <div class="modalidades-grid">
+              <article class="modalidad-card reveal">
+                <div class="modalidad-label">Implementación</div>
+                <h3>Implantación del sistema</h3>
+                <p>Diseño documental, puesta en marcha, seguimiento, auditoría interna y preparación para certificación.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 9001:2015 · Sistema de Gestión de Calidad</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 37001:2016 · Sistema de Gestión Antisoborno</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 31000:2018 · Gestión del Riesgo</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO/TS 54001:2019 · Organizaciones Electorales</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 18091:2019 · Gobiernos Locales: autodiagnóstico, información documentada y Observatorio Ciudadano</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 45001 · Seguridad y Salud en el Trabajo: peligros, riesgos, objetivos, programas y control documental</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>NOM-035-STPS-2018 y Norma UNE 93200</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar implementación de Sistemas de Gestión">Solicitar servicio</a>
+              </article>
+
+              <article class="modalidad-card featured reveal delay-200">
+                <div class="modalidad-badge">Más solicitado</div>
+                <div class="modalidad-label">Capacitación</div>
+                <h3>Formación de equipos</h3>
+                <p>Formación para interpretar normas, operar sistemas, implementar metodologías y realizar auditorías.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Interpretación, implementación y auditoría interna en ISO 9001:2015</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Implementador(a) y auditor(a) líder en ISO 37001:2016</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Pensamiento basado en riesgos e ISO 31000:2018</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Procesos, indicadores, documentación y auditoría electoral</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 18091: talleres de interpretación, autodiagnóstico, ODS, información documentada y Observatorio Ciudadano</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>NOM-035-STPS-2018 y cartas de servicios UNE 93200</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-primary" aria-label="Solicitar capacitación de Sistemas de Gestión">Solicitar capacitación</a>
+              </article>
+
+              <article class="modalidad-card reveal delay-400">
+                <div class="modalidad-label">Consultoría</div>
+                <h3>Acompañamiento técnico</h3>
+                <p>Apoyo especializado para adaptar modelos, atender hallazgos y consolidar la mejora continua.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Consultoría y acompañamiento ISO 9001:2015</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Acompañamiento para certificación ISO 37001:2016</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Planes de gestión de riesgos ISO 31000:2018</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 18091: evaluación de condiciones operativas, procesos, resultados y mejora de gobiernos locales</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>ISO 45001: identificación de peligros, evaluación de riesgos y fortalecimiento de cultura preventiva</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Preauditorías, auditorías internas y acciones correctivas</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tableros de control, indicadores y revisión por la Dirección</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar consultoría de Sistemas de Gestión">Solicitar consultoría</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-technical-details" aria-label="Detalle técnico de Sistemas de Gestión">
+            <details>
+              <summary>ISO 9001:2015 · Sistema de Gestión de Calidad</summary>
+              <p>Esta Norma Internacional especifica los requisitos para un Sistema de Gestión de Calidad cuando un centro de trabajo busca aumentar la satisfacción del usuario mediante la aplicación eficaz del sistema, la mejora de sus procesos y el aseguramiento de la conformidad con requisitos del usuario, legales y reglamentarios aplicables.</p>
+              <ul>
+                <li>Adecuación documental del Sistema de Gestión de Calidad.</li>
+                <li>Capacitación del personal.</li>
+                <li>Consultoría y acompañamiento ISO 9001:2015.</li>
+                <li>Auditoría interna.</li>
+                <li>Revisión por la Dirección.</li>
+                <li>Preparación para auditoría de certificación o mantenimiento.</li>
+                <li>Acciones correctivas: causa raíz, planes de acción, seguimiento, análisis de resultados, verificación, validación y cierre.</li>
+                <li>Capacitación en interpretación, metodologías de implementación y formación o actualización de auditores internos.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>ISO 37001:2016 · Sistema de Gestión Antisoborno</summary>
+              <p>Ayudamos a organizaciones de todo tipo y tamaño a establecer, implementar, mantener, revisar y mejorar un Sistema de Gestión Antisoborno para gestionar el riesgo con efectividad, combatir el soborno y promover una cultura ética.</p>
+              <ul>
+                <li>Diagnóstico y planificación.</li>
+                <li>Diseño del sistema.</li>
+                <li>Implementación del sistema.</li>
+                <li>Diseño del tablero de control.</li>
+                <li>Auditoría interna.</li>
+                <li>Revisión por la Dirección.</li>
+                <li>Preauditoría de tercera parte.</li>
+                <li>Acompañamiento en la certificación.</li>
+                <li>Capacitación: inducción, implementador(a) líder y formación de auditor(a) líder en ISO 37001:2016.</li>
+                <li>Aborda soborno en sectores público, privado y sin fines de lucro; soborno por parte de la organización, personal y socios de negocio; soborno a la organización; soborno directo e indirecto.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>ISO 31000:2018 · Gestión del Riesgo</summary>
+              <p>Proporciona directrices para gestionar el riesgo al que se enfrentan los centros de trabajo, incluyendo la toma de decisiones a todos los niveles y adaptándose a cualquier organización, sea cual sea su tamaño y contexto.</p>
+              <ul>
+                <li>Integrar el Plan de Gestión de Riesgos.</li>
+                <li>Reunión de trabajo con alta dirección y órganos de supervisión.</li>
+                <li>Establecer el contexto.</li>
+                <li>Definición, identificación, análisis y evaluación de riesgos.</li>
+                <li>Tratamiento de riesgos.</li>
+                <li>Comunicación y consulta.</li>
+                <li>Monitoreo, análisis crítico y auditoría.</li>
+                <li>Capacitación: inducción, pensamiento basado en riesgos y formación de equipo auditor.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>ISO/TS 54001:2019 · Organizaciones Electorales</summary>
+              <p>Estándar internacional aplicable a organizaciones electorales para todos los niveles de gobierno. Busca asegurar procesos electorales confiables, transparentes, libres y justos dentro del marco legal establecido.</p>
+              <ul>
+                <li>Fase 1. Diagnóstico a procesos clave.</li>
+                <li>Fase 2. Reunión con alta autoridad.</li>
+                <li>Fase 3. Capacitación y entrenamiento.</li>
+                <li>Fase 4. Despliegue, difusión y adecuación de planes estratégicos.</li>
+                <li>Fase 5. Diseño y estructuración del Sistema de Gestión.</li>
+                <li>Fase 6. Desarrollo e implementación de la documentación del Sistema de Gestión Electoral.</li>
+                <li>Fase 7. Preauditoría de certificación.</li>
+                <li>Fase 8. Auditoría de certificación.</li>
+                <li>Incluye análisis de contexto, normatividad legal, asuntos presupuestarios, materiales electorales, liderazgo, políticas de calidad, riesgos y oportunidades, objetivos, control de procesos, información documentada, auditoría interna, resolución de conflictos y mejora continua.</li>
+                <li>Capacitación: fundamentos, mapeo de procesos, indicadores, documentación, herramientas de calidad, formación de equipo auditor y calidad en el servicio electoral.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>NOM-035-STPS-2018 · Factores de Riesgo Psicosocial</summary>
+              <p>Establece elementos para identificar, analizar y prevenir factores de riesgo psicosocial, así como para promover un entorno organizacional favorable en los centros de trabajo.</p>
+              <ul>
+                <li>Integración del Comité dentro del Centro de Trabajo.</li>
+                <li>Capacitación a la Alta Dirección e integrantes del Comité.</li>
+                <li>Creación e implantación de política de prevención de riesgos psicosociales.</li>
+                <li>Sensibilización a todo el personal.</li>
+                <li>Difusión de la política del centro de trabajo.</li>
+                <li>Identificación y análisis de factores de riesgo psicosocial.</li>
+                <li>Evaluación del entorno laboral.</li>
+                <li>Programa de prevención y controles de factores de riesgo detectados.</li>
+                <li>Capacitación sobre proceso de implantación, obligaciones del patrón y obligaciones del trabajador.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Norma UNE 93200 · Cartas de Servicios</summary>
+              <p>Especifica requisitos del contenido y proceso de elaboración, seguimiento y revisión de cartas de servicios o cartas de compromiso, herramientas utilizadas para comunicar servicios y compromisos a personas usuarias.</p>
+              <ul>
+                <li>Constitución de equipo de trabajo.</li>
+                <li>Evaluación del nivel actual del servicio.</li>
+                <li>Diseño de encuestas y coordinación de focus group.</li>
+                <li>Formulación de compromisos e indicadores de calidad.</li>
+                <li>Identificación de procesos ligados a los servicios.</li>
+                <li>Diseño de medidas de subsanación y compensación.</li>
+                <li>Diseño de mecanismos eficaces para difusión.</li>
+                <li>Comparación del nivel de prestación con expectativas del usuario.</li>
+                <li>Redacción de la carta de servicios.</li>
+                <li>Capacitación en confección, gestión, certificación de compromisos, aspectos metodológicos, requisitos, beneficios y ventajas.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>ISO 18091:2019 · Sistema de Gestión para Gobiernos Locales</summary>
+              <p>Proporciona directrices para que los gobiernos locales implementen un sistema de gestión conforme a las necesidades y expectativas de sus ciudadanos y otras partes interesadas pertinentes.</p>
+              <p>Nuestras consultoras y consultores implementarán una herramienta útil para evaluar condiciones operativas, procesos utilizados y resultados logrados, con el fin de mejorar estructuras administrativas, productos y servicios para clientes/ciudadanos, y contribuir a que sea considerado un gobierno local confiable.</p>
+              <ul>
+                <li>Integración del autodiagnóstico.</li>
+                <li>Elaboración de información documentada.</li>
+                <li>Contexto de la organización.</li>
+                <li>Liderazgo.</li>
+                <li>Planificación.</li>
+                <li>Apoyo.</li>
+                <li>Operación.</li>
+                <li>Evaluación del desempeño.</li>
+                <li>Mejora.</li>
+                <li>Integración del Observatorio Ciudadano.</li>
+                <li>Taller: Conformación del Observatorio Ciudadano Integral a partir de ISO 18091.</li>
+                <li>Taller: Interpretación de la Norma ISO 18091:2019.</li>
+                <li>Taller: Integración del Autodiagnóstico a través de la herramienta de evaluación del gobierno local.</li>
+                <li>Taller: Integración de los Objetivos de Desarrollo Sostenible de la ONU (ODS) al Sistema de Gestión ISO 18091:2019.</li>
+                <li>Taller: Información Documentada de la Norma ISO 18091:2019.</li>
+                <li>Curso: Formación de equipo auditor en ISO 18091:2019.</li>
+                <li>Curso: Funcionamiento y operación del Observatorio Ciudadano Integral.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>ISO 45001 · Sistema de Gestión de Seguridad y Salud en el Trabajo</summary>
+              <p>Fortalece un marco de referencia para que los centros de trabajo establezcan, implementen, mantengan y mejoren continuamente su Sistema de Gestión de Seguridad y Salud en el Trabajo, con la finalidad de prevenir lesiones y enfermedades por riesgos laborales, disminuir peligros y riesgos de trabajo y desarrollar lugares de trabajo seguros y saludables para personas colaboradoras y partes interesadas.</p>
+              <p>Nuestro equipo consultor implementará una metodología integral para identificar peligros, evaluar y controlar riesgos laborales existentes, determinar oportunidades de mejora, fortalecer la cultura de prevención y contribuir al cumplimiento de requisitos legales aplicables a la protección física y mental de las personas trabajadoras.</p>
+              <ul>
+                <li>Diagnóstico inicial.</li>
+                <li>Identificación de peligros.</li>
+                <li>Evaluación de riesgos y oportunidades.</li>
+                <li>Determinación de objetivos y programas de SST.</li>
+                <li>Elaboración de información documental.</li>
+                <li>Gestión de competencias.</li>
+                <li>Programas de capacitación.</li>
+                <li>Comunicación interna y externa.</li>
+                <li>Control de la información documentada.</li>
+              </ul>
+            </details>
+          </section>
         </div>
 
         <!-- EVALUACIÓN -->
@@ -962,45 +1494,41 @@
               </li>
               </ul>
 
-              <section class="service-catalog" aria-label="Servicios de Evaluación">
+              <section class="service-catalog" aria-label="Modalidades de Evaluación">
                 <article class="service-catalog-card">
-                  <h3>Programa Anual de Evaluación (PAE)</h3>
-                  <p>Instrumento normativo que establece las evaluaciones a programas, subprogramas, estrategias o políticas durante cada ejercicio fiscal, conforme a las obligaciones aplicables a entes públicos.</p>
+                  <h3>Implementación</h3>
+                  <p>Diseñamos y ponemos en marcha instrumentos, lineamientos y sistemas de seguimiento orientados a resultados.</p>
                   <ul>
-                    <li>Diseño y desarrollo del Programa Anual de Evaluación.</li>
-                    <li>Elaboración de Lineamientos Generales para la Evaluación de Programas Presupuestarios.</li>
-                    <li>Construcción de Términos de Referencia para la Evaluación.</li>
-                    <li>Evaluación de programas presupuestarios y fondos federales.</li>
+                    <li>Diseño y desarrollo del Programa Anual de Evaluación (PAE).</li>
+                    <li>Lineamientos Generales para la Evaluación de Programas Presupuestarios.</li>
+                    <li>Términos de Referencia para evaluaciones.</li>
+                    <li>Implantación del Sistema de Gestión para Resultados en el Sector Público.</li>
                   </ul>
                 </article>
 
                 <article class="service-catalog-card">
-                  <h3>Capacitación PAE</h3>
+                  <h3>Capacitación</h3>
+                  <p>Formación para fortalecer capacidades de planeación, evaluación, presupuesto y gestión pública por resultados.</p>
                   <ul>
                     <li>Inducción al Programa Anual de Evaluación.</li>
                     <li>Elaboración de Términos de Referencia.</li>
                     <li>Diseño de Convenio para la Mejora de Resultados Gubernamentales.</li>
                     <li>Desarrollo Integral del Programa Anual de Evaluaciones.</li>
                     <li>Elaboración del Informe de Resultados.</li>
+                    <li>Taller de Gestión Integral del Presupuesto Basado en Resultados (PbR).</li>
+                    <li>Programa de Certificación en Administración Gubernamental por Resultados (AGpR).</li>
                   </ul>
                 </article>
 
                 <article class="service-catalog-card">
-                  <h3>Presupuesto Basado en Resultados (PbR)</h3>
-                  <p>Metodología para vincular la asignación de recursos públicos con el logro de resultados, en apego a los objetivos de planeación federal, estatal y municipal.</p>
+                  <h3>Consultoría</h3>
+                  <p>Evaluamos y asesoramos para retroalimentar el diseño, gestión, resultados y toma de decisiones públicas.</p>
                   <ul>
-                    <li>Consultoría para incorporar el enfoque PbR al ciclo presupuestario.</li>
-                    <li>Taller de Gestión Integral del Presupuesto Basado en Resultados.</li>
-                  </ul>
-                </article>
-
-                <article class="service-catalog-card">
-                  <h3>Administración Gubernamental por Resultados (AGpR)</h3>
-                  <p>Estándar de competencia desarrollado a partir de la Gestión para Resultados, orientado a personas que participan en la administración gubernamental federal, estatal o municipal.</p>
-                  <ul>
-                    <li>Evaluación de habilidades para fortalecer una cultura de monitoreo y evaluación.</li>
-                    <li>Planeación, seguimiento, evaluación y comunicación de una gestión pública orientada a resultados.</li>
-                    <li>Programa de Certificación e implantación del Sistema de Gestión para Resultados en el Sector Público.</li>
+                    <li>Evaluación de programas presupuestarios y fondos federales.</li>
+                    <li>Programa Anual de Evaluación (PAE).</li>
+                    <li>Presupuesto Basado en Resultados (PbR).</li>
+                    <li>Administración Gubernamental por Resultados (AGpR).</li>
+                    <li>Metodología de Marco Lógico.</li>
                   </ul>
                 </article>
               </section>
@@ -1028,116 +1556,116 @@
               </div>
             </div>
           </div>
+
+          <section class="service-modalidades" aria-label="Modalidades de consultoría en Evaluación">
+            <div class="section-header">
+              <span class="label-tag">Cómo trabajamos contigo</span>
+              <h3>Modalidades de consultoría</h3>
+              <p>Diseñamos el acompañamiento de Evaluación con implementación, capacitación y consultoría orientada a resultados.</p>
+            </div>
+
+            <div class="modalidades-grid">
+              <article class="modalidad-card reveal">
+                <div class="modalidad-label">Implementación</div>
+                <h3>Instrumentos de evaluación</h3>
+                <p>Diseño y puesta en marcha de lineamientos, términos y sistemas de seguimiento orientados a resultados.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Diseño y desarrollo del Programa Anual de Evaluación (PAE)</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Lineamientos Generales para la Evaluación de Programas Presupuestarios</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Términos de Referencia para evaluaciones</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sistema de Gestión para Resultados en el Sector Público</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar implementación de Evaluación">Solicitar servicio</a>
+              </article>
+
+              <article class="modalidad-card featured reveal delay-200">
+                <div class="modalidad-badge">Más solicitado</div>
+                <div class="modalidad-label">Capacitación</div>
+                <h3>Formación en resultados</h3>
+                <p>Capacitación para fortalecer planeación, evaluación, presupuesto y gestión pública por resultados.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Inducción al Programa Anual de Evaluación</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Elaboración de Términos de Referencia</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Convenios para la Mejora de Resultados Gubernamentales</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Taller de Gestión Integral del Presupuesto Basado en Resultados (PbR)</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Certificación en Administración Gubernamental por Resultados (AGpR)</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-primary" aria-label="Solicitar capacitación de Evaluación">Solicitar capacitación</a>
+              </article>
+
+              <article class="modalidad-card reveal delay-400">
+                <div class="modalidad-label">Consultoría</div>
+                <h3>Evaluación aplicada</h3>
+                <p>Evaluación y asesoramiento para retroalimentar el diseño, gestión y toma de decisiones públicas.</p>
+
+                <ul class="modalidad-features">
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Evaluación de programas presupuestarios y fondos federales</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Programa Anual de Evaluación (PAE)</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Presupuesto Basado en Resultados (PbR)</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Administración Gubernamental por Resultados (AGpR)</li>
+                  <li class="modalidad-feature"><svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Metodología de Marco Lógico</li>
+                </ul>
+
+                <a href="contacto.html" class="btn btn-secondary" aria-label="Solicitar consultoría de Evaluación">Solicitar consultoría</a>
+              </article>
+            </div>
+          </section>
+
+          <section class="service-technical-details" aria-label="Detalle técnico de Evaluación">
+            <details>
+              <summary>Programa Anual de Evaluación (PAE)</summary>
+              <p>El Programa Anual de Evaluación es un instrumento normativo donde se establecen las evaluaciones que se llevarán a cabo a programas, subprogramas, estrategias y/o políticas durante cada ejercicio fiscal anual. Este instrumento permite cumplir con la obligación establecida para los entes públicos.</p>
+              <p>Representa una necesidad de planear y ejecutar el proceso de evaluación, asegurando que los programas a evaluar se seleccionen estratégicamente.</p>
+              <ul>
+                <li>Los trabajos se fundamentan en el artículo 79 de la Ley General de Contabilidad Gubernamental.</li>
+                <li>Permite evaluar programas presupuestarios seleccionados por entes gubernamentales a partir de su diseño, basado en la metodología de Marco Lógico.</li>
+                <li>Evaluamos programas presupuestarios gubernamentales determinados en el PAE para proveer información que retroalimente su diseño, gestión y resultados.</li>
+                <li>Diseño y desarrollo del Programa Anual de Evaluación para el cumplimiento de objetivos del Plan de Desarrollo y Programas Estratégicos.</li>
+                <li>Elaboración de Lineamientos Generales para la Evaluación de Programas Presupuestarios.</li>
+                <li>Construcción de Términos de Referencia para la Evaluación.</li>
+                <li>Evaluación de programas presupuestarios y/o fondos federales.</li>
+                <li>Capacitación: inducción al Programa Anual de Evaluación.</li>
+                <li>Capacitación: elaboración de Términos de Referencia.</li>
+                <li>Capacitación: diseño de Convenio para la Mejora de Resultados Gubernamentales.</li>
+                <li>Capacitación: desarrollo integral del Programa Anual de Evaluaciones.</li>
+                <li>Capacitación: elaboración del Informe de Resultados.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Presupuesto Basado en Resultados (PbR)</summary>
+              <p>Es una metodología que permite mejorar la calidad del gasto público y promover una adecuada rendición de cuentas. Vincula los procesos de toma de decisiones y asignación de recursos públicos al logro de resultados, con base en el desempeño observado y esperado del ejercicio de los recursos presupuestarios.</p>
+              <ul>
+                <li>Se desarrolla en apego a los objetivos de planeación de los niveles Federal, Estatal y Municipal.</li>
+                <li>Fortalece la toma de decisiones orientada a resultados.</li>
+                <li>Promueve la rendición de cuentas y la mejora de la calidad del gasto público.</li>
+                <li>Capacitación: Taller de Gestión Integral del Presupuesto Basado en Resultados (PbR) para incorporarlo al ciclo presupuestario.</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>Administración Gubernamental por Resultados (AGpR)</summary>
+              <p>Estándar de competencia desarrollado a partir de la metodología de Gestión para Resultados (GpR), cuyo propósito es servir como referente para la capacitación y evaluación de personas que se desempeñan en procesos de administración gubernamental por resultados dentro de la Administración Pública Federal, Estatal o Municipal.</p>
+              <p>Ayuda a gestionar resultados mediante la dirección efectiva e integrada del proceso de creación de valor público en organizaciones públicas.</p>
+              <ul>
+                <li>La persona evaluada demostrará habilidad para desarrollar una cultura de monitoreo y evaluación.</li>
+                <li>Fortalece la incorporación del enfoque de Administración Gubernamental por Resultados en instituciones públicas.</li>
+                <li>Integra planeación, seguimiento, evaluación y comunicación de una gestión pública de calidad, orientada a resultados y centrada en ciudadanía y/o usuarios de programas.</li>
+                <li>Evalúa conocimientos para la elaboración, planeación, evaluación y seguimiento de planes estratégicos, planes operativos, riesgos, proyectos y procesos.</li>
+                <li>Permite monitoreo y evaluación durante y después de la implementación.</li>
+                <li>Considera la permanencia y planeación de procesos de comunicación de resultados.</li>
+                <li>Capacitación: Programa de Certificación.</li>
+                <li>Capacitación: Implantación del Sistema de Gestión para Resultados en el Sector Público.</li>
+              </ul>
+            </details>
+          </section>
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- MODALIDADES -->
-  <section class="section" style="background:var(--canvas-light)" aria-labelledby="modalidades-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="label-tag">Cómo trabajamos contigo</span>
-        <h2 id="modalidades-heading">Modalidades de consultoría</h2>
-        <p>Adaptamos nuestro acompañamiento al tamaño y necesidades de tu organización.</p>
-      </div>
-
-      <ul class="modalidades-grid">
-        <li class="modalidad-card reveal">
-          <div class="modalidad-label">Exploración</div>
-          <h3>Diagnóstico Inicial</h3>
-          <p>Para organizaciones que quieren conocer su situación antes de comprometerse con un proceso más amplio.</p>
-
-          <ul class="modalidad-features">
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Reunión de levantamiento de información
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Revisión documental básica
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Informe de hallazgos y recomendaciones
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Sesión de presentación de resultados
-            </li>
-          </ul>
-
-          <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center" aria-label="Solicitar diagnóstico inicial">Solicitar diagnóstico</a>
-        </li>
-
-        <li class="modalidad-card featured reveal delay-200">
-          <div class="modalidad-badge">Más solicitado</div>
-          <div class="modalidad-label">Implementación</div>
-          <h3>Proyecto Integral</h3>
-          <p style="color:rgba(255,255,255,0.85)">Acompañamiento completo desde el diagnóstico hasta la entrega de documentos finales y capacitación.</p>
-
-          <ul class="modalidad-features">
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Diagnóstico profundo
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Plan de trabajo personalizado
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Implementación con seguimiento
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Entregables ejecutivos completos
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Talleres de capacitación
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Soporte durante 3 meses
-            </li>
-          </ul>
-
-          <a href="contacto.html" class="btn btn-primary" style="width:100%;justify-content:center" aria-label="Cotizar proyecto integral">Cotizar proyecto</a>
-        </li>
-
-        <li class="modalidad-card reveal delay-400">
-          <div class="modalidad-label">Alianza</div>
-          <h3>Asesoría Continua</h3>
-          <p>Para organizaciones que requieren un aliado estratégico permanente con disponibilidad recurrente.</p>
-
-          <ul class="modalidad-features">
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Horas de consultoría mensuales
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Revisión de documentos
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Capacitaciones periódicas
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Actualizaciones normativas
-            </li>
-            <li class="modalidad-feature">
-              <svg class="check-icon" aria-hidden="true" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Atención prioritaria
-            </li>
-          </ul>
-
-          <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center" aria-label="Conocer más sobre asesoría continua">Conocer más</a>
-        </li>
-      </ul>
     </div>
   </section>
 
@@ -1248,8 +1776,26 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    const tabGroup = document.querySelector('.tab-group');
     const tabs = [...document.querySelectorAll('.tab-btn[role="tab"]')];
     const panels = [...document.querySelectorAll('.tab-panel[role="tabpanel"]')];
+    const overview = document.getElementById('servicios-overview');
+
+    function showServicesOverview() {
+      tabGroup?.classList.add('is-overview');
+      if (overview) overview.hidden = false;
+
+      tabs.forEach((tab, index) => {
+        tab.classList.remove('active');
+        tab.setAttribute('aria-selected', 'false');
+        tab.setAttribute('tabindex', index === 0 ? '0' : '-1');
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.remove('active');
+        panel.hidden = true;
+      });
+    }
 
     function activateServiceTab(panelId, shouldFocusPanel = false) {
       const targetPanel = document.getElementById(panelId);
@@ -1257,6 +1803,9 @@
 
       const targetIndex = panels.findIndex((panel) => panel.id === panelId);
       if (targetIndex < 0) return;
+
+      tabGroup?.classList.remove('is-overview');
+      if (overview) overview.hidden = true;
 
       tabs.forEach((tab, index) => {
         const isActive = index === targetIndex;
@@ -1279,7 +1828,7 @@
       }
     }
 
-    document.querySelectorAll('[data-service-target]').forEach((link) => {
+    document.querySelectorAll('.tabs-nav [data-service-target], .footer-link[data-service-target], .mobile-sub-link[data-service-target]').forEach((link) => {
       link.addEventListener('click', (event) => {
         const target = link.getAttribute('data-service-target');
         if (!target) return;
@@ -1290,14 +1839,30 @@
       });
     });
 
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('aria-controls');
+        if (!target) return;
+
+        history.replaceState(null, '', `#${target}`);
+        activateServiceTab(target, true);
+      });
+    });
+
     const initialHash = window.location.hash.replace('#', '');
-    if (initialHash) {
+    if (initialHash && document.getElementById(initialHash)?.classList.contains('tab-panel')) {
       activateServiceTab(initialHash, false);
+    } else {
+      showServicesOverview();
     }
 
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash) activateServiceTab(hash, true);
+      if (hash && document.getElementById(hash)?.classList.contains('tab-panel')) {
+        activateServiceTab(hash, true);
+      } else {
+        showServicesOverview();
+      }
     });
   });
 </script>
