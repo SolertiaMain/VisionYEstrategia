@@ -148,7 +148,10 @@ function initNavbar() {
 
       mobileMenu.hidden = false;
       mobileMenu.setAttribute('aria-hidden', 'false');
-      mobileMenu.classList.add('open');
+
+      requestAnimationFrame(() => {
+        mobileMenu.classList.add('open');
+      });
 
       document.body.style.overflow = 'hidden';
 
@@ -165,7 +168,10 @@ function initNavbar() {
 
       mobileMenu.classList.remove('open');
       mobileMenu.setAttribute('aria-hidden', 'true');
-      mobileMenu.hidden = true;
+
+      setTimeout(() => {
+        mobileMenu.hidden = true;
+      }, 320);
 
       document.body.style.overflow = '';
 
@@ -180,6 +186,21 @@ function initNavbar() {
       const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
       isOpen ? closeMobileMenu() : openMobileMenu();
     });
+
+    document.addEventListener('click', (event) => {
+      const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+
+      if (!isOpen) return;
+
+      const clickedInsideMenu = mobileMenu.contains(event.target);
+      const clickedHamburger = hamburger.contains(event.target);
+
+      if (!clickedInsideMenu && !clickedHamburger) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeMobileMenu();
+      }
+    }, true);
 
     mobileMenu.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
