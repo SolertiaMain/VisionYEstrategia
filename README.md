@@ -217,4 +217,4 @@ python3 -m http.server 8080
 
 ---
 
-> ¿Tienes dudas sobre el proyecto? Escríbenos a: informes@visionyestrategia.com.mx
+> ¿Tienes dudas sobre el proyecto? Escríbenos a: contacto@visionyestrategia.com.mx
