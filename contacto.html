@@ -292,7 +292,11 @@
             <h3>Solicita tu consulta gratuita</h3>
             <p>Cuéntanos brevemente tu situación y en menos de 24 horas te contactamos con una propuesta.</p>
 
-            <form class="contact-form-el" novalidate aria-describedby="form-instructions">
+            <form 
+              class="contact-form-el" 
+              action="https://formsubmit.co/aaf2102@outlook.com"
+              method="POST"
+              aria-describedby="form-instructions">
               <p id="form-instructions" class="form-help">
                 Los campos marcados como obligatorios deben completarse para enviar la solicitud.
               </p>
@@ -320,13 +324,20 @@
 
                 <div class="form-field">
                   <label for="cargo">Cargo o puesto</label>
+                  <p id="cargo-help" class="form-help">
+                    Rol dentro de tu organización.
+                  </p>
                   <input
                     type="text"
                     id="cargo"
                     name="cargo"
                     placeholder="Director, Coordinador…"
                     autocomplete="organization-title"
+                    aria-describedby="cargo-help"
                   />
+                  <p id="cargo-help" class="form-help">
+                    Este campo es opcional.
+                  </p>
                 </div>
 
                 <div class="form-field">
@@ -349,6 +360,9 @@
 
                 <div class="form-field">
                   <label for="tipo">Tipo de organización</label>
+                  <p id="tipo-help" class="form-help">
+                    Selecciona tu organización.
+                  </p>
                   <select id="tipo" name="tipo" aria-describedby="tipo-help">
                     <option value="">— Selecciona —</option>
                     <option>Gobierno municipal</option>
@@ -358,7 +372,9 @@
                     <option>Institución educativa</option>
                     <option>Otro</option>
                   </select>
-                  <p id="tipo-help" class="form-help">Este campo es opcional.</p>
+                  <p id="tipo-help" class="form-help">
+                    Este campo es opcional.
+                  </p>
                 </div>
 
                 <div class="form-field">
@@ -382,7 +398,7 @@
 
                 <div class="form-field">
                   <label for="telefono">Teléfono de contacto</label>
-                  <p id="telefono-help" class="form-help">Puedes escribir 10 dígitos o incluir lada. Campo opcional.</p>
+                  <p id="telefono-help" class="form-help">Puedes escribir 10 dígitos o incluir lada.</p>
                   <input
                     type="tel"
                     id="telefono"
@@ -395,6 +411,9 @@
                   <span id="telefono-error" class="form-error" role="alert" hidden>
                     Escribe un teléfono válido, por ejemplo: 722-000-0000.
                   </span>
+                  <p id="telefono-help" class="form-help">
+                    Este campo es opcional.
+                  </p>
                 </div>
 
                 <div class="form-field full">
@@ -436,6 +455,10 @@
                   <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                 </svg>
               </button>
+              <input type="hidden" name="_subject" value="Nueva solicitud desde Visión y Estrategia">
+              <input type="hidden" name="_next" value="https://main.d34qwjymzmyvkx.amplifyapp.com/contacto.html">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_template" value="table">
             </form>
 
             <div

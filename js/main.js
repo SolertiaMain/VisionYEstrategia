@@ -484,22 +484,7 @@ function handleSubmit(event) {
   buttonText.textContent = 'Enviando…';
   setFormStatus(form, 'Enviando solicitud.');
 
-  setTimeout(() => {
-    const card = form.closest('.contact-form-card');
-    const success = card ? $('#form-success', card) : null;
-
-    form.hidden = true;
-
-    if (success) {
-      success.hidden = false;
-      success.classList.add('visible');
-      success.focus();
-    }
-
-    button.disabled = false;
-    button.removeAttribute('aria-busy');
-    buttonText.textContent = originalText;
-  }, 900);
+  form.submit();
 }
 
 /* PARTICLES */
