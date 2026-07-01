@@ -294,8 +294,7 @@
 
             <form 
               class="contact-form-el" 
-              action="https://formsubmit.co/contacto@visionyestrategia.com.mx"
-              method="POST"
+              novalidate
               aria-describedby="form-instructions">
               <p id="form-instructions" class="form-help">
                 Los campos marcados como obligatorios deben completarse para enviar la solicitud.
@@ -325,7 +324,7 @@
                 <div class="form-field">
                   <label for="cargo">Cargo o puesto</label>
                   <p id="cargo-help" class="form-help">
-                    Rol dentro de tu organización.
+                    Rol dentro de tu organización.<br>Este campo es opcional.
                   </p>
                   <input
                     type="text"
@@ -335,14 +334,13 @@
                     autocomplete="organization-title"
                     aria-describedby="cargo-help"
                   />
-                  <p id="cargo-help" class="form-help">
-                    Este campo es opcional.
-                  </p>
                 </div>
 
                 <div class="form-field">
                   <label for="organizacion">Organización <span aria-hidden="true">*</span></label>
-                  <p id="organizacion-help" class="form-help">Indica el nombre de tu institución, empresa u organización.</p>
+                  <p id="organizacion-help" class="form-help">
+                    Indica el nombre de tu institución, empresa u organización.
+                  </p>
                   <input
                     type="text"
                     id="organizacion"
@@ -361,7 +359,7 @@
                 <div class="form-field">
                   <label for="tipo">Tipo de organización</label>
                   <p id="tipo-help" class="form-help">
-                    Selecciona tu organización.
+                    Selecciona tu organización.<br>Este campo es opcional.
                   </p>
                   <select id="tipo" name="tipo" aria-describedby="tipo-help">
                     <option value="">— Selecciona —</option>
@@ -372,9 +370,6 @@
                     <option>Institución educativa</option>
                     <option>Otro</option>
                   </select>
-                  <p id="tipo-help" class="form-help">
-                    Este campo es opcional.
-                  </p>
                 </div>
 
                 <div class="form-field">
@@ -398,7 +393,9 @@
 
                 <div class="form-field">
                   <label for="telefono">Teléfono de contacto</label>
-                  <p id="telefono-help" class="form-help">Puedes escribir 10 dígitos o incluir lada.</p>
+                  <p id="telefono-help" class="form-help">
+                    Puedes escribir 10 dígitos o incluir lada.<br>Este campo es opcional.
+                  </p>
                   <input
                     type="tel"
                     id="telefono"
@@ -411,9 +408,6 @@
                   <span id="telefono-error" class="form-error" role="alert" hidden>
                     Escribe un teléfono válido, por ejemplo: 722-000-0000.
                   </span>
-                  <p id="telefono-help" class="form-help">
-                    Este campo es opcional.
-                  </p>
                 </div>
 
                 <div class="form-field full">
@@ -455,10 +449,6 @@
                   <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                 </svg>
               </button>
-              <input type="hidden" name="_subject" value="Nueva solicitud desde Visión y Estrategia">
-              <input type="hidden" name="_next" value="https://main.d34qwjymzmyvkx.amplifyapp.com/contacto.html">
-              <input type="hidden" name="_captcha" value="false">
-              <input type="hidden" name="_template" value="table">
             </form>
 
             <div
@@ -645,6 +635,10 @@
     </svg>
   </button>
 </aside>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init('IG9TGtwNPbzIjtU7A')
+</script>
 <script type="module" src="/js/main.js"></script>
 
 </body>

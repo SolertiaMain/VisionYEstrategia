@@ -484,7 +484,29 @@ function handleSubmit(event) {
   buttonText.textContent = 'Enviando…';
   setFormStatus(form, 'Enviando solicitud.');
 
-  form.submit();
+  emailjs.sendForm('service_ffims9q', 'template_b0zcsv8', form)
+  .then(() => {
+    const card = form.closest('.contact-form-card');
+    const success = card ? $('#form-success', card) : null;
+
+    form.hidden = true;
+
+    if (success) {
+      success.hidden = false;
+      success.classList.add('visible');
+      success.focus();
+    }
+  })
+  .catch((error) => {
+    console.error('EmailJS error:', error);
+    setFormStatus(form, 'No se pudo enviar la solicitud. Intenta nuevamente o escríbenos a contacto@visionyestrategia.com.mx.');
+  })
+  .finally(() => {
+    button.disabled = false;
+    button.removeAttribute('aria-busy');
+    buttonText.textContent = originalText;
+  });
+
 }
 
 /* PARTICLES */
